@@ -21,7 +21,7 @@ class CategoriesShow
     /**
      * @var Collection<int, Show>
      */
-    #[ORM\OneToMany(targetEntity: Show::class, mappedBy: 'categorie_show_id')]
+    #[ORM\OneToMany(targetEntity: Show::class, mappedBy: 'categorie_show')]
     private Collection $show;
 
     public function __construct()
