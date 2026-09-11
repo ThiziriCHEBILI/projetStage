@@ -30,12 +30,12 @@ class Show
 
     #[ORM\ManyToOne(inversedBy: 'show')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?CategoriesShow $categorie_show_id = null;
+    private ?CategoriesShow $categorie_show = null;
 
     /**
      * @var Collection<int, ShowVideo>
      */
-    #[ORM\OneToMany(targetEntity: ShowVideo::class, mappedBy: 'show_id')]
+    #[ORM\OneToMany(targetEntity: ShowVideo::class, mappedBy: 'show')]
     private Collection $showVideos;
 
    
@@ -100,12 +100,12 @@ class Show
 
     public function getCategorieShowId(): ?CategoriesShow
     {
-        return $this->categorie_show_id;
+        return $this->categorie_show;
     }
 
-    public function setCategorieShowId(?CategoriesShow $categorie_show_id): static
+    public function setCategorieShowId(?CategoriesShow $categorie_show): static
     {
-        $this->categorie_show_id = $categorie_show_id;
+        $this->categorie_show = $categorie_show;
 
         return $this;
     }

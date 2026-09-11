@@ -26,7 +26,7 @@ class UserLectures
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ShowVideo $show_video_id = null;
+    private ?ShowVideo $show_video = null;
 
     public function getId(): ?int
     {
@@ -71,12 +71,12 @@ class UserLectures
 
     public function getShowVideoId(): ?ShowVideo
     {
-        return $this->show_video_id;
+        return $this->show_video;
     }
 
-    public function setShowVideoId(?ShowVideo $show_video_id): static
+    public function setShowVideoId(?ShowVideo $show_video): static
     {
-        $this->show_video_id = $show_video_id;
+        $this->show_video = $show_video;
 
         return $this;
     }

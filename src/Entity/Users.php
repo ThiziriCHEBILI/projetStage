@@ -34,13 +34,13 @@ class Users
     /**
      * @var Collection<int, UserListShow>
      */
-    #[ORM\OneToMany(targetEntity: UserListShow::class, mappedBy: 'user_id')]
+    #[ORM\OneToMany(targetEntity: UserListShow::class, mappedBy: 'user')]
     private Collection $userListShow;
 
     /**
      * @var Collection<int, UserLectures>
      */
-    #[ORM\OneToMany(targetEntity: UserLectures::class, mappedBy: 'user_id')]
+    #[ORM\OneToMany(targetEntity: UserLectures::class, mappedBy: 'user')]
     private Collection $userLectures;
 
     public function __construct()

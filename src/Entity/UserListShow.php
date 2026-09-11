@@ -15,11 +15,11 @@ class UserListShow
 
     #[ORM\ManyToOne(inversedBy: 'userListShow')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Users $user_id = null;
+    private ?Users $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'userListShow')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Show $show_id = null;
+    private ?Show $show = null;
 
     public function getId(): ?int
     {
@@ -28,24 +28,24 @@ class UserListShow
 
     public function getUserId(): ?Users
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?Users $user_id): static
+    public function setUserId(?Users $user): static
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
     public function getShowId(): ?Show
     {
-        return $this->show_id;
+        return $this->show;
     }
 
-    public function setShowId(?Show $show_id): static
+    public function setShowId(?Show $show): static
     {
-        $this->show_id = $show_id;
+        $this->show = $show;
 
         return $this;
     }

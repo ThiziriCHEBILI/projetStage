@@ -37,7 +37,7 @@ class ShowVideo
 
     #[ORM\ManyToOne(inversedBy: 'showVideos')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Show $show_id = null;
+    private ?Show $show = null;
 
     public function getId(): ?int
     {
@@ -130,12 +130,12 @@ class ShowVideo
 
     public function getShowId(): ?Show
     {
-        return $this->show_id;
+        return $this->show;
     }
 
-    public function setShowId(?Show $show_id): static
+    public function setShowId(?Show $show): static
     {
-        $this->show_id = $show_id;
+        $this->show = $show;
 
         return $this;
     }
