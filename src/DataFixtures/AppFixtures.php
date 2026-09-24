@@ -4,12 +4,10 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Users;
 use App\Entity\Show;
 use App\Entity\CategoriesShow;
 use App\Entity\ShowVideo;
-use App\Entity\UserLectures;
-use App\Entity\UserListShow;
+
 
 
 class AppFixtures extends Fixture
@@ -84,7 +82,7 @@ class AppFixtures extends Fixture
             $manager->persist($showVideo);
 
         }
-        
+
         $manager->flush();
     }
 }
