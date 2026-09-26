@@ -18,14 +18,10 @@ class AppFixtures extends Fixture
         // $manager->persist($product);
 
         $categoriesShowData = [
-            ["name" => "Action"],
-            ["name" => "Comédie"],
-            ["name" => "Drame"],
-            ["name" => "Sci-Fi"],
-            ["name" => "Horreur"],
-            ["name" => "Documentaire"],
-            ["name" => "Animation"],
-            ["name" => "Thriller"],
+            ["name" => "films"],
+            ["name" => "series"],
+            ["name" => "dessins-animes"],
+
         ];
 
         $categoriesShow = [];
@@ -38,16 +34,19 @@ class AppFixtures extends Fixture
 
 
         $showsData = [
-            ["title" => "Inception", "description" => "Un voleur qui s'infiltre dans les rêves pour dérober des secrets.", "categoryIndex" => 3, "releaseDate" => "2010-07-16"],
-            ["title" => "Léon", "description" => "Un tueur professionnel prend une jeune fille orpheline sous son aile.", "categoryIndex" => 2, "releaseDate" => "1994-09-14"],
-            ["title" => "Alien", "description" => "L'équipage d'un vaisseau spatial est traqué par une créature extraterrestre mortelle.", "categoryIndex" => 4, "releaseDate" => "1979-06-22"],
-            ["title" => "Mad Max: Fury Road", "description" => "Une course-poursuite explosive dans un désert post-apocalyptique.", "categoryIndex" => 0, "releaseDate" => "2015-05-15"],
-            ["title" => "The Grand Budapest Hotel", "description" => "Les aventures burlesques d'un concierge légendaire et de son protégé.", "categoryIndex" => 1, "releaseDate" => "2014-02-26"],
-            ["title" => "Le Voyage de Chihiro", "description" => "Une fillette se retrouve piégée dans un monde peuplé d'esprits.", "categoryIndex" => 6, "releaseDate" => "2001-07-20"],
-            ["title" => "Se7en", "description" => "Deux détectives traquent un tueur en série inspiré par les sept péchés capitaux.", "categoryIndex" => 7, "releaseDate" => "1995-09-22"],
-            ["title" => "Free Solo", "description" => "L'ascension vertigineuse d'El Capitan sans corde ni assurance.", "categoryIndex" => 5, "releaseDate" => "2018-09-28"],
-            ["title" => "Interstellar", "description" => "Des astronautes voyagent à travers un trou de ver pour sauver l'humanité.", "categoryIndex" => 3, "releaseDate" => "2014-11-05"],
-            ["title" => "Django Unchained", "description" => "Un esclave affranchi devenu chasseur de primes part libérer sa femme.", "categoryIndex" => 0, "releaseDate" => "2012-12-25"],
+            // Films (categoryIndex => 0)
+            ["title" => "Dune: Deuxième Partie", "description" => "Paul Atréides s'unit aux Fremen pour se venger des conspirateurs qui ont détruit sa famille.", "categoryIndex" => 0, "releaseDate" => "2024-02-28"],
+            ["title" => "Oppenheimer", "description" => "L'histoire du physicien J. Robert Oppenheimer et de son rôle dans le développement de la bombe atomique.", "categoryIndex" => 0, "releaseDate" => "2023-07-19"],
+            
+            // Séries (categoryIndex => 1)
+            ["title" => "The Last of Us", "description" => "Un contrebandier est chargé d'escorter une adolescente à travers une Amérique post-apocalyptique.", "categoryIndex" => 1, "releaseDate" => "2023-01-15"],
+            ["title" => "Squid Game", "description" => "Des centaines de joueurs endettés s'affrontent dans des jeux d'enfants mortels pour un énorme prix en argent.", "categoryIndex" => 1, "releaseDate" => "2021-09-17"],
+           
+
+            // Dessins animés (categoryIndex => 2)
+            ["title" => "Le Garçon et le Héron", "description" => "Un jeune garçon en deuil part à la recherche de sa mère disparue dans un monde fantastique.", "categoryIndex" => 2, "releaseDate" => "2023-07-14"],
+            ["title" => "Vaïana 2", "description" => "Vaïana part pour un nouveau voyage à travers les mers du Pacifique après avoir reçu un appel inattendu de ses ancêtres.", "categoryIndex" => 2, "releaseDate" => "2024-11-27"],
+            
         ];
 
         $shows = [];
@@ -64,9 +63,17 @@ class AppFixtures extends Fixture
 
 
         $showVideosData = [
-            ["showIndex" => 0, "description" => "Bande-annonce officielle d'Inception", "image" => "inception.jpg", "url" => "https://video.example.com/inception", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "4K HDR", "viewingTime" => "02:28:00"],
-            ["showIndex" => 1, "description" => "Bande-annonce officielle de Léon", "image" => "leon.jpg", "url" => "https://video.example.com/leon", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "Full HD", "viewingTime" => "01:50:00"],
-            ["showIndex" => 2, "description" => "Bande-annonce officielle d'Alien", "image" => "alien.jpg", "url" => "https://video.example.com/alien", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "HD", "viewingTime" => "01:57:00"],
+            // Films
+            ["showIndex" => 0, "description" => "Bande-annonce officielle de Dune: Deuxième Partie", "image" => "dune2.jpg", "url" => "https://video.example.com/dune2", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "4K HDR", "viewingTime" => "02:46:00"],
+            ["showIndex" => 1, "description" => "Bande-annonce officielle d'Oppenheimer", "image" => "oppenheimer.jpg", "url" => "https://video.example.com/oppenheimer", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "Full HD", "viewingTime" => "03:00:00"],
+
+            // Séries
+            ["showIndex" => 2, "description" => "The Last of Us - Saison 1, Épisode 3", "image" => "lastofus.jpg", "url" => "https://video.example.com/lastofus-s1e3", "episodeNumber" => 3, "saisonNumber" => 1, "videoQuality" => "4K HDR", "viewingTime" => "01:16:00"],
+            ["showIndex" => 3, "description" => "Squid Game - Saison 2, Épisode 5", "image" => "squidgame.jpg", "url" => "https://video.example.com/squidgame-s2e5", "episodeNumber" => 5, "saisonNumber" => 2, "videoQuality" => "Full HD", "viewingTime" => "00:55:00"],
+
+            // Dessins animés
+            ["showIndex" => 4, "description" => "Bande-annonce officielle du Garçon et le Héron", "image" => "garconheron.jpg", "url" => "https://video.example.com/garconheron", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "Full HD", "viewingTime" => "02:04:00"],
+            ["showIndex" => 5, "description" => "Bande-annonce officielle de Vaïana 2", "image" => "vaiana2.jpg", "url" => "https://video.example.com/vaiana2", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "4K HDR", "viewingTime" => "01:40:00"],
         ];
 
         foreach ($showVideosData as $showVideoData) {
@@ -80,7 +87,6 @@ class AppFixtures extends Fixture
             $showVideo->setViewingTime(new \DateTime($showVideoData["viewingTime"]));
             $showVideo->setShowId($shows[$showVideoData["showIndex"]]);
             $manager->persist($showVideo);
-
         }
 
         $manager->flush();
