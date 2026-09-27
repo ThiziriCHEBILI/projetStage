@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ShowRepository::class)]
 #[ORM\Table(name: '`show`')]
@@ -15,31 +16,36 @@ class Show
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['show:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['show:read'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['show:read'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['show:read'])]
     private ?\DateTime $date_publication = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['show:read'])]
     private ?\DateTime $release_date = null;
 
     #[ORM\ManyToOne(inversedBy: 'show')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['show:read'])]
     private ?CategoriesShow $categorie_show = null;
-
     /**
      * @var Collection<int, ShowVideo>
      */
-    #[ORM\OneToMany(targetEntity: ShowVideo::class, mappedBy: 'show')]
+    #[ORM\OneToMany(targetEntity: ShowVideo::class, mappedBy: 'show', cascade: ['remove'])]
     private Collection $showVideos;
 
-   
+
     public function __construct()
     {
         $this->showVideos = new ArrayCollection();
@@ -140,6 +146,4 @@ class Show
 
         return $this;
     }
-
-   
 }
