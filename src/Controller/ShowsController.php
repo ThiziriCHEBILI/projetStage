@@ -19,7 +19,7 @@ final class ShowsController extends AbstractController
 {
 
     #[Route('/{name}', name: 'get_shows_by_category', methods: ['GET'])]
-    public function getShowsByCategory(string $name, EntityManagerInterface $em): JsonResponse
+    public function getShowsByCategory(string $name, Request $request, EntityManagerInterface $em): JsonResponse
     {
         try {
             $category = $em->getRepository(CategoriesShow::class)->findOneBy(['name' => $name]);
@@ -27,12 +27,24 @@ final class ShowsController extends AbstractController
                 return $this->json(['message' => 'Catégorie introuvable'], 404);
             }
 
+            $page = (int) $request->query->get('page', 1);
+            if ($page < 1) {
+                $page = 1;
+            }
+            $limit = 12;
+            $offset = ($page - 1) * $limit;
+
             $shows = $em->getRepository(Show::class)->findBy(
                 ['categorie_show' => $category],
-                ['release_date' => 'DESC']
+                ['release_date' => 'DESC'],
+                $limit,
+                $offset
             );
-            if (empty($shows)) {
+            if (empty($shows) && $page == 1) {
                 return $this->json(['message' => 'Aucun show trouvé pour cette catégorie'], 404);
+            }
+            if (empty($shows)) {
+                return $this->json(['message' => 'Cette page ne contient aucun show'], 404);
             }
 
             return $this->json($shows, 200, [], ['groups' => 'show:read']);
@@ -141,7 +153,7 @@ final class ShowsController extends AbstractController
                 'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
             ]);
 
-             $errors = $validator->validate($data, $constraints);
+            $errors = $validator->validate($data, $constraints);
             if (count($errors) > 0) {
                 return $this->json(["message" => (string) $errors], 400);
             }
