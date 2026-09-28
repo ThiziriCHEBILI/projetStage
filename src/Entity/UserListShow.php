@@ -18,7 +18,7 @@ class UserListShow
     private ?Users $user = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Show $show = null;
 
     public function getId(): ?int

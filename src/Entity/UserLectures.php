@@ -25,7 +25,7 @@ class UserLectures
     private ?Users $user = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?ShowVideo $show_video = null;
 
     public function getId(): ?int
