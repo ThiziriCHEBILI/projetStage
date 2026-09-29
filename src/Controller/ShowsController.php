@@ -36,9 +36,9 @@ final class ShowsController extends AbstractController
 
             return $this->json($shows, 200, [], ['groups' => 'show:read']);
         } catch (DBALException) {
-            return $this->json(['error' => 'Erreur de base de données'], 500);
-        } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], 500);
+            return $this->json(['message' => 'Une erreur est survenue'], 500);
+        } catch (\Exception) {
+            return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
     #[Route('/{name}', name: 'get_shows_by_category', methods: ['GET'])]
@@ -72,9 +72,9 @@ final class ShowsController extends AbstractController
 
             return $this->json($shows, 200, [], ['groups' => 'show:read']);
         } catch (DBALException) {
-            return $this->json(['error' => 'Erreur de base de données'], 500);
-        } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], 500);
+            return $this->json(['message' => 'Une erreur est survenue'], 500);
+        } catch (\Exception) {
+            return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
 
@@ -97,9 +97,9 @@ final class ShowsController extends AbstractController
 
             return $this->json($show, 200, [], ['groups' => 'show:read']);
         } catch (DBALException) {
-            return $this->json(['error' => 'Erreur de base de données'], 500);
-        } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], 500);
+            return $this->json(['message' => 'Une erreur est survenue'], 500);
+        } catch (\Exception) {
+            return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
 
@@ -142,9 +142,9 @@ final class ShowsController extends AbstractController
 
             return $this->json($show, 201, [], ['groups' => 'show:read']);
         } catch (DBALException) {
-            return $this->json(['error' => 'Erreur de base de données'], 500);
-        } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], 500);
+            return $this->json(['message' => 'Une erreur est survenue'], 500);
+        } catch (\Exception) {
+            return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
 
@@ -187,9 +187,9 @@ final class ShowsController extends AbstractController
 
             return $this->json($show, 200, [], ['groups' => 'show:read']);
         } catch (DBALException) {
-            return $this->json(['error' => 'Erreur de base de données'], 500);
-        } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], 500);
+            return $this->json(['message' => 'Une erreur est survenue'], 500);
+        } catch (\Exception) {
+            return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
 
@@ -218,9 +218,9 @@ final class ShowsController extends AbstractController
 
             return $this->json(['message' => 'show supprimé avec succès'], 200);
         } catch (DBALException) {
-            return $this->json(['error' => 'Erreur de base de données'], 500);
-        } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], 500);
+            return $this->json(['message' => 'Une erreur est survenue'], 500);
+        } catch (\Exception) {
+            return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
 }
