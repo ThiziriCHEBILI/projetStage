@@ -45,6 +45,10 @@ class Show
     #[ORM\OneToMany(targetEntity: ShowVideo::class, mappedBy: 'show', cascade: ['remove'])]
     private Collection $showVideos;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    #[Groups(['show:read'])]
+    private ?string $award = null;
+
 
     public function __construct()
     {
@@ -143,6 +147,18 @@ class Show
                 $showVideo->setShowId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAward(): ?string
+    {
+        return $this->award;
+    }
+
+    public function setAward(?string $award): static
+    {
+        $this->award = $award;
 
         return $this;
     }

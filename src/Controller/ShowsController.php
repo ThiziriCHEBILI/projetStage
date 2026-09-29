@@ -17,7 +17,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[Route('/shows', name: 'app_show')]
 final class ShowsController extends AbstractController
 {
+    #[Route('/a-la-une', name: 'get_shows_winners_by_category', methods: ['GET'])]
+    public function getShowsWinners(EntityManagerInterface $em): JsonResponse
+    {
+        try {
+            $categories = $em->getRepository(CategoriesShow::class)->findAll();
 
+            $shows = [];
+            foreach ($categories as $category) {
+                $show = $em->getRepository(Show::class)->findOneBy(
+                    ['award' => "award winner", 'categorie_show' => $category],
+                    ['release_date' => 'DESC'],
+                );
+                if ($show) {
+                    $shows[] = $show;
+                }
+            }
+
+            return $this->json($shows, 200, [], ['groups' => 'show:read']);
+        } catch (DBALException) {
+            return $this->json(['error' => 'Erreur de base de données'], 500);
+        } catch (\Exception $e) {
+            return $this->json(['error' => $e->getMessage()], 500);
+        }
+    }
     #[Route('/{name}', name: 'get_shows_by_category', methods: ['GET'])]
     public function getShowsByCategory(string $name, Request $request, EntityManagerInterface $em): JsonResponse
     {

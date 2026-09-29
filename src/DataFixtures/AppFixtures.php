@@ -36,15 +36,15 @@ class AppFixtures extends Fixture
         $showsData = [
             // Films (categoryIndex => 0)
             ["title" => "Dune: Deuxième Partie", "description" => "Paul Atréides s'unit aux Fremen pour se venger des conspirateurs qui ont détruit sa famille.", "categoryIndex" => 0, "releaseDate" => "2024-02-28"],
-            ["title" => "Oppenheimer", "description" => "L'histoire du physicien J. Robert Oppenheimer et de son rôle dans le développement de la bombe atomique.", "categoryIndex" => 0, "releaseDate" => "2023-07-19"],
+            ["title" => "Oppenheimer", "description" => "L'histoire du physicien J. Robert Oppenheimer et de son rôle dans le développement de la bombe atomique.", "categoryIndex" => 0, "releaseDate" => "2023-07-19","award" => "award winner"],
             
             // Séries (categoryIndex => 1)
-            ["title" => "The Last of Us", "description" => "Un contrebandier est chargé d'escorter une adolescente à travers une Amérique post-apocalyptique.", "categoryIndex" => 1, "releaseDate" => "2023-01-15"],
+            ["title" => "The Last of Us", "description" => "Un contrebandier est chargé d'escorter une adolescente à travers une Amérique post-apocalyptique.", "categoryIndex" => 1, "releaseDate" => "2023-01-15","award" => "award winner"],
             ["title" => "Squid Game", "description" => "Des centaines de joueurs endettés s'affrontent dans des jeux d'enfants mortels pour un énorme prix en argent.", "categoryIndex" => 1, "releaseDate" => "2021-09-17"],
            
 
             // Dessins animés (categoryIndex => 2)
-            ["title" => "Le Garçon et le Héron", "description" => "Un jeune garçon en deuil part à la recherche de sa mère disparue dans un monde fantastique.", "categoryIndex" => 2, "releaseDate" => "2023-07-14"],
+            ["title" => "Le Garçon et le Héron", "description" => "Un jeune garçon en deuil part à la recherche de sa mère disparue dans un monde fantastique.", "categoryIndex" => 2, "releaseDate" => "2023-07-14","award" => "award winner"],
             ["title" => "Vaïana 2", "description" => "Vaïana part pour un nouveau voyage à travers les mers du Pacifique après avoir reçu un appel inattendu de ses ancêtres.", "categoryIndex" => 2, "releaseDate" => "2024-11-27"],
             
         ];
@@ -56,6 +56,7 @@ class AppFixtures extends Fixture
             $show->setDescription($showData["description"]);
             $show->setDatePublication(new \DateTime());
             $show->setReleaseDate(new \DateTime($showData["releaseDate"]));
+            $show->setAward($showData["award"] ?? null);
             $show->setCategorieShowId($categoriesShow[$showData["categoryIndex"]]);
             $manager->persist($show);
             $shows[] = $show;
