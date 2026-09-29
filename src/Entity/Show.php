@@ -49,6 +49,10 @@ class Show
     #[Groups(['show:read'])]
     private ?string $award = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Groups(['show:read'])]
+    private ?string $type_show = null;
+
 
     public function __construct()
     {
@@ -159,6 +163,18 @@ class Show
     public function setAward(?string $award): static
     {
         $this->award = $award;
+
+        return $this;
+    }
+
+    public function getTypeShow(): ?string
+    {
+        return $this->type_show;
+    }
+
+    public function setTypeShow(?string $type_show): static
+    {
+        $this->type_show = $type_show;
 
         return $this;
     }
