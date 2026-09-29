@@ -57,7 +57,7 @@ class AppFixtures extends Fixture
             $show->setDatePublication(new \DateTime());
             $show->setReleaseDate(new \DateTime($showData["releaseDate"]));
             $show->setAward($showData["award"] ?? null);
-            $show->setCategorieShowId($categoriesShow[$showData["categoryIndex"]]);
+            $show->setCategorieShow($categoriesShow[$showData["categoryIndex"]]);
             $manager->persist($show);
             $shows[] = $show;
         }

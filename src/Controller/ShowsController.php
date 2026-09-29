@@ -136,7 +136,7 @@ final class ShowsController extends AbstractController
             $show->setDescription($data['description']);
             $show->setDatePublication(new \DateTime());
             $show->setReleaseDate(new \DateTime($data['release_date']));
-            $show->setCategorieShowId($category);
+            $show->setCategorieShow($category);
             $em->persist($show);
             $em->flush();
 

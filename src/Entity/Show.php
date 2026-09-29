@@ -108,13 +108,13 @@ class Show
 
         return $this;
     }
-
-    public function getCategorieShowId(): ?CategoriesShow
+   
+    public function getCategorieShow(): ?CategoriesShow
     {
         return $this->categorie_show;
     }
 
-    public function setCategorieShowId(?CategoriesShow $categorie_show): static
+    public function setCategorieShow(?CategoriesShow $categorie_show): static
     {
         $this->categorie_show = $categorie_show;
 
