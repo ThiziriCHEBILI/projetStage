@@ -57,18 +57,18 @@ final class ShowsController extends AbstractController
             $limit = 12;
             $offset = ($page - 1) * $limit;
 
+            $type = $request->query->get('type');
+            $criteres = ['categorie_show' => $category];
+            if ($type) {
+                $criteres['type_show'] = $type;
+            }
+
             $shows = $em->getRepository(Show::class)->findBy(
-                ['categorie_show' => $category],
+                $criteres,
                 ['release_date' => 'DESC'],
                 $limit,
                 $offset
             );
-            if (empty($shows) && $page == 1) {
-                return $this->json(['message' => 'Aucun show trouvé pour cette catégorie'], 404);
-            }
-            if (empty($shows)) {
-                return $this->json(['message' => 'Cette page ne contient aucun show'], 404);
-            }
 
             return $this->json($shows, 200, [], ['groups' => 'show:read']);
         } catch (DBALException) {
@@ -123,6 +123,7 @@ final class ShowsController extends AbstractController
                 'title' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 30)],
                 'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
                 'release_date' => [new Assert\NotBlank(), new Assert\Date()],
+                'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
             ]);
 
             $errors = $validator->validate($data, $constraints);
@@ -136,6 +137,7 @@ final class ShowsController extends AbstractController
             $show->setDescription($data['description']);
             $show->setDatePublication(new \DateTime());
             $show->setReleaseDate(new \DateTime($data['release_date']));
+            $show->setTypeShow($data['type_show']);
             $show->setCategorieShow($category);
             $em->persist($show);
             $em->flush();
@@ -174,6 +176,8 @@ final class ShowsController extends AbstractController
             $constraints = new Assert\Collection([
                 'title' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 30)],
                 'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
+                'release_date' => [new Assert\NotBlank(), new Assert\Date()],
+                'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
             ]);
 
             $errors = $validator->validate($data, $constraints);
@@ -183,6 +187,9 @@ final class ShowsController extends AbstractController
 
             $show->setTitle($data['title']);
             $show->setDescription($data['description']);
+            $show->setReleaseDate(new \DateTime($data['release_date']));
+            $show->setTypeShow($data['type_show']);
+
             $em->flush();
 
             return $this->json($show, 200, [], ['groups' => 'show:read']);
