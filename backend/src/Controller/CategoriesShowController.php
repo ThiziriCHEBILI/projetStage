@@ -67,7 +67,7 @@ final class CategoriesShowController extends AbstractController
         }
     }
 
-#[Route('/{id}', name: 'delete_category', methods: ['DELETE'], requirements:['id' => '/id+'])]
+#[Route('/{id}', name: 'delete_category', methods: ['DELETE'], requirements: ['id' => '\d+'])]
     public function deleteCategory(int $id, EntityManagerInterface $em): JsonResponse
 
     {
@@ -79,13 +79,13 @@ final class CategoriesShowController extends AbstractController
             }
 
             if (!$category->getShow()->isEmpty()) {
-                return $this->json(['message' => 'cette categorie contient des shows'], 409);
+                return $this->json(['message' => 'Cette catégorie contient des shows'], 409);
             }
 
             $em->remove($category);
             $em->flush();
 
-            return $this->json(['message' => 'categorie supprimée avec succès'], 200);
+            return $this->json(['message' => 'Catégorie supprimée avec succès'], 200);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
         } catch (\Exception) {
