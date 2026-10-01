@@ -17,8 +17,8 @@ class UserListShow
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'userListShow')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Show $show = null;
 
     public function getId(): ?int

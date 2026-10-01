@@ -36,7 +36,7 @@ class ShowVideo
     private ?\DateTime $viewing_time = null;
 
     #[ORM\ManyToOne(inversedBy: 'showVideos')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Show $show = null;
 
     public function getId(): ?int

@@ -6,6 +6,7 @@ use App\Repository\CategoriesShowRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CategoriesShowRepository::class)]
 class CategoriesShow
@@ -13,9 +14,11 @@ class CategoriesShow
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['show:read', 'category:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 25)]
+    #[Groups(['show:read', 'category:read'])]
     private ?string $name = null;
 
     /**
@@ -58,7 +61,7 @@ class CategoriesShow
     {
         if (!$this->show->contains($show)) {
             $this->show->add($show);
-            $show->setCategorieShowId($this);
+            $show->setCategorieShow($this);
         }
 
         return $this;
@@ -68,8 +71,8 @@ class CategoriesShow
     {
         if ($this->show->removeElement($show)) {
             // set the owning side to null (unless already changed)
-            if ($show->getCategorieShowId() === $this) {
-                $show->setCategorieShowId(null);
+            if ($show->getCategorieShow() === $this) {
+                $show->setCategorieShow(null);
             }
         }
 
