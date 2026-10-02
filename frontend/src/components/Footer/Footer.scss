@@ -5,7 +5,9 @@
   flex-direction: column;
   gap: 16px;
   padding: 40px $container-padding;
-  border-top: 1px solid $color-surface;
+  background-color: $color-background-bar;
+  margin-top: auto;
+
 
   &__logo {
     display: flex;

@@ -1,0 +1,93 @@
+@use "../../index" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px $container-padding;
+  background-color: $color-background-bar;
+  &__navigation {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  &__tools {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  &__logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__logoNOVA {
+    width: 30px;
+    height: 30px;
+  }
+
+  &__name {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    a {
+      font-size: 16px;
+      color: $color-text-muted;
+      transition: color 0.2s ease;
+      padding-bottom: 6px;
+      border-bottom: 3px solid transparent;
+       &.active {
+        color: $color-text;
+        border-bottom-color: $color-accent;
+      }
+    }
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background-color: $color-surface;
+  }
+  &__search input {
+    border: none;
+    outline: none;
+    background: none;
+    color: $color-text;
+    font-size: 14px;
+    width: 220px;
+  }
+  &__search i {
+    color: $color-text-subtle;
+    font-size: 14px;
+  }
+
+  &__search input::placeholder {
+    color: $color-text-subtle;
+  }
+
+    &__login {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: $color-text-muted;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-text;
+    }
+
+    i {
+      font-size: 18px;
+    }
+  }
+}
