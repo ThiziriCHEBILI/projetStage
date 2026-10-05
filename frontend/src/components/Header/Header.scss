@@ -50,29 +50,31 @@
   }
 
   &__search {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 14px;
-    border-radius: 10px;
-    background-color: $color-surface;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background-color: $color-surface;
+
+  i {
+    color: $color-text-subtle;
+    font-size: 14px;
   }
-  &__search input {
+
+  input {
     border: none;
     outline: none;
     background: none;
     color: $color-text;
     font-size: 14px;
     width: 220px;
-  }
-  &__search i {
-    color: $color-text-subtle;
-    font-size: 14px;
-  }
 
-  &__search input::placeholder {
-    color: $color-text-subtle;
+    &::placeholder {
+      color: $color-text-subtle;
+    }
   }
+}
 
     &__login {
     display: flex;
