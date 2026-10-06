@@ -13,11 +13,8 @@ $font-main: "Inter", Arial, sans-serif;
 
 $container-padding: 30px;
 
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+$breakpoint-mobile: 768px;
+
 
 * {
   box-sizing: border-box;
@@ -60,4 +57,4 @@ button {
   color: inherit;
 }
 
-$breakpoint-mobile: 768px;
+
