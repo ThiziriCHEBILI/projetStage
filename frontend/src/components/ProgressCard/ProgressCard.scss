@@ -1,0 +1,119 @@
+@use "../../index" as *;
+
+.progress {
+  width: 340px;
+  min-width: 340px;
+
+  &__visual {
+    position: relative;
+    margin-bottom: 10px;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover &__visual {
+    transform: scale(1.04);
+    z-index: 2;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+
+  &:hover &__image {
+    border-color: $color-text;
+  }
+
+  &__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    color: $color-text;
+  }
+
+  &__bar {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: rgba($color-text, 0.3);
+  }
+
+  &__fill {
+    height: 100%;
+    border-radius: 2px;
+    background-color: $color-accent;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  &__more {
+    font-size: 16px;
+    color: $color-text-muted;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  &__info {
+    font-size: 13px;
+    color: $color-text-subtle;
+    margin-top: 4px;
+  }
+
+  &__menu {
+    position: relative;
+  }
+
+  &__options {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    z-index: 10;
+    min-width: 180px;
+    margin-bottom: 6px;
+    padding: 6px 0;
+    list-style: none;
+    border-radius: 6px;
+    background-color: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  &__option {
+    display: block;
+    width: 100%;
+    padding: 8px 14px;
+    text-align: left;
+    font-size: 13px;
+    color: $color-text-muted;
+
+    &:hover {
+      background-color: rgba($color-text, 0.08);
+      color: $color-text;
+    }
+  }
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+  }
+}

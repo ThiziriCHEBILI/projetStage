@@ -1,4 +1,4 @@
-import type { Show, Section } from "../Types";
+import type { Show, Section, Progress } from "../Types";
 
 export const shows: Show[] = [
   {
@@ -9,17 +9,8 @@ export const shows: Show[] = [
     release_date: "2024-02-28T00:00:00+00:00",
     type_show: "sci-fi",
     image_show: "/imageVideo.png",
-    videos: [
-      {
-        id: 1,
-        descriptionVideo: "Bande-annonce officielle de Dune: Deuxième Partie",
-        image: "/imageVideo.png",
-        episodeNumber: 1,
-        saisonNumber: 1,
-        videoQuality: "4K HDR",
-        viewingTime: "02:46:00",
-      },
-    ],
+    seasonCount: 0,
+    bestQuality: "4K HDR",
   },
   {
     id: 2,
@@ -29,17 +20,8 @@ export const shows: Show[] = [
     release_date: "2023-07-19T00:00:00+00:00",
     type_show: "drame",
     image_show: "/imageVideo.png",
-    videos: [
-      {
-        id: 2,
-        descriptionVideo: "Bande-annonce officielle d'Oppenheimer",
-        image: "/imageVideo.png",
-        episodeNumber: 1,
-        saisonNumber: 1,
-        videoQuality: "Full HD",
-        viewingTime: "03:00:00",
-      },
-    ],
+    seasonCount: 0,
+    bestQuality: "Full HD",
   },
   {
     id: 3,
@@ -49,17 +31,8 @@ export const shows: Show[] = [
     release_date: "2023-01-15T00:00:00+00:00",
     type_show: "drame",
     image_show: "/imageVideo.png",
-    videos: [
-      {
-        id: 3,
-        descriptionVideo: "The Last of Us - Saison 1, Épisode 3",
-        image: "/imageVideo.png",
-        episodeNumber: 3,
-        saisonNumber: 1,
-        videoQuality: "4K HDR",
-        viewingTime: "01:16:00",
-      },
-    ],
+    seasonCount: 1,
+    bestQuality: "4K HDR",
   },
   {
     id: 4,
@@ -69,17 +42,8 @@ export const shows: Show[] = [
     release_date: "2021-09-17T00:00:00+00:00",
     type_show: "thriller",
     image_show: "/imageVideo.png",
-    videos: [
-      {
-        id: 4,
-        descriptionVideo: "Squid Game - Saison 2, Épisode 5",
-        image: "/imageVideo.png",
-        episodeNumber: 5,
-        saisonNumber: 2,
-        videoQuality: "Full HD",
-        viewingTime: "00:55:00",
-      },
-    ],
+    seasonCount: 2,
+    bestQuality: "Full HD",
   },
   {
     id: 5,
@@ -89,17 +53,8 @@ export const shows: Show[] = [
     release_date: "2023-07-14T00:00:00+00:00",
     type_show: "aventure",
     image_show: "/imageVideo.png",
-    videos: [
-      {
-        id: 5,
-        descriptionVideo: "Bande-annonce officielle du Garçon et le Héron",
-        image: "/imageVideo.png",
-        episodeNumber: 1,
-        saisonNumber: 1,
-        videoQuality: "Full HD",
-        viewingTime: "02:04:00",
-      },
-    ],
+    seasonCount: 0,
+    bestQuality: "Full HD",
   },
   {
     id: 6,
@@ -109,27 +64,12 @@ export const shows: Show[] = [
     release_date: "2024-11-27T00:00:00+00:00",
     type_show: "aventure",
     image_show: "/imageVideo.png",
-    videos: [
-      {
-        id: 6,
-        descriptionVideo: "Bande-annonce officielle de Vaïana 2",
-        image: "/imageVideo.png",
-        episodeNumber: 1,
-        saisonNumber: 1,
-        videoQuality: "4K HDR",
-        viewingTime: "01:40:00",
-      },
-    ],
+    seasonCount: 0,
+    bestQuality: "4K HDR",
   },
 ];
 
 export const sections: Section[] = [
-  {
-    id: 1,
-    title: "Reprendre votre lecture",
-    seeAll: "/shows/reprendre",
-    shows: [shows[0], shows[2], shows[4]],
-  },
   {
     id: 2,
     title: "Tendances actuelles",
@@ -141,7 +81,7 @@ export const sections: Section[] = [
   },
   {
     id: 3,
-    title: "Top 10 France aujourd'hui",
+    title: "Top 5 France aujourd'hui",
     shows: [shows[4], shows[5]],
   },
   {
@@ -152,5 +92,47 @@ export const sections: Section[] = [
     withQuality: true,
     info: "saison",
     shows: [shows[2], shows[3]],
+  },
+];
+
+export const progressList: Progress[] = [
+  {
+    show: shows[0],
+    video: {
+      id: 1,
+      descriptionVideo: "Bande-annonce officielle de Dune: Deuxième Partie",
+      image: "/imageVideo.png",
+      episodeNumber: 1,
+      saisonNumber: 1,
+      videoQuality: "4K HDR",
+      duration: "02:46:00",
+    },
+    remainingDuration: "00:32:00",
+  },
+  {
+    show: shows[2],
+    video: {
+      id: 3,
+      descriptionVideo: "The Last of Us - Saison 1, Épisode 3",
+      image: "/imageVideo.png",
+      episodeNumber: 3,
+      saisonNumber: 1,
+      videoQuality: "4K HDR",
+      duration: "01:16:00",
+    },
+    remainingDuration: "00:48:00",
+  },
+  {
+    show: shows[4],
+    video: {
+      id: 5,
+      descriptionVideo: "Bande-annonce officielle du Garçon et le Héron",
+      image: "/imageVideo.png",
+      episodeNumber: 1,
+      saisonNumber: 1,
+      videoQuality: "Full HD",
+      duration: "02:04:00",
+    },
+    remainingDuration: "00:12:00",
   },
 ];

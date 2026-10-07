@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 import type { Show, Info } from "../../Types";
-import { formatSaisons, nombreDeSaisons } from "../../utilities/convert";
+import { formatSeasons } from "../../utilities/convert";
 import "./ShowCard.scss";
 
 interface ShowCardProps {
@@ -14,26 +14,23 @@ export function ShowCard({
   withQuality,
   info,
 }: ShowCardProps): JSX.Element {
-  const video = show.videos[0];
+  let infoText = show.type_show;
 
-  let texteInfo = show.type_show;
   if (info === "saison") {
-    texteInfo = formatSaisons(nombreDeSaisons(show.videos));
+    infoText = formatSeasons(show.seasonCount);
   }
 
   return (
     <article className="card">
       <img src={show.image_show} alt="" className="card__image" />
 
-      {withQuality && (
-        <span className="card__quality">{video.videoQuality}</span>
-      )}
+      {withQuality && <span className="card__quality">{show.bestQuality}</span>}
 
       <h3 className="card__title">{show.title}</h3>
 
       {info && (
         <p className="card__info">
-          {new Date(show.release_date).getFullYear()} · {texteInfo}
+          {new Date(show.release_date).getFullYear()} · {infoText}
         </p>
       )}
     </article>

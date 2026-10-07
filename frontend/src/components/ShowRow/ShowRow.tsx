@@ -1,25 +1,19 @@
-import type { JSX } from "react";
+import type { JSX, ReactNode } from "react";
 import { Link } from "react-router";
-import type { Show, Info } from "../../Types";
-import { ShowCard } from "../ShowCard/ShowCard";
 import "./ShowRow.scss";
 
 interface ShowRowProps {
   titleSec: string;
   desc?: string;
-  shows: Show[];
   seeAll?: string;
-  withQuality?: boolean;
-  info?: Info;
+  children: ReactNode;
 }
 
 export function ShowRow({
   titleSec,
   desc,
-  shows,
   seeAll,
-  withQuality,
-  info,
+  children,
 }: ShowRowProps): JSX.Element {
   return (
     <section className="row">
@@ -37,16 +31,7 @@ export function ShowRow({
 
       {desc && <p className="row__desc">{desc}</p>}
 
-      <div className="row__cards">
-        {shows.map((show) => (
-          <ShowCard
-            key={show.id}
-            show={show}
-            withQuality={withQuality}
-            info={info}
-          />
-        ))}
-      </div>
+      <div className="row__cards">{children}</div>
     </section>
   );
 }

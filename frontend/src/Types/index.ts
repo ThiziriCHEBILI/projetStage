@@ -7,7 +7,7 @@ export interface ShowVideo {
   episodeNumber: number;
   saisonNumber: number;
   videoQuality: string;
-  viewingTime: string;
+  duration: string;
 }
 export interface Show {
   id: number;
@@ -16,7 +16,8 @@ export interface Show {
   release_date: string;
   type_show: string;
   image_show: string;
-  videos: ShowVideo[];
+  seasonCount: number;
+  bestQuality: string;
 }
 
 export interface Section {
@@ -27,4 +28,10 @@ export interface Section {
   withQuality?: boolean;
   info?: Info;
   shows: Show[];
+}
+
+export interface Progress {
+  show: Show;
+  video: ShowVideo;
+  remainingDuration: string;
 }
