@@ -16,12 +16,12 @@ export interface Show {
   release_date: string;
   type_show: string;
   image_show: string;
+  image_poster: string;
   seasonCount: number;
   bestQuality: string;
 }
 
 export interface Section {
-  id: number;
   title: string;
   desc?: string;
   seeAll?: string;

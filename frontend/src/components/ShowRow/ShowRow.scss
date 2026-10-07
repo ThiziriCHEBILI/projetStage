@@ -3,46 +3,70 @@
 .row {
   margin-bottom: 40px;
 
- &__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 $container-padding;
-}
-
-&__title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 20px;
-  font-weight: bold;
-
-  i {
-    font-size: 12px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $container-padding;
   }
-}
 
-&__seeall {
-  font-size: 16px;
-  color: $color-text-muted;
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: bold;
 
-  &:hover {
+    i {
+      font-size: 12px;
+    }
+  }
+
+  &__seeall {
+    font-size: 16px;
+    color: $color-text-muted;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  &__desc {
+    font-size: 16px;
+    color: $color-text-subtle;
+    padding: 0 $container-padding;
+    margin-top: 4px;
+  }
+
+  &__strip {
+    position: relative;
+    padding: 0 $container-padding;
+    margin-top: 16px;
+  }
+
+  &__cards {
+    display: flex;
+    gap: 16px;
+    overflow: hidden;
+    padding: 12px 8px;
+  }
+
+    &__arrow {
+    position: absolute;
+    top: 34%;
+    transform: translateY(-50%);
+    z-index: 2;
+    font-size: 28px;
     color: $color-text;
+    cursor: pointer;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
   }
-}
+  }
 
-&__desc {
-  font-size: 16px;
-  color: $color-text-subtle;
-  padding: 0 $container-padding;
-  margin-top: 4px;
-}
-
-&__cards {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 12px $container-padding;
-  margin-top: 16px;
-}
-}

@@ -1,8 +1,8 @@
 @use "../../index" as *;
 
 .progress {
-  width: 340px;
-  min-width: 340px;
+  width: 24%;
+  flex-shrink: 0;
 
   &__visual {
     position: relative;
