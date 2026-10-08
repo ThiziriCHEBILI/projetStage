@@ -1,7 +1,17 @@
 import type { JSX } from "react";
 import "./RgpdModal.scss";
 
-const infos = [
+interface RgpdInfo {
+  icon: string;
+  title: string;
+  text: string;
+}
+
+interface RgpdModalProps {
+  onClose: () => void;
+}
+
+const infos: RgpdInfo[] = [
   {
     icon: "fa-solid fa-user",
     title: "Création du compte",
@@ -24,7 +34,7 @@ const infos = [
   },
 ];
 
-export function RgpdModal({ onClose }: { onClose: () => void }): JSX.Element {
+export function RgpdModal({ onClose }: RgpdModalProps): JSX.Element {
   return (
     <div
       className="backdrop"
