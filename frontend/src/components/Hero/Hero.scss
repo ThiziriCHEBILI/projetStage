@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 0 $container-padding;
+    padding: 0 $container-padding 0 80px;
     background-image: linear-gradient(to right, $color-background, transparent);
   }
 
@@ -120,11 +120,11 @@
     }
 
     &--left {
-      left: 10px;
+      left: 20px;
     }
 
     &--right {
-      right: 10px;
+      right: 20px;
     }
   }
 }
