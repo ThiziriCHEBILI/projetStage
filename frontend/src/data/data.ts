@@ -82,7 +82,7 @@ export const shows: Show[] = [
     description:
       "Dans une petite ville de l'Indiana, la disparition d'un enfant révèle un monde parallèle.",
     release_date: "2016-07-15T00:00:00+00:00",
-    type_show: "fantastique",
+    type_show: "horreur",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
     seasonCount: 4,
@@ -118,7 +118,7 @@ export const shows: Show[] = [
     description:
       "Inspiré par Arsène Lupin, Assane Diop venge son père victime d'une injustice.",
     release_date: "2021-01-08T00:00:00+00:00",
-    type_show: "policier",
+    type_show: "thriller",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
     seasonCount: 3,
@@ -142,7 +142,7 @@ export const shows: Show[] = [
     description:
       "Deux sœurs se retrouvent dans des camps opposés d'une guerre entre deux cités.",
     release_date: "2021-11-06T00:00:00+00:00",
-    type_show: "animation",
+    type_show: "action",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
     seasonCount: 2,
@@ -275,3 +275,12 @@ export const topShows: Show[] = [
   shows[3],
 ];
 export const heroShows: Show[] = [shows[0], shows[2], shows[4]];
+
+export const showTypes: string[] = [
+  "sci-fi",
+  "drame",
+  "thriller",
+  "aventure",
+  "action",
+  "horreur",
+];

@@ -6,6 +6,7 @@ import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
 import { TopCard } from "../../components/TopCard/TopCard";
 import { isRecent } from "../../utilities/convert";
+import { TypeFilters } from "../../components/TypeFilters/TypeFilters";
 import {
   heroShows,
   trendingSection,
@@ -33,6 +34,8 @@ export default function Home(): JSX.Element {
   return (
     <>
       <Hero shows={heroShows} />
+      <TypeFilters />
+
       {continueWatching.length > 0 && (
         <ShowRow
           titleSec="Reprendre votre lecture"
