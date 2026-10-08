@@ -45,7 +45,7 @@
     right: 10px;
     height: 3px;
     border-radius: 2px;
-    background-color: rgba($color-text, 0.3);
+    background-color: $color-background-bar;
   }
 
   &__fill {
@@ -94,7 +94,7 @@
     padding: 6px 0;
     list-style: none;
     border-radius: 6px;
-    background-color: #1a1a1a;
+    background-color: $color-surface;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   }
 
