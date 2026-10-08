@@ -3,6 +3,7 @@ $color-background-bar: #090b0d;
 
 $color-surface: #1c2429;
 $color-accent: #e01f26;
+$color-accent-light: #ff4a50;
 $color-success: #40bf2e;
 
 $color-text: #ebebeb;
@@ -11,13 +12,10 @@ $color-text-subtle: #8c949c;
 
 $font-main: "Inter", Arial, sans-serif;
 
-$container-padding: 30px;
+$container-padding: 50px;
 
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+$breakpoint-mobile: 768px;
+
 
 * {
   box-sizing: border-box;
@@ -60,4 +58,4 @@ button {
   color: inherit;
 }
 
-$breakpoint-mobile: 768px;
+

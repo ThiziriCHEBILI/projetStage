@@ -1,8 +1,87 @@
-import './Home.scss';
+import { useState } from "react";
 import type { JSX } from "react";
+import { Hero } from "../../components/Hero/Hero";
+import { ShowRow } from "../../components/ShowRow/ShowRow";
+import { ShowCard } from "../../components/ShowCard/ShowCard";
+import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
+import { TopCard } from "../../components/TopCard/TopCard";
+import { isRecent } from "../../utilities/convert";
+import {
+  heroShows,
+  trendingSection,
+  seriesSection,
+  progressList,
+  topShows,
+} from "../../data/data";
+import "./Home.scss";
+
+const DAYS_BEFORE_REMOVE = 30;
 
 export default function Home(): JSX.Element {
-  return(
-   <div></div>
+  const [continueWatching, setContinueWatching] = useState(
+    progressList.filter((progress) =>
+      isRecent(progress.lastWatched, DAYS_BEFORE_REMOVE),
+    ),
+  );
+
+  function removeFromList(videoId: number): void {
+    setContinueWatching(
+      continueWatching.filter((progress) => progress.video.id !== videoId),
+    );
+  }
+
+  return (
+    <>
+      <Hero shows={heroShows} />
+      {continueWatching.length > 0 && (
+        <ShowRow
+          titleSec="Reprendre votre lecture"
+          seeAll="/shows/reprendre"
+          cards={continueWatching.map((progress) => (
+            <ProgressCard
+              key={progress.video.id}
+              progress={progress}
+              onRemove={removeFromList}
+            />
+          ))}
+        />
+      )}
+
+      <ShowRow
+        titleSec={trendingSection.title}
+        desc={trendingSection.desc}
+        seeAll={trendingSection.seeAll}
+        cards={trendingSection.shows.map((show) => (
+          <ShowCard
+            key={show.id}
+            show={show}
+            withQuality={trendingSection.withQuality}
+            info={trendingSection.info}
+          />
+        ))}
+      />
+
+      <ShowRow
+        titleSec="Top 5 aujourd'hui"
+        maxCards={5}
+        cards={topShows.map((show, index) => (
+          <TopCard key={show.id} show={show} position={index + 1} />
+        ))}
+      />
+
+      <ShowRow
+        titleSec={seriesSection.title}
+        desc={seriesSection.desc}
+        seeAll={seriesSection.seeAll}
+        cards={seriesSection.shows.map((show) => (
+          <ShowCard
+            key={show.id}
+            show={show}
+            withQuality={seriesSection.withQuality}
+            info={seriesSection.info}
+          />
+        ))}
+      />
+    </>
   );
 }
