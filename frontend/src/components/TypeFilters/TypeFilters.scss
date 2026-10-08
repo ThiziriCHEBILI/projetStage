@@ -1,0 +1,25 @@
+@use "../../index" as *;
+
+.types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 $container-padding;
+  margin-bottom: 32px;
+
+  &__item {
+    padding: 8px 20px;
+    border-radius: 16px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: $color-surface;
+    color: $color-text;
+    text-transform: capitalize; // majuscule "drame" _ "Drame"
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+
+    &:hover {
+      background-color: $color-surface-hover;
+    }
+  }
+}
