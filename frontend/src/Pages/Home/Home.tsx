@@ -33,17 +33,19 @@ export default function Home(): JSX.Element {
   return (
     <>
       <Hero shows={heroShows} />
-      <ShowRow
-        titleSec="Reprendre votre lecture"
-        seeAll="/shows/reprendre"
-        cards={continueWatching.map((progress) => (
-          <ProgressCard
-            key={progress.video.id}
-            progress={progress}
-            onRemove={removeFromList}
-          />
-        ))}
-      />
+      {continueWatching.length > 0 && (
+        <ShowRow
+          titleSec="Reprendre votre lecture"
+          seeAll="/shows/reprendre"
+          cards={continueWatching.map((progress) => (
+            <ProgressCard
+              key={progress.video.id}
+              progress={progress}
+              onRemove={removeFromList}
+            />
+          ))}
+        />
+      )}
 
       <ShowRow
         titleSec={trendingSection.title}
