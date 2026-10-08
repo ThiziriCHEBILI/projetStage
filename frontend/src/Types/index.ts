@@ -35,4 +35,5 @@ export interface Progress {
   show: Show;
   video: ShowVideo;
   remainingDuration: string;
+  lastWatched: string;
 }

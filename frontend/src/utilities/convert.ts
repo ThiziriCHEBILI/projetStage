@@ -31,3 +31,10 @@ export function watchedPercent(remaining: string, total: string): number {
   const watchedSeconds = totalSeconds - remainingSeconds;
   return (watchedSeconds / totalSeconds) * 100;
 }
+
+export function isRecent(date: string, days: number): boolean {
+  const limit = new Date();
+  limit.setDate(limit.getDate() - days);
+
+  return new Date(date) > limit;
+}

@@ -156,7 +156,20 @@ export const trendingSection: Section = {
   seeAll: "/shows/tendances",
   withQuality: true,
   info: "type_show",
-  shows: [shows[0], shows[1], shows[2], shows[3], shows[4], shows[5], shows[6], shows[7], shows[8], shows[9], shows[10], shows[11], ],
+  shows: [
+    shows[0],
+    shows[1],
+    shows[2],
+    shows[3],
+    shows[4],
+    shows[5],
+    shows[6],
+    shows[7],
+    shows[8],
+    shows[9],
+    shows[10],
+    shows[11],
+  ],
 };
 
 export const seriesSection: Section = {
@@ -165,7 +178,7 @@ export const seriesSection: Section = {
   seeAll: "/shows/series",
   withQuality: true,
   info: "saison",
-    shows: [shows[2], shows[3], shows[6], shows[7], shows[9], shows[11]],
+  shows: [shows[2], shows[3], shows[6], shows[7], shows[9], shows[11]],
 };
 
 export const progressList: Progress[] = [
@@ -181,11 +194,12 @@ export const progressList: Progress[] = [
       duration: "02:46:00",
     },
     remainingDuration: "00:32:00",
+    lastWatched: "2026-10-07T21:30:00+00:00",
   },
   {
     show: shows[2],
     video: {
-      id: 3,
+      id: 2,
       descriptionVideo: "The Last of Us - Saison 1, Épisode 3",
       image: "/imageVideo.png",
       episodeNumber: 3,
@@ -194,11 +208,12 @@ export const progressList: Progress[] = [
       duration: "01:16:00",
     },
     remainingDuration: "00:48:00",
+    lastWatched: "2026-10-05T20:15:00+00:00",
   },
   {
     show: shows[4],
     video: {
-      id: 5,
+      id: 3,
       descriptionVideo: "Bande-annonce officielle du Garçon et le Héron",
       image: "/imageVideo.png",
       episodeNumber: 1,
@@ -207,8 +222,9 @@ export const progressList: Progress[] = [
       duration: "02:04:00",
     },
     remainingDuration: "00:12:00",
+    lastWatched: "2026-09-30T18:00:00+00:00",
   },
-    {
+  {
     show: shows[6],
     video: {
       id: 4,
@@ -220,6 +236,7 @@ export const progressList: Progress[] = [
       duration: "00:52:00",
     },
     remainingDuration: "00:18:00",
+    lastWatched: "2026-09-20T22:45:00+00:00",
   },
   {
     show: shows[7],
@@ -233,6 +250,7 @@ export const progressList: Progress[] = [
       duration: "00:48:00",
     },
     remainingDuration: "00:36:00",
+    lastWatched: "2026-08-12T19:00:00+00:00",
   },
   {
     show: shows[9],
@@ -244,8 +262,9 @@ export const progressList: Progress[] = [
       saisonNumber: 1,
       videoQuality: "4K HDR",
       duration: "00:45:00",
-      },
+    },
     remainingDuration: "00:09:00",
+    lastWatched: "2026-07-03T21:00:00+00:00",
   },
 ];
 export const topShows: Show[] = [

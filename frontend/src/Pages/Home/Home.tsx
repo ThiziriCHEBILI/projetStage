@@ -5,6 +5,7 @@ import { ShowRow } from "../../components/ShowRow/ShowRow";
 import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
 import { TopCard } from "../../components/TopCard/TopCard";
+import { isRecent } from "../../utilities/convert";
 import {
   heroShows,
   trendingSection,
@@ -14,8 +15,14 @@ import {
 } from "../../data/data";
 import "./Home.scss";
 
+const DAYS_BEFORE_REMOVE = 30;
+
 export default function Home(): JSX.Element {
-  const [continueWatching, setContinueWatching] = useState(progressList);
+  const [continueWatching, setContinueWatching] = useState(
+    progressList.filter((progress) =>
+      isRecent(progress.lastWatched, DAYS_BEFORE_REMOVE),
+    ),
+  );
 
   function removeFromList(videoId: number): void {
     setContinueWatching(
