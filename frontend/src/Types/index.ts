@@ -19,6 +19,7 @@ export interface Show {
   image_poster: string;
   seasonCount: number;
   bestQuality: string;
+  award?: string;
 }
 
 export interface Section {

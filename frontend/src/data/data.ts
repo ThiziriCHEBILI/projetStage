@@ -12,6 +12,7 @@ export const shows: Show[] = [
     image_poster: "/imagePoster.png",
     seasonCount: 0,
     bestQuality: "4K HDR",
+    award: "award winner",
   },
   {
     id: 2,
@@ -36,6 +37,7 @@ export const shows: Show[] = [
     image_poster: "/imagePoster.png",
     seasonCount: 1,
     bestQuality: "4K HDR",
+    award: "award winner",
   },
   {
     id: 4,
@@ -60,6 +62,7 @@ export const shows: Show[] = [
     image_poster: "/imagePoster.png",
     seasonCount: 0,
     bestQuality: "Full HD",
+    award: "award winner",
   },
   {
     id: 6,
@@ -252,3 +255,4 @@ export const topShows: Show[] = [
   shows[1],
   shows[3],
 ];
+export const heroShows: Show[] = [shows[0], shows[2], shows[4]];

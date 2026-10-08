@@ -1,0 +1,130 @@
+@use "../../index" as *;
+
+.hero {
+  position: relative;
+  margin-bottom: 40px;
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+  }
+
+  &__content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 $container-padding;
+    background-image: linear-gradient(to right, $color-background, transparent);
+  }
+
+  &__counter {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: $color-text-subtle;
+  }
+
+  &__badge {
+    margin-top: 12px;
+    padding: 4px 24px 4px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: $color-text;
+    background-image: linear-gradient(to right, $color-text, $color-accent 44%);
+  }
+
+  &__title {
+    max-width: 45%;
+    margin-top: 12px;
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1.1;
+  }
+
+  &__info {
+    margin-top: 12px;
+    font-size: 15px;
+    color: $color-text-muted;
+  }
+
+  &__desc {
+    max-width: 45%;
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-text-muted;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  &__watch,
+  &__list {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease,
+      color 0.25s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      color: $color-background;
+      background-color: $color-accent-light;
+    }
+  }
+
+  &__watch {
+    color: $color-background;
+    background-color: $color-text;
+  }
+
+  &__list {
+    color: $color-text;
+    background-color: $color-surface;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    font-size: 32px;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition:
+      transform 0.25s ease,
+      color 0.25s ease;
+
+    &:hover {
+      transform: translateY(-50%) scale(1.25);
+      color: $color-text;
+    }
+
+    &--left {
+      left: 10px;
+    }
+
+    &--right {
+      right: 10px;
+    }
+  }
+}

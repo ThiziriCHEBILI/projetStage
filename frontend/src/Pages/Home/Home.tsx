@@ -1,10 +1,12 @@
 import { useState } from "react";
 import type { JSX } from "react";
+import { Hero } from "../../components/Hero/Hero";
 import { ShowRow } from "../../components/ShowRow/ShowRow";
 import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
 import { TopCard } from "../../components/TopCard/TopCard";
 import {
+  heroShows,
   trendingSection,
   seriesSection,
   progressList,
@@ -23,6 +25,7 @@ export default function Home(): JSX.Element {
 
   return (
     <>
+      <Hero shows={heroShows} />
       <ShowRow
         titleSec="Reprendre votre lecture"
         seeAll="/shows/reprendre"
