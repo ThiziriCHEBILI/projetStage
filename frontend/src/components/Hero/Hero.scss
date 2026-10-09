@@ -32,7 +32,7 @@
   }
 
   &__badge {
-    margin-top: 12px;
+    margin-top: 18px;
     padding: 4px 24px 4px 16px;
     border-radius: 4px;
     font-size: 12px;
@@ -43,22 +43,26 @@
   }
 
   &__title {
-    max-width: 45%;
-    margin-top: 12px;
+    max-width: 520px;
+    height: 98px;
+    margin-top: 18px;
     font-size: 48px;
     font-weight: bold;
     line-height: 1.1;
   }
 
   &__info {
-    margin-top: 12px;
+    margin-top: 18px;
     font-size: 15px;
     color: $color-text-muted;
   }
 
   &__desc {
-    max-width: 45%;
-    margin-top: 12px;
+    max-width: 520px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
     font-size: 16px;
     line-height: 1.5;
     color: $color-text-muted;
@@ -67,7 +71,7 @@
   &__actions {
     display: flex;
     gap: 12px;
-    margin-top: 24px;
+    margin-top: 28px;
   }
 
   &__watch,
