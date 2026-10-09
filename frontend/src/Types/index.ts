@@ -37,3 +37,9 @@ export interface Progress {
   remainingDuration: string;
   lastWatched: string;
 }
+
+export interface CategoryPage {
+  title: string;
+  desc: string;
+  shows: Show[];
+}
