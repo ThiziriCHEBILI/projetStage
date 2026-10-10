@@ -1,21 +1,28 @@
 @use "../../index" as *;
 
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px $container-padding;
-  background-color: $color-background-bar;
+  background-color: rgba($color-background-bar, 0.7);
+  backdrop-filter: blur(8px);
+
   &__navigation {
     display: flex;
     align-items: center;
     gap: 40px;
   }
+
   &__tools {
     display: flex;
     align-items: center;
     gap: 24px;
   }
+
   &__logo-link {
     display: flex;
     align-items: center;
@@ -32,51 +39,34 @@
     font-weight: bold;
   }
 
-  &__nav {
+  &__search {
     display: flex;
     align-items: center;
-    gap: 28px;
-    a {
-      font-size: 16px;
-      color: $color-text-muted;
-      transition: color 0.2s ease;
-      padding-bottom: 6px;
-      border-bottom: 3px solid transparent;
-       &.active {
-        color: $color-text;
-        border-bottom-color: $color-accent;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background-color: $color-surface;
+
+    i {
+      color: $color-text-subtle;
+      font-size: 14px;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      background: none;
+      color: $color-text;
+      font-size: 14px;
+      width: 220px;
+
+      &::placeholder {
+        color: $color-text-subtle;
       }
     }
   }
 
-  &__search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 14px;
-  border-radius: 10px;
-  background-color: $color-surface;
-
-  i {
-    color: $color-text-subtle;
-    font-size: 14px;
-  }
-
-  input {
-    border: none;
-    outline: none;
-    background: none;
-    color: $color-text;
-    font-size: 14px;
-    width: 220px;
-
-    &::placeholder {
-      color: $color-text-subtle;
-    }
-  }
-}
-
-    &__login {
+  &__login {
     display: flex;
     align-items: center;
     gap: 8px;
