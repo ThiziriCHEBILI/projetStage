@@ -31,7 +31,12 @@ export function Hero({ shows }: HeroProps): JSX.Element {
 
   return (
     <section className="hero">
-      <img src={show.image_show} alt="" className="hero__image" />
+      <img
+        src={show.image_show}
+        alt=""
+        className="hero__image"
+        fetchPriority="high"
+      />
 
       <button
         type="button"
