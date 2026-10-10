@@ -1,4 +1,4 @@
-import type { Show, Section, Progress } from "../Types";
+import type { Show, Section, Progress, CategoryPage } from "../Types";
 
 export const shows: Show[] = [
   {
@@ -148,6 +148,141 @@ export const shows: Show[] = [
     seasonCount: 2,
     bestQuality: "4K HDR",
   },
+  {
+    id: 13,
+    title: "Seven",
+    description:
+      "Deux inspecteurs traquent un tueur qui met en scène les sept péchés capitaux.",
+    release_date: "1995-09-22T00:00:00+00:00",
+    type_show: "thriller",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 0,
+    bestQuality: "Full HD",
+  },
+  {
+    id: 14,
+    title: "Mad Max: Fury Road",
+    description:
+      "Dans un désert post-apocalyptique, une guerrière fuit un tyran avec quelques survivantes.",
+    release_date: "2015-05-14T00:00:00+00:00",
+    type_show: "action",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 0,
+    bestQuality: "4K HDR",
+    award: "award winner",
+  },
+  {
+    id: 15,
+    title: "Indiana Jones",
+    description:
+      "Un archéologue part à la recherche d'une relique avant que ses ennemis ne la trouvent.",
+    release_date: "1981-06-12T00:00:00+00:00",
+    type_show: "aventure",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 0,
+    bestQuality: "Full HD",
+  },
+  {
+    id: 16,
+    title: "Conjuring",
+    description:
+      "Deux enquêteurs du paranormal viennent en aide à une famille terrorisée dans sa ferme.",
+    release_date: "2013-07-19T00:00:00+00:00",
+    type_show: "horreur",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 0,
+    bestQuality: "Full HD",
+  },
+  {
+    id: 17,
+    title: "Le Parrain",
+    description:
+      "Le chef vieillissant d'une famille mafieuse transmet son empire à son fils cadet.",
+    release_date: "1972-03-24T00:00:00+00:00",
+    type_show: "drame",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 0,
+    bestQuality: "4K HDR",
+    award: "award winner",
+  },
+  {
+    id: 18,
+    title: "John Wick",
+    description:
+      "Un ancien tueur à gages sort de sa retraite pour venger la mort de son chien.",
+    release_date: "2014-10-24T00:00:00+00:00",
+    type_show: "action",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 0,
+    bestQuality: "4K HDR",
+  },
+  {
+    id: 19,
+    title: "Dark",
+    description:
+      "La disparition d'enfants dans une petite ville allemande révèle un secret de famille.",
+    release_date: "2017-12-01T00:00:00+00:00",
+    type_show: "sci-fi",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 3,
+    bestQuality: "4K HDR",
+  },
+  {
+    id: 20,
+    title: "Breaking Bad",
+    description:
+      "Un professeur de chimie se lance dans la fabrication de drogue pour assurer l'avenir des siens.",
+    release_date: "2008-01-20T00:00:00+00:00",
+    type_show: "drame",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 5,
+    bestQuality: "Full HD",
+    award: "award winner",
+  },
+  {
+    id: 21,
+    title: "The Witcher",
+    description:
+      "Un chasseur de monstres solitaire croise la route d'une princesse en fuite.",
+    release_date: "2019-12-20T00:00:00+00:00",
+    type_show: "aventure",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 3,
+    bestQuality: "4K HDR",
+  },
+  {
+    id: 22,
+    title: "Black Mirror",
+    description:
+      "Chaque épisode imagine une dérive possible de notre rapport à la technologie.",
+    release_date: "2011-12-04T00:00:00+00:00",
+    type_show: "sci-fi",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 6,
+    bestQuality: "4K HDR",
+  },
+  {
+    id: 23,
+    title: "Peaky Blinders",
+    description:
+      "Une famille de gangsters étend son pouvoir dans l'Angleterre d'après-guerre.",
+    release_date: "2013-09-12T00:00:00+00:00",
+    type_show: "drame",
+    image_show: "/imageVideo.png",
+    image_poster: "/imagePoster.png",
+    seasonCount: 6,
+    bestQuality: "Full HD",
+  },
 ];
 
 export const trendingSection: Section = {
@@ -284,3 +419,49 @@ export const showTypes: string[] = [
   "action",
   "horreur",
 ];
+
+export const filmShows: Show[] = [
+  shows[0],
+  shows[1],
+  shows[8],
+  shows[10],
+  shows[12],
+  shows[13],
+  shows[14],
+  shows[15],
+  shows[16],
+  shows[17],
+];
+
+export const seriesShows: Show[] = [
+  shows[2],
+  shows[3],
+  shows[6],
+  shows[7],
+  shows[9],
+  shows[18],
+  shows[19],
+  shows[20],
+  shows[21],
+  shows[22],
+];
+
+export const animesShows: Show[] = [shows[4], shows[5], shows[11]];
+
+export const filmsPage: CategoryPage = {
+  title: "Films",
+  desc: "Découvrez notre sélection de films incontournables : des dernières nouveautés aux grands classiques, en passant par la science-fiction, l'action et le thriller. Trouvez votre prochain film préféré en quelques clics.",
+  shows: filmShows,
+};
+
+export const seriesPage: CategoryPage = {
+  title: "Séries",
+  desc: "Plongez dans nos séries à dévorer : thrillers haletants, drames intenses et frissons garantis. Un épisode en appelle toujours un autre.",
+  shows: seriesShows,
+};
+
+export const animesPage: CategoryPage = {
+  title: "Dessins animés",
+  desc: "Des aventures pour tous les âges : mondes imaginaires, héros attachants et grands voyages. À regarder seul ou en famille.",
+  shows: animesShows,
+};
