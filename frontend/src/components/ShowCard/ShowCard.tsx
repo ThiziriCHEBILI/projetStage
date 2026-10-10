@@ -22,7 +22,12 @@ export function ShowCard({
 
   return (
     <article className="card">
-      <img src={show.image_show} alt="" className="card__image" />
+      <img
+        src={show.image_show}
+        alt=""
+        className="card__image"
+        loading="lazy"
+      />
 
       {withQuality && <span className="card__quality">{show.bestQuality}</span>}
 
