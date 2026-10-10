@@ -10,7 +10,7 @@ $color-text: #ebebeb;
 $color-text-muted: #b8bfc4;
 $color-text-subtle: #8c949c;
 
-$color-accent-hover:  #c4181e;
+$color-accent-hover: #c4181e;
 $color-surface-hover: #2a353b;
 
 $font-main: "Inter", Arial, sans-serif;
@@ -18,7 +18,6 @@ $font-main: "Inter", Arial, sans-serif;
 $container-padding: 50px;
 
 $breakpoint-mobile: 768px;
-
 
 * {
   box-sizing: border-box;
@@ -29,7 +28,6 @@ $breakpoint-mobile: 768px;
 
 html,
 body {
-  overflow-x: hidden;
   width: 100%;
 }
 
@@ -60,5 +58,3 @@ button {
   font-family: inherit;
   color: inherit;
 }
-
-

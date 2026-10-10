@@ -1,5 +1,6 @@
 import type { JSX, SubmitEvent } from "react";
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router";
+import { Nav } from "../Nav/Nav";
 import logo from "../../assets/logo_NOVA.png";
 import "./Header.scss";
 
@@ -15,14 +16,10 @@ export function Header(): JSX.Element {
           <img src={logo} alt="NOVA" className="header__logoNOVA" />
           <span className="header__name">NOVA</span>
         </Link>
-        <nav className="header__nav">
-          <NavLink to="/">Accueil</NavLink>
-          <NavLink to="/shows/films">Films</NavLink>
-          <NavLink to="/shows/series">Séries</NavLink>
-          <NavLink to="/shows/dessins-animes">Dessins animés</NavLink>
-          <NavLink to="/ma-liste">Ma Liste</NavLink>
-        </nav>
+
+        <Nav />
       </div>
+
       <div className="header__tools">
         <form className="header__search" onSubmit={handleSubmit}>
           <button type="submit" aria-label="Lancer la recherche">
