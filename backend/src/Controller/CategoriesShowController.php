@@ -78,7 +78,7 @@ final class CategoriesShowController extends AbstractController
                 return $this->json(['message' => 'Catégorie introuvable'], 404);
             }
 
-            if (!$category->getShow()->isEmpty()) {
+            if (!$category->getShows()->isEmpty()) {
                 return $this->json(['message' => 'Cette catégorie contient des shows'], 409);
             }
 
