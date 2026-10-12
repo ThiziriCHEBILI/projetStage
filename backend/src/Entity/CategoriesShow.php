@@ -25,11 +25,11 @@ class CategoriesShow
      * @var Collection<int, Show>
      */
     #[ORM\OneToMany(targetEntity: Show::class, mappedBy: 'category_show')]
-    private Collection $show;
+    private Collection $shows;
 
     public function __construct()
     {
-        $this->show = new ArrayCollection();
+        $this->shows = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,15 +52,15 @@ class CategoriesShow
     /**
      * @return Collection<int, Show>
      */
-    public function getShow(): Collection
+    public function getShows(): Collection
     {
-        return $this->show;
+        return $this->shows;
     }
 
     public function addShow(Show $show): static
     {
-        if (!$this->show->contains($show)) {
-            $this->show->add($show);
+        if (!$this->shows->contains($show)) {
+            $this->shows->add($show);
             $show->setCategoryShow($this);
         }
 
@@ -69,7 +69,7 @@ class CategoriesShow
 
     public function removeShow(Show $show): static
     {
-        if ($this->show->removeElement($show)) {
+        if ($this->shows->removeElement($show)) {
             // set the owning side to null (unless already changed)
             if ($show->getCategoryShow() === $this) {
                 $show->setCategoryShow(null);

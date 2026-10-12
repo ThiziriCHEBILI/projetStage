@@ -35,7 +35,7 @@ class Show
     #[Groups(['show:read'])]
     private ?\DateTime $release_date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'show')]
+    #[ORM\ManyToOne(inversedBy: 'shows')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['show:read'])]
     private ?CategoriesShow $category_show = null;
