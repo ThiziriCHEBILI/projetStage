@@ -2,29 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\UserListShowRepository;
+use App\Repository\UserShowListRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UserListShowRepository::class)]
-class UserListShow
+#[ORM\Entity(repositoryClass: UserShowListRepository::class)]
+class UserShowList
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'userListShow')]
+    #[ORM\Id]
+    #[ORM\ManyToOne(inversedBy: 'userShowList')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $user = null;
 
+    #[ORM\Id]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Show $show = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getUserId(): ?Users
     {

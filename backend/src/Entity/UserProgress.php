@@ -2,36 +2,31 @@
 
 namespace App\Entity;
 
-use App\Repository\UserLecturesRepository;
+use App\Repository\UserProgressRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UserLecturesRepository::class)]
-class UserLectures
+#[ORM\Entity(repositoryClass: UserProgressRepository::class)]
+class UserProgress
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTime $remaining_duration = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTime $last_watched = null;
 
-    #[ORM\ManyToOne(inversedBy: 'userLectures')]
+    #[ORM\Id]
+    #[ORM\ManyToOne(inversedBy: 'userProgress')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $user = null;
 
+    #[ORM\Id]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?ShowVideo $show_video = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+
 
     public function getRemainingDuration(): ?\DateTime
     {

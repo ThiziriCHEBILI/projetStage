@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\UserListShow;
+use App\Entity\UserShowList;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<UserListShow>
+ * @extends ServiceEntityRepository<UserShowList>
  */
-class UserListShowRepository extends ServiceEntityRepository
+class UserShowListRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UserListShow::class);
+        parent::__construct($registry, UserShowList::class);
     }
 
     //    /**
-    //     * @return UserListShow[] Returns an array of UserListShow objects
+    //     * @return UserShowList[] Returns an array of UserShowList objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class UserListShowRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?UserListShow
+    //    public function findOneBySomeField($value): ?UserShowList
     //    {
     //        return $this->createQueryBuilder('u')
     //            ->andWhere('u.exampleField = :val')
