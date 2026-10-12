@@ -32,21 +32,21 @@ class Users
     private ?\DateTime $date_registration = null;
 
     /**
-     * @var Collection<int, UserListShow>
+     * @var Collection<int, UserShowList>
      */
-    #[ORM\OneToMany(targetEntity: UserListShow::class, mappedBy: 'user')]
-    private Collection $userListShow;
+    #[ORM\OneToMany(targetEntity: UserShowList::class, mappedBy: 'user')]
+    private Collection $userShowList;
 
     /**
-     * @var Collection<int, UserLectures>
+     * @var Collection<int, UserProgress>
      */
-    #[ORM\OneToMany(targetEntity: UserLectures::class, mappedBy: 'user')]
-    private Collection $userLectures;
+    #[ORM\OneToMany(targetEntity: UserProgress::class, mappedBy: 'user')]
+    private Collection $userProgress;
 
     public function __construct()
     {
-        $this->userListShow = new ArrayCollection();
-        $this->userLectures = new ArrayCollection();
+        $this->userShowList = new ArrayCollection();
+        $this->userProgress = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,29 +115,29 @@ class Users
     }
 
     /**
-     * @return Collection<int, UserListShow>
+     * @return Collection<int, UserShowList>
      */
-    public function getUserListShow(): Collection
+    public function getUserShowList(): Collection
     {
-        return $this->userListShow;
+        return $this->userShowList;
     }
 
-    public function addUserListShow(UserListShow $userListShow): static
+    public function addUserShowList(UserShowList $userShowList): static
     {
-        if (!$this->userListShow->contains($userListShow)) {
-            $this->userListShow->add($userListShow);
-            $userListShow->setUserId($this);
+        if (!$this->userShowList->contains($userShowList)) {
+            $this->userShowList->add($userShowList);
+            $userShowList->setUserId($this);
         }
 
         return $this;
     }
 
-    public function removeUserListShow(UserListShow $userListShow): static
+    public function removeUserShowList(UserShowList $userShowList): static
     {
-        if ($this->userListShow->removeElement($userListShow)) {
+        if ($this->userShowList->removeElement($userShowList)) {
             // set the owning side to null (unless already changed)
-            if ($userListShow->getUserId() === $this) {
-                $userListShow->setUserId(null);
+            if ($userShowList->getUserId() === $this) {
+                $userShowList->setUserId(null);
             }
         }
 
@@ -145,29 +145,29 @@ class Users
     }
 
     /**
-     * @return Collection<int, UserLectures>
+     * @return Collection<int, UserProgress>
      */
-    public function getUserLectures(): Collection
+    public function getUserProgress(): Collection
     {
-        return $this->userLectures;
+        return $this->userProgress;
     }
 
-    public function addUserLecture(UserLectures $userLecture): static
+    public function addUserProgress(UserProgress $userProgress): static
     {
-        if (!$this->userLectures->contains($userLecture)) {
-            $this->userLectures->add($userLecture);
-            $userLecture->setUserId($this);
+        if (!$this->userProgress->contains($userProgress)) {
+            $this->userProgress->add($userProgress);
+            $userProgress->setUserId($this);
         }
 
         return $this;
     }
 
-    public function removeUserLecture(UserLectures $userLecture): static
+    public function removeUserProgress(UserProgress $userProgress): static
     {
-        if ($this->userLectures->removeElement($userLecture)) {
+        if ($this->userProgress->removeElement($userProgress)) {
             // set the owning side to null (unless already changed)
-            if ($userLecture->getUserId() === $this) {
-                $userLecture->setUserId(null);
+            if ($userProgress->getUserId() === $this) {
+                $userProgress->setUserId(null);
             }
         }
 

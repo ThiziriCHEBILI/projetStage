@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\UserLectures;
+use App\Entity\UserProgress;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<UserLectures>
+ * @extends ServiceEntityRepository<UserProgress>
  */
-class UserLecturesRepository extends ServiceEntityRepository
+class UserProgressRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UserLectures::class);
+        parent::__construct($registry, UserProgress::class);
     }
 
 //    /**
-//     * @return UserLectures[] Returns an array of UserLectures objects
+//     * @return UserProgress[] Returns an array of UserProgress objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -31,7 +31,7 @@ class UserLecturesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?UserLectures
+//    public function findOneBySomeField($value): ?UserProgress
 //    {
 //        return $this->createQueryBuilder('u')
 //            ->andWhere('u.exampleField = :val')
