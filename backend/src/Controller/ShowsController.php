@@ -26,7 +26,7 @@ final class ShowsController extends AbstractController
             $shows = [];
             foreach ($categories as $category) {
                 $show = $em->getRepository(Show::class)->findOneBy(
-                    ['award' => "award winner", 'categorie_show' => $category],
+                    ['award' => "award winner", 'category_show' => $category],
                     ['release_date' => 'DESC'],
                 );
                 if ($show) {
@@ -58,7 +58,7 @@ final class ShowsController extends AbstractController
             $offset = ($page - 1) * $limit;
 
             $type = $request->query->get('type');
-            $criteres = ['categorie_show' => $category];
+            $criteres = ['category_show' => $category];
             if ($type) {
                 $criteres['type_show'] = $type;
             }
@@ -89,7 +89,7 @@ final class ShowsController extends AbstractController
 
             $show = $em->getRepository(Show::class)->findOneBy([
                 'id' => $id,
-                'categorie_show' => $category
+                'category_show' => $category
             ]);
             if (!$show) {
                 return $this->json(['message' => 'Show introuvable dans cette catégorie'], 404);
@@ -138,7 +138,7 @@ final class ShowsController extends AbstractController
             $show->setDatePublication(new \DateTime());
             $show->setReleaseDate(new \DateTime($data['release_date']));
             $show->setTypeShow($data['type_show']);
-            $show->setCategorieShow($category);
+            $show->setCategoryShow($category);
             $em->persist($show);
             $em->flush();
 
@@ -163,7 +163,7 @@ final class ShowsController extends AbstractController
 
             $show = $em->getRepository(Show::class)->findOneBy([
                 'id' => $id,
-                'categorie_show' => $category
+                'category_show' => $category
             ]);
             if (!$show) {
                 return $this->json(['message' => 'Show introuvable dans cette catégorie'], 404);
@@ -214,7 +214,7 @@ final class ShowsController extends AbstractController
 
             $show = $em->getRepository(Show::class)->findOneBy([
                 'id' => $id,
-                'categorie_show' => $category
+                'category_show' => $category
             ]);
             if (!$show) {
                 return $this->json(['message' => 'Show introuvable dans cette catégorie'], 404);

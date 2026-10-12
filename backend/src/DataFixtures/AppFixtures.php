@@ -58,7 +58,7 @@ class AppFixtures extends Fixture
             $show->setReleaseDate(new \DateTime($showData["releaseDate"]));
             $show->setAward($showData["award"] ?? null);
             $show->setTypeShow($showData["type_show"] ?? null);
-            $show->setCategorieShow($categoriesShow[$showData["categoryIndex"]]);
+            $show->setCategoryShow($categoriesShow[$showData["categoryIndex"]]);
             $manager->persist($show);
             $shows[] = $show;
         }
@@ -66,16 +66,16 @@ class AppFixtures extends Fixture
 
         $showVideosData = [
             // Films
-            ["showIndex" => 0, "description" => "Bande-annonce officielle de Dune: Deuxième Partie", "image" => "dune2.jpg", "url" => "https://video.example.com/dune2", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "4K HDR", "viewingTime" => "02:46:00"],
-            ["showIndex" => 1, "description" => "Bande-annonce officielle d'Oppenheimer", "image" => "oppenheimer.jpg", "url" => "https://video.example.com/oppenheimer", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "Full HD", "viewingTime" => "03:00:00"],
+            ["showIndex" => 0, "description" => "Bande-annonce officielle de Dune: Deuxième Partie", "image" => "dune2.jpg", "url" => "https://video.example.com/dune2", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "4K HDR", "duration" => "02:46:00"],
+            ["showIndex" => 1, "description" => "Bande-annonce officielle d'Oppenheimer", "image" => "oppenheimer.jpg", "url" => "https://video.example.com/oppenheimer", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "Full HD", "duration" => "03:00:00"],
 
             // Séries
-            ["showIndex" => 2, "description" => "The Last of Us - Saison 1, Épisode 3", "image" => "lastofus.jpg", "url" => "https://video.example.com/lastofus-s1e3", "episodeNumber" => 3, "saisonNumber" => 1, "videoQuality" => "4K HDR", "viewingTime" => "01:16:00"],
-            ["showIndex" => 3, "description" => "Squid Game - Saison 2, Épisode 5", "image" => "squidgame.jpg", "url" => "https://video.example.com/squidgame-s2e5", "episodeNumber" => 5, "saisonNumber" => 2, "videoQuality" => "Full HD", "viewingTime" => "00:55:00"],
+            ["showIndex" => 2, "description" => "The Last of Us - Saison 1, Épisode 3", "image" => "lastofus.jpg", "url" => "https://video.example.com/lastofus-s1e3", "episodeNumber" => 3, "saisonNumber" => 1, "videoQuality" => "4K HDR", "duration" => "01:16:00"],
+            ["showIndex" => 3, "description" => "Squid Game - Saison 2, Épisode 5", "image" => "squidgame.jpg", "url" => "https://video.example.com/squidgame-s2e5", "episodeNumber" => 5, "saisonNumber" => 2, "videoQuality" => "Full HD", "duration" => "00:55:00"],
 
             // Dessins animés
-            ["showIndex" => 4, "description" => "Bande-annonce officielle du Garçon et le Héron", "image" => "garconheron.jpg", "url" => "https://video.example.com/garconheron", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "Full HD", "viewingTime" => "02:04:00"],
-            ["showIndex" => 5, "description" => "Bande-annonce officielle de Vaïana 2", "image" => "vaiana2.jpg", "url" => "https://video.example.com/vaiana2", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "4K HDR", "viewingTime" => "01:40:00"],
+            ["showIndex" => 4, "description" => "Bande-annonce officielle du Garçon et le Héron", "image" => "garconheron.jpg", "url" => "https://video.example.com/garconheron", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "Full HD", "duration" => "02:04:00"],
+            ["showIndex" => 5, "description" => "Bande-annonce officielle de Vaïana 2", "image" => "vaiana2.jpg", "url" => "https://video.example.com/vaiana2", "episodeNumber" => 1, "saisonNumber" => 1, "videoQuality" => "4K HDR", "duration" => "01:40:00"],
         ];
 
         foreach ($showVideosData as $showVideoData) {
@@ -86,7 +86,7 @@ class AppFixtures extends Fixture
             $showVideo->setEpisodeNumber($showVideoData["episodeNumber"]);
             $showVideo->setSaisonNumber($showVideoData["saisonNumber"]);
             $showVideo->setVideoQuality($showVideoData["videoQuality"]);
-            $showVideo->setViewingTime(new \DateTime($showVideoData["viewingTime"]));
+            $showVideo->setDuration(new \DateTime($showVideoData["duration"]));
             $showVideo->setShowId($shows[$showVideoData["showIndex"]]);
             $manager->persist($showVideo);
         }

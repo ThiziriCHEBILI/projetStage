@@ -38,7 +38,7 @@ class Show
     #[ORM\ManyToOne(inversedBy: 'show')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['show:read'])]
-    private ?CategoriesShow $categorie_show = null;
+    private ?CategoriesShow $category_show = null;
     /**
      * @var Collection<int, ShowVideo>
      */
@@ -113,14 +113,14 @@ class Show
         return $this;
     }
    
-    public function getCategorieShow(): ?CategoriesShow
+    public function getCategoryShow(): ?CategoriesShow
     {
-        return $this->categorie_show;
+        return $this->category_show;
     }
 
-    public function setCategorieShow(?CategoriesShow $categorie_show): static
+    public function setCategoryShow(?CategoriesShow $category_show): static
     {
-        $this->categorie_show = $categorie_show;
+        $this->category_show = $category_show;
 
         return $this;
     }

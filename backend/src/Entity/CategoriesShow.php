@@ -24,7 +24,7 @@ class CategoriesShow
     /**
      * @var Collection<int, Show>
      */
-    #[ORM\OneToMany(targetEntity: Show::class, mappedBy: 'categorie_show')]
+    #[ORM\OneToMany(targetEntity: Show::class, mappedBy: 'category_show')]
     private Collection $show;
 
     public function __construct()
@@ -61,7 +61,7 @@ class CategoriesShow
     {
         if (!$this->show->contains($show)) {
             $this->show->add($show);
-            $show->setCategorieShow($this);
+            $show->setCategoryShow($this);
         }
 
         return $this;
@@ -71,8 +71,8 @@ class CategoriesShow
     {
         if ($this->show->removeElement($show)) {
             // set the owning side to null (unless already changed)
-            if ($show->getCategorieShow() === $this) {
-                $show->setCategorieShow(null);
+            if ($show->getCategoryShow() === $this) {
+                $show->setCategoryShow(null);
             }
         }
 
