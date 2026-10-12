@@ -53,6 +53,14 @@ class Show
     #[Groups(['show:read'])]
     private ?string $type_show = null;
 
+    #[ORM\Column(length: 255)]
+    #[Groups(['show:read'])]
+    private ?string $image_show = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['show:read'])]
+    private ?string $image_poster = null;
+
 
     public function __construct()
     {
@@ -175,6 +183,30 @@ class Show
     public function setTypeShow(?string $type_show): static
     {
         $this->type_show = $type_show;
+
+        return $this;
+    }
+
+    public function getImageShow(): ?string
+    {
+        return $this->image_show;
+    }
+
+    public function setImageShow(string $image_show): static
+    {
+        $this->image_show = $image_show;
+
+        return $this;
+    }
+
+    public function getImagePoster(): ?string
+    {
+        return $this->image_poster;
+    }
+
+    public function setImagePoster(string $image_poster): static
+    {
+        $this->image_poster = $image_poster;
 
         return $this;
     }
