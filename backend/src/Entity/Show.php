@@ -61,6 +61,14 @@ class Show
     #[Groups(['show:read'])]
     private ?string $image_poster = null;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['show:read'])]
+    private ?int $season_count = null;
+
+    #[ORM\Column(length: 10, nullable: true)]
+    #[Groups(['show:read'])]
+    private ?string $quality = null;
+
 
     public function __construct()
     {
@@ -120,7 +128,7 @@ class Show
 
         return $this;
     }
-   
+
     public function getCategoryShow(): ?CategoriesShow
     {
         return $this->category_show;
@@ -207,6 +215,30 @@ class Show
     public function setImagePoster(string $image_poster): static
     {
         $this->image_poster = $image_poster;
+
+        return $this;
+    }
+
+    public function getSeasonCount(): ?int
+    {
+        return $this->season_count;
+    }
+
+    public function setSeasonCount(?int $season_count): static
+    {
+        $this->season_count = $season_count;
+
+        return $this;
+    }
+
+    public function getQuality(): ?string
+    {
+        return $this->quality;
+    }
+
+    public function setQuality(?string $quality): static
+    {
+        $this->quality = $quality;
 
         return $this;
     }
