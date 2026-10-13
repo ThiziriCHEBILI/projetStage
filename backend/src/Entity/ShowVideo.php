@@ -23,10 +23,10 @@ class ShowVideo
     #[ORM\Column(length: 255)]
     private ?string $url_video = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $episode_number = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $saison_number = null;
 
     #[ORM\Column(length: 10)]
@@ -85,7 +85,7 @@ class ShowVideo
         return $this->episode_number;
     }
 
-    public function setEpisodeNumber(int $episode_number): static
+    public function setEpisodeNumber(?int $episode_number): static
     {
         $this->episode_number = $episode_number;
 
@@ -97,7 +97,7 @@ class ShowVideo
         return $this->saison_number;
     }
 
-    public function setSaisonNumber(int $saison_number): static
+    public function setSaisonNumber(?int $saison_number): static
     {
         $this->saison_number = $saison_number;
 
