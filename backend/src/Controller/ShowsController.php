@@ -126,6 +126,8 @@ final class ShowsController extends AbstractController
                 'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
                 'image_show' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'image_poster' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
+                'season_count' => new Assert\Optional([new Assert\Type(type: 'integer'), new Assert\Positive()]),
+                'quality' => new Assert\Optional([new Assert\Type(type: 'string'), new Assert\Length(max: 10),]),
             ]);
 
             $errors = $validator->validate($data, $constraints);
@@ -142,6 +144,8 @@ final class ShowsController extends AbstractController
             $show->setTypeShow($data['type_show']);
             $show->setImageShow($data['image_show']);
             $show->setImagePoster($data['image_poster']);
+            $show->setSeasonCount($data['season_count'] ?? null);
+            $show->setQuality($data['quality'] ?? null);
             $show->setCategoryShow($category);
             $em->persist($show);
             $em->flush();
@@ -184,6 +188,9 @@ final class ShowsController extends AbstractController
                 'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
                 'image_show' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'image_poster' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
+                'season_count' => new Assert\Optional([new Assert\Type(type: 'integer'), new Assert\Positive()]),
+                'quality' => new Assert\Optional([new Assert\Type(type: 'string'), new Assert\Length(max: 10),]),
+
             ]);
 
             $errors = $validator->validate($data, $constraints);
@@ -197,6 +204,9 @@ final class ShowsController extends AbstractController
             $show->setTypeShow($data['type_show']);
             $show->setImageShow($data['image_show']);
             $show->setImagePoster($data['image_poster']);
+            $show->setSeasonCount($data['season_count'] ?? null);
+            $show->setQuality($data['quality'] ?? null);
+
 
             $em->flush();
 
