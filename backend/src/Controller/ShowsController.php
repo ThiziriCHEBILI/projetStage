@@ -54,7 +54,7 @@ final class ShowsController extends AbstractController
             if ($page < 1) {
                 $page = 1;
             }
-            $limit = 12;
+            $limit = 8;
             $offset = ($page - 1) * $limit;
 
             $type = $request->query->get('type');
@@ -63,6 +63,9 @@ final class ShowsController extends AbstractController
                 $criteres['type_show'] = $type;
             }
 
+            $total = $em->getRepository(Show::class)->count($criteres);
+            $totalPages = max(1, (int) ceil($total / $limit));
+
             $shows = $em->getRepository(Show::class)->findBy(
                 $criteres,
                 ['release_date' => 'DESC'],
@@ -70,7 +73,13 @@ final class ShowsController extends AbstractController
                 $offset
             );
 
-            return $this->json($shows, 200, [], ['groups' => 'show:read']);
+            return $this->json([
+                'shows' => $shows,
+                'page' => $page,
+                'limit' => $limit,
+                'total' => $total,
+                'totalPages' => $totalPages,
+            ], 200, [], ['groups' => 'show:read']);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
         } catch (\Exception) {
