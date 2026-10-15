@@ -95,7 +95,7 @@ final class ShowsController extends AbstractController
                 return $this->json(['message' => 'Show introuvable dans cette catégorie'], 404);
             }
 
-            return $this->json($show, 200, [], ['groups' => 'show:read']);
+            return $this->json($show, 200, [], ['groups' => ['show:read', 'video:read']]);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
         } catch (\Exception) {

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ShowVideoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ShowVideoRepository::class)]
 class ShowVideo
@@ -12,27 +13,35 @@ class ShowVideo
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['video:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['video:read'])]
     private ?string $description_video = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['video:read'])]
     private ?string $image_video = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['video:read'])]
     private ?string $url_video = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['video:read'])]
     private ?int $episode_number = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['video:read'])]
     private ?int $saison_number = null;
 
     #[ORM\Column(length: 10)]
+    #[Groups(['video:read'])]
     private ?string $video_quality = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Groups(['video:read'])]
     private ?\DateTime $duration = null;
 
     #[ORM\ManyToOne(inversedBy: 'showVideos')]
