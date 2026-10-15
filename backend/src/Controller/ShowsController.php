@@ -124,6 +124,7 @@ final class ShowsController extends AbstractController
                 'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
                 'release_date' => [new Assert\NotBlank(), new Assert\Date()],
                 'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
+                'award' => new Assert\Optional([new Assert\Choice(choices: ['award winner'])]),
                 'image_show' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'image_poster' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'season_count' => new Assert\Optional([new Assert\Type(type: 'integer'), new Assert\Positive()]),
@@ -142,6 +143,7 @@ final class ShowsController extends AbstractController
             $show->setDatePublication(new \DateTime());
             $show->setReleaseDate(new \DateTime($data['release_date']));
             $show->setTypeShow($data['type_show']);
+            $show->setAward($data['award'] ?? null);
             $show->setImageShow($data['image_show']);
             $show->setImagePoster($data['image_poster']);
             $show->setSeasonCount($data['season_count'] ?? null);
@@ -186,6 +188,7 @@ final class ShowsController extends AbstractController
                 'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
                 'release_date' => [new Assert\NotBlank(), new Assert\Date()],
                 'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
+                'award' => new Assert\Optional([new Assert\Choice(choices: ['award winner'])]),
                 'image_show' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'image_poster' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'season_count' => new Assert\Optional([new Assert\Type(type: 'integer'), new Assert\Positive()]),
@@ -202,6 +205,7 @@ final class ShowsController extends AbstractController
             $show->setDescription($data['description']);
             $show->setReleaseDate(new \DateTime($data['release_date']));
             $show->setTypeShow($data['type_show']);
+            $show->setAward($data['award'] ?? null);
             $show->setImageShow($data['image_show']);
             $show->setImagePoster($data['image_poster']);
             $show->setSeasonCount($data['season_count'] ?? null);
