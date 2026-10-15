@@ -54,7 +54,7 @@ final class ShowsController extends AbstractController
             if ($page < 1) {
                 $page = 1;
             }
-            $limit = 12;
+            $limit = 8;
             $offset = ($page - 1) * $limit;
 
             $type = $request->query->get('type');
@@ -63,6 +63,9 @@ final class ShowsController extends AbstractController
                 $criteres['type_show'] = $type;
             }
 
+            $total = $em->getRepository(Show::class)->count($criteres);
+            $totalPages = max(1, (int) ceil($total / $limit));
+
             $shows = $em->getRepository(Show::class)->findBy(
                 $criteres,
                 ['release_date' => 'DESC'],
@@ -70,7 +73,13 @@ final class ShowsController extends AbstractController
                 $offset
             );
 
-            return $this->json($shows, 200, [], ['groups' => 'show:read']);
+            return $this->json([
+                'shows' => $shows,
+                'page' => $page,
+                'limit' => $limit,
+                'total' => $total,
+                'totalPages' => $totalPages,
+            ], 200, [], ['groups' => 'show:read']);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
         } catch (\Exception) {
@@ -95,7 +104,7 @@ final class ShowsController extends AbstractController
                 return $this->json(['message' => 'Show introuvable dans cette catégorie'], 404);
             }
 
-            return $this->json($show, 200, [], ['groups' => 'show:read']);
+            return $this->json($show, 200, [], ['groups' => ['show:read', 'video:read']]);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
         } catch (\Exception) {
@@ -124,6 +133,7 @@ final class ShowsController extends AbstractController
                 'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
                 'release_date' => [new Assert\NotBlank(), new Assert\Date()],
                 'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
+                'award' => new Assert\Optional([new Assert\Choice(choices: ['award winner'])]),
                 'image_show' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'image_poster' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'season_count' => new Assert\Optional([new Assert\Type(type: 'integer'), new Assert\Positive()]),
@@ -142,6 +152,7 @@ final class ShowsController extends AbstractController
             $show->setDatePublication(new \DateTime());
             $show->setReleaseDate(new \DateTime($data['release_date']));
             $show->setTypeShow($data['type_show']);
+            $show->setAward($data['award'] ?? null);
             $show->setImageShow($data['image_show']);
             $show->setImagePoster($data['image_poster']);
             $show->setSeasonCount($data['season_count'] ?? null);
@@ -186,6 +197,7 @@ final class ShowsController extends AbstractController
                 'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
                 'release_date' => [new Assert\NotBlank(), new Assert\Date()],
                 'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
+                'award' => new Assert\Optional([new Assert\Choice(choices: ['award winner'])]),
                 'image_show' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'image_poster' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
                 'season_count' => new Assert\Optional([new Assert\Type(type: 'integer'), new Assert\Positive()]),
@@ -202,6 +214,7 @@ final class ShowsController extends AbstractController
             $show->setDescription($data['description']);
             $show->setReleaseDate(new \DateTime($data['release_date']));
             $show->setTypeShow($data['type_show']);
+            $show->setAward($data['award'] ?? null);
             $show->setImageShow($data['image_show']);
             $show->setImagePoster($data['image_poster']);
             $show->setSeasonCount($data['season_count'] ?? null);
