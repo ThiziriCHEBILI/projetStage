@@ -9,6 +9,7 @@ export interface ShowVideo {
   videoQuality: string;
   duration: string;
 }
+
 export interface Show {
   id: number;
   title: string;
@@ -29,7 +30,6 @@ export interface Section {
   seeAll?: string;
   withQuality?: boolean;
   info?: Info;
-  shows: Show[];
 }
 
 export interface Progress {
@@ -43,5 +43,4 @@ export interface CategoryPage {
   name: string;
   title: string;
   desc: string;
-  shows: Show[];
 }

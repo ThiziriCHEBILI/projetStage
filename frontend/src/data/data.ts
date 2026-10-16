@@ -291,20 +291,6 @@ export const trendingSection: Section = {
   seeAll: "/shows/tendances",
   withQuality: true,
   info: "type_show",
-  shows: [
-    shows[0],
-    shows[1],
-    shows[2],
-    shows[3],
-    shows[4],
-    shows[5],
-    shows[6],
-    shows[7],
-    shows[8],
-    shows[9],
-    shows[10],
-    shows[11],
-  ],
 };
 
 export const seriesSection: Section = {
@@ -313,7 +299,6 @@ export const seriesSection: Section = {
   seeAll: "/shows/series",
   withQuality: true,
   info: "saison",
-  shows: [shows[2], shows[3], shows[6], shows[7], shows[9], shows[11]],
 };
 
 export const progressList: Progress[] = [
@@ -402,13 +387,6 @@ export const progressList: Progress[] = [
     lastWatched: "2026-07-03T21:00:00+00:00",
   },
 ];
-export const topShows: Show[] = [
-  shows[2],
-  shows[0],
-  shows[4],
-  shows[1],
-  shows[3],
-];
 
 export const showTypes: string[] = [
   "sci-fi",
@@ -419,51 +397,20 @@ export const showTypes: string[] = [
   "horreur",
 ];
 
-export const filmShows: Show[] = [
-  shows[0],
-  shows[1],
-  shows[8],
-  shows[10],
-  shows[12],
-  shows[13],
-  shows[14],
-  shows[15],
-  shows[16],
-  shows[17],
-];
-
-export const seriesShows: Show[] = [
-  shows[2],
-  shows[3],
-  shows[6],
-  shows[7],
-  shows[9],
-  shows[18],
-  shows[19],
-  shows[20],
-  shows[21],
-  shows[22],
-];
-
-export const animesShows: Show[] = [shows[4], shows[5], shows[11]];
-
 export const filmsPage: CategoryPage = {
   name: "films",
   title: "Films",
   desc: "Découvrez notre sélection de films incontournables : des dernières nouveautés aux grands classiques, en passant par la science-fiction, l'action et le thriller. Trouvez votre prochain film préféré en quelques clics.",
-  shows: filmShows,
 };
 
 export const seriesPage: CategoryPage = {
   name: "series",
   title: "Séries",
   desc: "Plongez dans nos séries à dévorer : thrillers haletants, drames intenses et frissons garantis. Un épisode en appelle toujours un autre.",
-  shows: seriesShows,
 };
 
 export const animesPage: CategoryPage = {
   name: "dessins-animes",
   title: "Dessins animés",
   desc: "Des aventures pour tous les âges : mondes imaginaires, héros attachants et grands voyages. À regarder seul ou en famille.",
-  shows: animesShows,
 };
