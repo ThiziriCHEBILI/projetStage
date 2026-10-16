@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 import type { Show } from "../../Types";
+import { imageUrl } from "../../utilities/imageUrl";
 import "./TopCard.scss";
 
 interface TopCardProps {
@@ -15,7 +16,7 @@ export function TopCard({ show, position }: TopCardProps): JSX.Element {
       </span>
 
       <img
-        src={show.image_poster}
+        src={imageUrl(show, show.image_poster)}
         alt={"Numéro " + position + " : " + show.title}
         className="top__poster"
       />

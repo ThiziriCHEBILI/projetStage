@@ -33,7 +33,7 @@ export function Hero({ shows }: HeroProps): JSX.Element {
   return (
     <section className="hero">
       <img
-        src={imageUrl(show)}
+        src={imageUrl(show, show.image_show)}
         alt=""
         className="hero__image"
         fetchPriority="high"
