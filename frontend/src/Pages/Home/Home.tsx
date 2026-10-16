@@ -6,8 +6,9 @@ import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
 import { TopCard } from "../../components/TopCard/TopCard";
 import { isRecent } from "../../utilities/convert";
+import { useFetch } from "../../utilities/useFetch";
+import type { Show } from "../../Types/ApiType";
 import {
-  heroShows,
   trendingSection,
   seriesSection,
   progressList,
@@ -18,6 +19,7 @@ import "./Home.scss";
 const DAYS_BEFORE_REMOVE = 30;
 
 export default function Home(): JSX.Element {
+  const { data: heroShows } = useFetch<Show[]>("shows/a-la-une");
   const [continueWatching, setContinueWatching] = useState(
     progressList.filter((progress) =>
       isRecent(progress.lastWatched, DAYS_BEFORE_REMOVE),
@@ -32,7 +34,7 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <Hero shows={heroShows} />
+      {heroShows && heroShows.length > 0 && <Hero shows={heroShows} />}
 
       {continueWatching.length > 0 && (
         <ShowRow

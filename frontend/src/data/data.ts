@@ -409,7 +409,6 @@ export const topShows: Show[] = [
   shows[1],
   shows[3],
 ];
-export const heroShows: Show[] = [shows[0], shows[2], shows[4]];
 
 export const showTypes: string[] = [
   "sci-fi",
