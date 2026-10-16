@@ -10,8 +10,8 @@ export const shows: Show[] = [
     type_show: "sci-fi",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "4K HDR",
+    season_count: 0,
+    quality: "4K HDR",
     award: "award winner",
   },
   {
@@ -23,8 +23,8 @@ export const shows: Show[] = [
     type_show: "drame",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "Full HD",
+    season_count: 0,
+    quality: "Full HD",
   },
   {
     id: 3,
@@ -35,8 +35,8 @@ export const shows: Show[] = [
     type_show: "drame",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 1,
-    bestQuality: "4K HDR",
+    season_count: 1,
+    quality: "4K HDR",
     award: "award winner",
   },
   {
@@ -48,8 +48,8 @@ export const shows: Show[] = [
     type_show: "thriller",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 2,
-    bestQuality: "Full HD",
+    season_count: 2,
+    quality: "Full HD",
   },
   {
     id: 5,
@@ -60,8 +60,8 @@ export const shows: Show[] = [
     type_show: "aventure",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "Full HD",
+    season_count: 0,
+    quality: "Full HD",
     award: "award winner",
   },
   {
@@ -73,8 +73,8 @@ export const shows: Show[] = [
     type_show: "aventure",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "4K HDR",
+    season_count: 0,
+    quality: "4K HDR",
   },
   {
     id: 7,
@@ -85,8 +85,8 @@ export const shows: Show[] = [
     type_show: "horreur",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 4,
-    bestQuality: "4K HDR",
+    season_count: 4,
+    quality: "4K HDR",
   },
   {
     id: 8,
@@ -97,8 +97,8 @@ export const shows: Show[] = [
     type_show: "thriller",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 5,
-    bestQuality: "Full HD",
+    season_count: 5,
+    quality: "Full HD",
   },
   {
     id: 9,
@@ -109,8 +109,8 @@ export const shows: Show[] = [
     type_show: "sci-fi",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "4K HDR",
+    season_count: 0,
+    quality: "4K HDR",
   },
   {
     id: 10,
@@ -121,8 +121,8 @@ export const shows: Show[] = [
     type_show: "thriller",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 3,
-    bestQuality: "4K HDR",
+    season_count: 3,
+    quality: "4K HDR",
   },
   {
     id: 11,
@@ -133,8 +133,8 @@ export const shows: Show[] = [
     type_show: "sci-fi",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "Full HD",
+    season_count: 0,
+    quality: "Full HD",
   },
   {
     id: 12,
@@ -145,8 +145,8 @@ export const shows: Show[] = [
     type_show: "action",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 2,
-    bestQuality: "4K HDR",
+    season_count: 2,
+    quality: "4K HDR",
   },
   {
     id: 13,
@@ -157,8 +157,8 @@ export const shows: Show[] = [
     type_show: "thriller",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "Full HD",
+    season_count: 0,
+    quality: "Full HD",
   },
   {
     id: 14,
@@ -169,8 +169,8 @@ export const shows: Show[] = [
     type_show: "action",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "4K HDR",
+    season_count: 0,
+    quality: "4K HDR",
     award: "award winner",
   },
   {
@@ -182,8 +182,8 @@ export const shows: Show[] = [
     type_show: "aventure",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "Full HD",
+    season_count: 0,
+    quality: "Full HD",
   },
   {
     id: 16,
@@ -194,8 +194,8 @@ export const shows: Show[] = [
     type_show: "horreur",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "Full HD",
+    season_count: 0,
+    quality: "Full HD",
   },
   {
     id: 17,
@@ -206,8 +206,8 @@ export const shows: Show[] = [
     type_show: "drame",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "4K HDR",
+    season_count: 0,
+    quality: "4K HDR",
     award: "award winner",
   },
   {
@@ -219,8 +219,8 @@ export const shows: Show[] = [
     type_show: "action",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 0,
-    bestQuality: "4K HDR",
+    season_count: 0,
+    quality: "4K HDR",
   },
   {
     id: 19,
@@ -231,8 +231,8 @@ export const shows: Show[] = [
     type_show: "sci-fi",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 3,
-    bestQuality: "4K HDR",
+    season_count: 3,
+    quality: "4K HDR",
   },
   {
     id: 20,
@@ -243,8 +243,8 @@ export const shows: Show[] = [
     type_show: "drame",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 5,
-    bestQuality: "Full HD",
+    season_count: 5,
+    quality: "Full HD",
     award: "award winner",
   },
   {
@@ -256,8 +256,8 @@ export const shows: Show[] = [
     type_show: "aventure",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 3,
-    bestQuality: "4K HDR",
+    season_count: 3,
+    quality: "4K HDR",
   },
   {
     id: 22,
@@ -268,8 +268,8 @@ export const shows: Show[] = [
     type_show: "sci-fi",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 6,
-    bestQuality: "4K HDR",
+    season_count: 6,
+    quality: "4K HDR",
   },
   {
     id: 23,
@@ -280,8 +280,8 @@ export const shows: Show[] = [
     type_show: "drame",
     image_show: "/imageVideo.png",
     image_poster: "/imagePoster.png",
-    seasonCount: 6,
-    bestQuality: "Full HD",
+    season_count: 6,
+    quality: "Full HD",
   },
 ];
 
@@ -449,18 +449,21 @@ export const seriesShows: Show[] = [
 export const animesShows: Show[] = [shows[4], shows[5], shows[11]];
 
 export const filmsPage: CategoryPage = {
+  name: "films",
   title: "Films",
   desc: "Découvrez notre sélection de films incontournables : des dernières nouveautés aux grands classiques, en passant par la science-fiction, l'action et le thriller. Trouvez votre prochain film préféré en quelques clics.",
   shows: filmShows,
 };
 
 export const seriesPage: CategoryPage = {
+  name: "series",
   title: "Séries",
   desc: "Plongez dans nos séries à dévorer : thrillers haletants, drames intenses et frissons garantis. Un épisode en appelle toujours un autre.",
   shows: seriesShows,
 };
 
 export const animesPage: CategoryPage = {
+  name: "dessins-animes",
   title: "Dessins animés",
   desc: "Des aventures pour tous les âges : mondes imaginaires, héros attachants et grands voyages. À regarder seul ou en famille.",
   shows: animesShows,

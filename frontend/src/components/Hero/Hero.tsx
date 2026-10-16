@@ -58,7 +58,7 @@ export function Hero({ shows }: HeroProps): JSX.Element {
 
         <p className="hero__info">
           {new Date(show.release_date).getFullYear()} • {show.type_show} •{" "}
-          {show.bestQuality}
+          {show.quality}
         </p>
 
         <p className="hero__desc">{show.description}</p>
