@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { JSX } from "react";
 import { Link } from "react-router";
 import type { Show } from "../../Types";
+import { imageUrl } from "../../utilities/imageUrl";
 import "./Hero.scss";
 
 interface HeroProps {
@@ -32,7 +33,7 @@ export function Hero({ shows }: HeroProps): JSX.Element {
   return (
     <section className="hero">
       <img
-        src={show.image_show}
+        src={imageUrl(show, show.image_show)}
         alt=""
         className="hero__image"
         fetchPriority="high"
@@ -58,7 +59,7 @@ export function Hero({ shows }: HeroProps): JSX.Element {
 
         <p className="hero__info">
           {new Date(show.release_date).getFullYear()} • {show.type_show} •{" "}
-          {show.bestQuality}
+          {show.quality}
         </p>
 
         <p className="hero__desc">{show.description}</p>

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import type { JSX } from "react";
 import type { CategoryPage } from "../../Types";
+import type { PaginatedShows } from "../../Types/ApiType";
+import { useFetch } from "../../utilities/useFetch";
 import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { TypeFilters } from "../../components/TypeFilters/TypeFilters";
 import { Pagination } from "../../components/Pagination/Pagination";
 import "./Category.scss";
-
-const SHOWS_MAX = 8;
 
 interface CategoryProps {
   page: CategoryPage;
@@ -16,26 +16,22 @@ export default function Category({ page }: CategoryProps): JSX.Element {
   const [activeType, setActiveType] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredShows =
+  const endpoint =
     activeType === ""
-      ? page.shows
-      : page.shows.filter((show) => show.type_show === activeType);
+      ? `shows/${page.name}?page=${currentPage}`
+      : `shows/${page.name}?page=${currentPage}&type=${activeType}`;
 
-  const totalPages = Math.ceil(filteredShows.length / SHOWS_MAX);
-
-  const currentShows = filteredShows.slice(
-    (currentPage - 1) * SHOWS_MAX,
-    currentPage * SHOWS_MAX,
-  );
+  const { data, loading, error } = useFetch<PaginatedShows>(endpoint);
 
   function selectType(type: string): void {
     setActiveType(type);
     setCurrentPage(1);
   }
-  function selectPage(page: number): void {
-  setCurrentPage(page);
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+
+  function selectPage(pageNumber: number): void {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
     <section className="category">
@@ -44,9 +40,13 @@ export default function Category({ page }: CategoryProps): JSX.Element {
 
       <TypeFilters activeType={activeType} onSelect={selectType} />
 
-      {currentShows.length > 0 ? (
+      {loading && <p className="category__empty">Chargement…</p>}
+
+      {error && <p className="category__empty">{error}</p>}
+
+      {data && data.shows.length > 0 && (
         <div className="category__grid">
-          {currentShows.map((show) => (
+          {data.shows.map((show) => (
             <ShowCard
               key={show.id}
               show={show}
@@ -55,16 +55,18 @@ export default function Category({ page }: CategoryProps): JSX.Element {
             />
           ))}
         </div>
-      ) : (
+      )}
+
+      {data && data.shows.length === 0 && (
         <p className="category__empty">
           Aucun titre de ce type pour le moment.
         </p>
       )}
 
-      {totalPages > 1 && (
+      {data && data.totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
-          totalPages={totalPages}
+          totalPages={data.totalPages}
           onSelect={selectPage}
         />
       )}

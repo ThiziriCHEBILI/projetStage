@@ -16,14 +16,14 @@ export function Pagination({
 
   return (
     <nav className="pagination" aria-label="Pagination">
-      {pages.map((page) => (
+      {pages.map((pageNumber, index) => (
         <button
-          key={page}
+          key={index}
           type="button"
-          className={`pagination__button ${page === currentPage ? "pagination__button--active" : ""}`}
-          onClick={() => onSelect(page)}
+          className={`pagination__button ${pageNumber === currentPage ? "pagination__button--active" : ""}`}
+          onClick={() => onSelect(pageNumber)}
         >
-          {page}
+          {pageNumber}
         </button>
       ))}
     </nav>

@@ -8,11 +8,17 @@ export function Router() {
     <Routes>
       <Route path="/" element={<Home />} />
 
-      <Route path="/shows/films" element={<Category page={filmsPage} />} />
-      <Route path="/shows/series" element={<Category page={seriesPage} />} />
+      <Route
+        path="/shows/films"
+        element={<Category key="films" page={filmsPage} />}
+      />
+      <Route
+        path="/shows/series"
+        element={<Category key="series" page={seriesPage} />}
+      />
       <Route
         path="/shows/dessins-animes"
-        element={<Category page={animesPage} />}
+        element={<Category key="dessins-animes" page={animesPage} />}
       />
     </Routes>
   );

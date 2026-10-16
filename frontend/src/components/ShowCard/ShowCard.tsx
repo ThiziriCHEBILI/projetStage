@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 import type { Show, Info } from "../../Types";
 import { formatSeasons } from "../../utilities/convert";
+import { API_URL } from "../../utilities/fetchApi";
 import "./ShowCard.scss";
 
 interface ShowCardProps {
@@ -16,20 +17,18 @@ export function ShowCard({
 }: ShowCardProps): JSX.Element {
   let infoText = show.type_show;
 
-  if (info === "saison") {
-    infoText = formatSeasons(show.seasonCount);
+  if (info === "saison" && show.season_count !== null) {
+    infoText = formatSeasons(show.season_count);
   }
+  const imageUrl = show.category_show
+    ? `${API_URL}/images/${show.category_show.name}/${show.image_show}`
+    : show.image_show;
 
   return (
     <article className="card">
-      <img
-        src={show.image_show}
-        alt=""
-        className="card__image"
-        loading="lazy"
-      />
+      <img src={imageUrl} alt="" className="card__image" loading="lazy" />
 
-      {withQuality && <span className="card__quality">{show.bestQuality}</span>}
+      {withQuality && <span className="card__quality">{show.quality}</span>}
 
       <h3 className="card__title">{show.title}</h3>
 

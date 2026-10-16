@@ -6,23 +6,26 @@ import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
 import { TopCard } from "../../components/TopCard/TopCard";
 import { isRecent } from "../../utilities/convert";
-import {
-  heroShows,
-  trendingSection,
-  seriesSection,
-  progressList,
-  topShows,
-} from "../../data/data";
+import { useFetch } from "../../utilities/useFetch";
+import type { Show, PaginatedShows } from "../../Types/ApiType";
+import { trendingSection, seriesSection, progressList } from "../../data/data";
 import "./Home.scss";
 
 const DAYS_BEFORE_REMOVE = 30;
 
 export default function Home(): JSX.Element {
+  const { data: heroShows } = useFetch<Show[]>("shows/a-la-une");
+  const { data: trendingShows } =
+    useFetch<PaginatedShows>("shows/films?page=1");
   const [continueWatching, setContinueWatching] = useState(
     progressList.filter((progress) =>
       isRecent(progress.lastWatched, DAYS_BEFORE_REMOVE),
     ),
   );
+  const { data: topShows } = useFetch<PaginatedShows>(
+    "shows/dessins-animes?page=1",
+  );
+  const { data: seriesShows } = useFetch<PaginatedShows>("shows/series?page=1");
 
   function removeFromList(videoId: number): void {
     setContinueWatching(
@@ -32,7 +35,7 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <Hero shows={heroShows} />
+      {heroShows && heroShows.length > 0 && <Hero shows={heroShows} />}
 
       {continueWatching.length > 0 && (
         <ShowRow
@@ -48,41 +51,47 @@ export default function Home(): JSX.Element {
         />
       )}
 
-      <ShowRow
-        titleSec={trendingSection.title}
-        desc={trendingSection.desc}
-        seeAll={trendingSection.seeAll}
-        cards={trendingSection.shows.map((show) => (
-          <ShowCard
-            key={show.id}
-            show={show}
-            withQuality={trendingSection.withQuality}
-            info={trendingSection.info}
-          />
-        ))}
-      />
+      {trendingShows && (
+        <ShowRow
+          titleSec={trendingSection.title}
+          desc={trendingSection.desc}
+          seeAll={trendingSection.seeAll}
+          cards={trendingShows.shows.map((show) => (
+            <ShowCard
+              key={show.id}
+              show={show}
+              withQuality={trendingSection.withQuality}
+              info={trendingSection.info}
+            />
+          ))}
+        />
+      )}
 
-      <ShowRow
-        titleSec="Top 5 aujourd'hui"
-        maxCards={5}
-        cards={topShows.map((show, index) => (
-          <TopCard key={show.id} show={show} position={index + 1} />
-        ))}
-      />
+      {topShows && (
+        <ShowRow
+          titleSec="Top 5 aujourd'hui"
+          maxCards={5}
+          cards={topShows.shows.slice(0, 5).map((show, index) => (
+            <TopCard key={show.id} show={show} position={index + 1} />
+          ))}
+        />
+      )}
 
-      <ShowRow
-        titleSec={seriesSection.title}
-        desc={seriesSection.desc}
-        seeAll={seriesSection.seeAll}
-        cards={seriesSection.shows.map((show) => (
-          <ShowCard
-            key={show.id}
-            show={show}
-            withQuality={seriesSection.withQuality}
-            info={seriesSection.info}
-          />
-        ))}
-      />
+      {seriesShows && (
+        <ShowRow
+          titleSec={seriesSection.title}
+          desc={seriesSection.desc}
+          seeAll={seriesSection.seeAll}
+          cards={seriesShows.shows.map((show) => (
+            <ShowCard
+              key={show.id}
+              show={show}
+              withQuality={seriesSection.withQuality}
+              info={seriesSection.info}
+            />
+          ))}
+        />
+      )}
     </>
   );
 }

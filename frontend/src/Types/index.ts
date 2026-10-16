@@ -9,17 +9,19 @@ export interface ShowVideo {
   videoQuality: string;
   duration: string;
 }
+
 export interface Show {
   id: number;
   title: string;
   description: string;
   release_date: string;
-  type_show: string;
+  type_show: string | null;
   image_show: string;
   image_poster: string;
-  seasonCount: number;
-  bestQuality: string;
-  award?: string;
+  season_count: number | null;
+  quality: string | null;
+  award?: string | null;
+  category_show?: { id: number; name: string };
 }
 
 export interface Section {
@@ -28,7 +30,6 @@ export interface Section {
   seeAll?: string;
   withQuality?: boolean;
   info?: Info;
-  shows: Show[];
 }
 
 export interface Progress {
@@ -39,7 +40,7 @@ export interface Progress {
 }
 
 export interface CategoryPage {
+  name: string;
   title: string;
   desc: string;
-  shows: Show[];
 }
