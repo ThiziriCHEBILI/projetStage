@@ -1,21 +1,39 @@
 security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\Users
+                property: email
 
     firewalls:
+        login:
+            pattern: ^/auth/login
+            stateless: true
+            login_throttling:
+                max_attempts: 5
+                interval: "1 minute"
+            provider: app_user_provider
+            json_login:
+                check_path: /auth/login
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
         dev:
             # Ensure dev tools and static assets are always allowed
             pattern: ^/(_profiler|_wdt|assets|build)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
-
+            provider: app_user_provider
+            stateless: true
+            jwt: ~
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -24,8 +42,11 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/auth, roles: PUBLIC_ACCESS }
+        - { path: ^/shows, roles: PUBLIC_ACCESS, methods: [GET] }
+        - { path: ^/shows, roles: ROLE_ADMIN, methods: [POST, PUT, DELETE] }
+        - { path: ^/categories, roles: ROLE_ADMIN, methods: [GET, POST, DELETE] }
+        - { path: ^/user, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:
