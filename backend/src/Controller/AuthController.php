@@ -60,4 +60,10 @@ final class AuthController extends AbstractController
             return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
+
+    #[Route('/login', name: '_login', methods: ['POST'])]
+    public function login(): JsonResponse
+    {
+        throw new \Exception('Cette méthode ne doit jamais être appelée.');
+    }
 }
