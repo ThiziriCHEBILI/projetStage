@@ -45,8 +45,8 @@ security:
         - { path: ^/auth, roles: PUBLIC_ACCESS }
         - { path: ^/shows, roles: PUBLIC_ACCESS, methods: [GET] }
         - { path: ^/shows, roles: ROLE_ADMIN, methods: [POST, PUT, DELETE] }
-        - { path: ^/categories, roles: PUBLIC_ACCESS, methods: [GET] }
-        - { path: ^/categories, roles: ROLE_ADMIN, methods: [POST, DELETE] }
+        - { path: ^/categories, roles: ROLE_ADMIN, methods: [GET, POST, DELETE] }
+        - { path: ^/user, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:
