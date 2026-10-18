@@ -2,18 +2,40 @@ import { useState } from "react";
 import type { JSX, FormEvent } from "react";
 import { useNavigate } from "react-router";
 import { RgpdModal } from "../../components/RgpdModal/RgpdModal";
+import { fetchAPI } from "../../utilities/fetchApi";
+import { useAuth } from "../../context/AuthContext";
 import "./Login.scss";
 
 export default function Login(): JSX.Element {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showRgpd, setShowRgpd] = useState(false);
   const [remember, setRemember] = useState(false);
+  const [error, setError] = useState("");
+  const { setToken } = useAuth();
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(formData);
+    setError("");
+
+    const response = await fetchAPI<{ token?: string; message?: string }>(
+      "auth/login",
+      "POST",
+      formData,
+    );
+
+    if (response?.token) {
+      if (remember) {
+        localStorage.setItem("token", response.token);
+      } else {
+        sessionStorage.setItem("token", response.token);
+      }
+      setToken(response.token);
+      navigate("/");
+    } else {
+      setError("Email ou mot de passe incorrect.");
+    }
   };
 
   return (
@@ -68,6 +90,7 @@ export default function Login(): JSX.Element {
           <button className="login__button" type="submit">
             Se connecter
           </button>
+          {error && <p className="login__error">{error}</p>}
         </form>
 
         <p className="login__footer">
