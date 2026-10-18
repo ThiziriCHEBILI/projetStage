@@ -1,13 +1,24 @@
 import type { JSX, SubmitEvent } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Nav } from "../Nav/Nav";
 import logo from "../../assets/logo_NOVA.png";
+import { useAuth } from "../../context/AuthContext";
 import "./Header.scss";
 
 export function Header(): JSX.Element {
+  const { token, setToken } = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
   };
+
+  function handleLogout(): void {
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    setToken(undefined);
+    navigate("/");
+  }
 
   return (
     <header className="header">
@@ -33,10 +44,21 @@ export function Header(): JSX.Element {
           />
         </form>
 
-        <Link to="/login" className="header__login">
-          <i className="fa-solid fa-circle-user" aria-hidden="true"></i>
-          Connexion
-        </Link>
+        {token ? (
+          <button
+            type="button"
+            className="header__login"
+            onClick={handleLogout}
+          >
+            <i className="fa-solid fa-circle-user" aria-hidden="true"></i>
+            Déconnexion
+          </button>
+        ) : (
+          <Link to="/login" className="header__login">
+            <i className="fa-solid fa-circle-user" aria-hidden="true"></i>
+            Connexion
+          </Link>
+        )}
       </div>
     </header>
   );
