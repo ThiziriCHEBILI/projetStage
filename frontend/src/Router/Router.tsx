@@ -2,11 +2,13 @@ import { Routes, Route } from "react-router";
 import Category from "../Pages/Category/Category";
 import { filmsPage, seriesPage, animesPage } from "../data/data";
 import Home from "../Pages/Home/Home";
+import Login from "../Pages/Login/Login";
 
 export function Router() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
 
       <Route
         path="/shows/films"

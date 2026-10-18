@@ -33,7 +33,7 @@ export function Header(): JSX.Element {
           />
         </form>
 
-        <Link to="/connexion" className="header__login">
+        <Link to="/login" className="header__login">
           <i className="fa-solid fa-circle-user" aria-hidden="true"></i>
           Connexion
         </Link>

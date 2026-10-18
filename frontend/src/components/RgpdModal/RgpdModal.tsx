@@ -9,6 +9,7 @@ interface RgpdInfo {
 
 interface RgpdModalProps {
   onClose: () => void;
+  onConfirm: () => void;
 }
 
 const infos: RgpdInfo[] = [
@@ -34,7 +35,7 @@ const infos: RgpdInfo[] = [
   },
 ];
 
-export function RgpdModal({ onClose }: RgpdModalProps): JSX.Element {
+export function RgpdModal({ onClose, onConfirm }: RgpdModalProps): JSX.Element {
   return (
     <div
       className="backdrop"
@@ -78,7 +79,7 @@ export function RgpdModal({ onClose }: RgpdModalProps): JSX.Element {
         </p>
 
         <div className="modal__actions">
-          <button type="button" className="modal__confirm">
+          <button type="button" className="modal__confirm" onClick={onConfirm}>
             Continuer l'inscription
           </button>
           <button type="button" className="modal__cancel" onClick={onClose}>
