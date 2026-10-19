@@ -48,3 +48,11 @@ export interface PaginatedShows {
   total: number;
   totalPages: number;
 }
+
+export interface User {
+  id: number;
+  name: string;
+  surname: string;
+  email: string;
+  date_registration: string;
+}

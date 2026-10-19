@@ -1,0 +1,149 @@
+@use "../../index" as *;
+
+.register {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 24px $container-padding;
+
+  background-image:
+    linear-gradient(rgba($color-background, 0.6), rgba($color-background, 0.6)),
+    url("../../assets/carousel-login.webp");
+  background-size: cover;
+  background-position: center;
+
+  &__card {
+    margin: auto;
+    width: 100%;
+    max-width: 480px;
+    padding: 16px 34px;
+    background-color: $color-surface;
+    border-radius: 8px;
+  }
+  &__title {
+    margin-bottom: 8px;
+    font-size: 26px;
+    text-align: center;
+  }
+
+  &__subtitle {
+    margin-bottom: 28px;
+    color: $color-text-muted;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__field {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+
+  &__label {
+    margin-bottom: 8px;
+    color: $color-text-muted;
+    font-size: 14px;
+  }
+
+  &__input {
+    padding: 12px 14px;
+    border: 1px solid $color-surface-hover;
+    border-radius: 4px;
+    background-color: $color-background;
+    color: $color-text;
+    font-size: 12px;
+
+    &:focus {
+      outline: 2px solid $color-accent;
+      outline-offset: 1px;
+    }
+  }
+
+  &__error {
+    margin-top: 6px;
+    color: $color-accent-light;
+    font-size: 13px;
+  }
+
+  &__error--form {
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  &__options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  &__checkbox {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    accent-color: $color-accent;
+    cursor: pointer;
+  }
+
+  &__checkbox-label {
+    color: $color-text-muted;
+    font-size: 14px;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+
+  &__button {
+    margin-top: 20px;
+    padding: 13px;
+    border-radius: 4px;
+    background-color: $color-accent;
+    color: $color-text;
+    font-size: 16px;
+    font-weight: 600;
+
+    &:hover {
+      background-color: $color-accent-hover;
+    }
+  }
+
+  &__footer {
+    margin-top: 24px;
+    color: $color-text-muted;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  &__link {
+    color: $color-accent-light;
+    font-size: 14px;
+    text-decoration: underline;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 24px;
+
+    &__card {
+      padding: 28px 22px;
+    }
+
+    &__row {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+}
