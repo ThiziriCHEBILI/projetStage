@@ -47,6 +47,8 @@ security:
         - { path: ^/shows, roles: ROLE_ADMIN, methods: [POST, PUT, DELETE] }
         - { path: ^/categories, roles: ROLE_ADMIN, methods: [GET, POST, DELETE] }
         - { path: ^/user, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/videos, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:
