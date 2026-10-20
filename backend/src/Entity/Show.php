@@ -43,6 +43,7 @@ class Show
      * @var Collection<int, ShowVideo>
      */
     #[ORM\OneToMany(targetEntity: ShowVideo::class, mappedBy: 'show', cascade: ['remove'])]
+    #[ORM\OrderBy(['saison_number' => 'ASC', 'episode_number' => 'ASC'])]
     #[Groups(['video:read'])]
     private Collection $showVideos;
 

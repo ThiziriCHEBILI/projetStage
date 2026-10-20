@@ -25,7 +25,6 @@ class ShowVideo
     private ?string $image_video = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['video:read'])]
     private ?string $url_video = null;
 
     #[ORM\Column(nullable: true)]
