@@ -174,6 +174,7 @@ class AppFixtures extends Fixture
             ["showIndex" => 29, "description" => "Bande-annonce officielle de Spider-Man: New Generation", "image" => "spider-man-new-generation-h.webp", "url" => "https://www.youtube.com/watch?v=-AnN_Xg2Nps", "videoQuality" => "4K HDR", "duration" => "00:02:25"],
         ];
 
+        $defaultEpisodeCount = 10;
         foreach ($showVideosData as $showVideoData) {
             $showVideo = new ShowVideo();
             $showVideo->setDescriptionVideo($showVideoData["description"]);
@@ -185,6 +186,29 @@ class AppFixtures extends Fixture
             $showVideo->setDuration(new \DateTime($showVideoData["duration"]));
             $showVideo->setShowId($shows[$showVideoData["showIndex"]]);
             $manager->persist($showVideo);
+            $saison = $showVideoData["saisonNumber"] ?? null;
+            if ($saison === null) {
+                continue;
+            }
+
+            $episodeCount = $showVideoData["episodeCount"]
+                ?? ($saison <= 2 ? $defaultEpisodeCount : 0);
+
+
+            $show = $shows[$showVideoData["showIndex"]];
+
+            for ($episode = 1; $episode <= $episodeCount; $episode++) {
+                $video = new ShowVideo();
+                $video->setDescriptionVideo($show->getTitle() . " - Saison $saison, Épisode $episode");
+                $video->setImageVideo($showVideoData["image"]);
+                $video->setUrlVideo($showVideoData["url"]);
+                $video->setSaisonNumber($saison);
+                $video->setEpisodeNumber($episode);
+                $video->setVideoQuality($showVideoData["videoQuality"]);
+                $video->setDuration(new \DateTime($showVideoData["duration"]));
+                $video->setShowId($show);
+                $manager->persist($video);
+            }
         }
 
         $manager->flush();
