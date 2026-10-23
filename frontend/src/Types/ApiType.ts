@@ -30,11 +30,10 @@ export interface ShowVideo {
   id: number;
   description_video: string;
   image_video: string;
-  url_video: string;
   episode_number: number | null;
   saison_number: number | null;
   video_quality: string;
-  duration: string;
+  duration: number;
 }
 
 export interface ShowDetail extends Show {

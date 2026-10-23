@@ -2,11 +2,15 @@
 
 .top {
   position: relative;
-  width: 19%;
+  width: 100%;
   padding: 10px;
   border-radius: 8px;
   background-color: $color-surface;
-  cursor: pointer;
+  
+  &__link {
+    display: block;
+    width: 19%;
+  }
 
   &__poster {
     display: block;

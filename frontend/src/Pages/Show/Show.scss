@@ -1,0 +1,68 @@
+@use "../../index" as *;
+
+.show {
+  &__episodes {
+    padding: 0 $container-padding 60px;
+  }
+
+  &__heading {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__empty {
+    color: $color-text-muted;
+  }
+  &__dots {
+    display: flex;
+    gap: 8px;
+    padding: 20px 0;
+    justify-content: center;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $color-accent;
+    animation: blink 1s infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+  &__error {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    margin: 0;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background-color: #e50914;
+    color: #fff;
+  }
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}

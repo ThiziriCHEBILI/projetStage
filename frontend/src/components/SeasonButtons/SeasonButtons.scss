@@ -1,0 +1,30 @@
+@use "../../index" as *;
+
+.seasons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 0 $container-padding;
+
+  &__button {
+    padding: 10px 22px;
+    border-radius: 20px;
+    background-color: $color-surface;
+    color: $color-text-muted;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $color-surface-hover;
+    }
+
+    &--active {
+      background-color: $color-accent;
+      color: $color-text;
+
+      &:hover {
+        background-color: $color-accent-hover;
+      }
+    }
+  }
+}

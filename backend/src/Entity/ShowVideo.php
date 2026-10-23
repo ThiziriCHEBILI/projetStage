@@ -39,9 +39,9 @@ class ShowVideo
     #[Groups(['video:read'])]
     private ?string $video_quality = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column]
     #[Groups(['video:read'])]
-    private ?\DateTime $duration = null;
+    private ?int $duration = null;
 
     #[ORM\ManyToOne(inversedBy: 'showVideos')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
@@ -124,12 +124,12 @@ class ShowVideo
         return $this;
     }
 
-    public function getDuration(): ?\DateTime
+    public function getDuration(): ?int
     {
         return $this->duration;
     }
 
-    public function setDuration(\DateTime $duration): static
+    public function setDuration(int $duration): static
     {
         $this->duration = $duration;
 

@@ -1,5 +1,7 @@
 import type { JSX } from "react";
-import type { Show, Info } from "../../Types";
+import { Link } from "react-router";
+import type { Show } from "../../Types/ApiType";
+import type { Info } from "../../Types";
 import { formatSeasons } from "../../utilities/convert";
 import { API_URL } from "../../utilities/fetchApi";
 import "./ShowCard.scss";
@@ -15,7 +17,7 @@ export function ShowCard({
   withQuality,
   info,
 }: ShowCardProps): JSX.Element {
-  let infoText = show.type_show;
+  let infoText: string | null = show.type_show;
 
   if (info === "saison" && show.season_count !== null) {
     infoText = formatSeasons(show.season_count);
@@ -25,18 +27,23 @@ export function ShowCard({
     : show.image_show;
 
   return (
-    <article className="card">
-      <img src={imageUrl} alt="" className="card__image" loading="lazy" />
+    <Link
+      to={`/shows/${show.category_show.name}/${show.id}`}
+      className="card__link"
+    >
+      <article className="card">
+        <img src={imageUrl} alt="" className="card__image" loading="lazy" />
 
-      {withQuality && <span className="card__quality">{show.quality}</span>}
+        {withQuality && <span className="card__quality">{show.quality}</span>}
 
-      <h3 className="card__title">{show.title}</h3>
+        <h3 className="card__title">{show.title}</h3>
 
-      {info && (
-        <p className="card__info">
-          {new Date(show.release_date).getFullYear()} · {infoText}
-        </p>
-      )}
-    </article>
+        {info && (
+          <p className="card__info">
+            {new Date(show.release_date).getFullYear()} · {infoText}
+          </p>
+        )}
+      </article>
+    </Link>
   );
 }
