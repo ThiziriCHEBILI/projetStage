@@ -61,11 +61,13 @@ export default function Show(): JSX.Element {
       )}
 
       {seasons.length > 0 && (
-        <SeasonButtons
-          seasons={seasons}
-          season={season}
-          onSelect={selectSeason}
-        />
+        <div className="show__seasons">
+          <SeasonButtons
+            seasons={seasons}
+            season={season}
+            onSelect={selectSeason}
+          />
+        </div>
       )}
 
       {seasons.length > 0 && (

@@ -56,6 +56,10 @@
     background-color: #e50914;
     color: #fff;
   }
+  &__seasons {
+    margin-bottom: 28px;
+    padding: 0 $container-padding;
+  }
 }
 @keyframes blink {
   0%,

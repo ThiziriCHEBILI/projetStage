@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 import { showTypes } from "../../data/data";
-import "./TypeFilters.scss";
+import { FilterButtons } from "../FilterButtons/FilterButtons";
 
 interface TypeFiltersProps {
   activeType: string;
@@ -11,26 +11,15 @@ export function TypeFilters({
   activeType,
   onSelect,
 }: TypeFiltersProps): JSX.Element {
-  return (
-    <div className="types">
-      <button
-        type="button"
-        className={`types__button ${activeType === "" ? "types__button--active" : ""}`}
-        onClick={() => onSelect("")}
-      >
-        Tout
-      </button>
+  const buttons = [
+    { value: "", label: "Tout" },
+    ...showTypes.map((type) => ({
+      value: type,
+      label: type,
+    })),
+  ];
 
-      {showTypes.map((type) => (
-        <button
-          key={type}
-          type="button"
-          className={`types__button ${type === activeType ? "types__button--active" : ""}`}
-          onClick={() => onSelect(type)}
-        >
-          {type}
-        </button>
-      ))}
-    </div>
+  return (
+    <FilterButtons buttons={buttons} active={activeType} onSelect={onSelect} />
   );
 }

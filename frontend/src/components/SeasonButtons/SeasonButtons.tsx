@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import "./SeasonButtons.scss";
+import { FilterButtons } from "../FilterButtons/FilterButtons";
 
 interface SeasonButtonsProps {
   seasons: number[];
@@ -12,23 +12,12 @@ export function SeasonButtons({
   season,
   onSelect,
 }: SeasonButtonsProps): JSX.Element {
+  const buttons = seasons.map((number) => ({
+    value: number,
+    label: `Saison ${number}`,
+  }));
+
   return (
-    <div className="seasons">
-      {seasons.map((number) => (
-        <button
-          key={number}
-          type="button"
-          aria-pressed={number === season}
-          className={
-            number === season
-              ? "seasons__button seasons__button--active"
-              : "seasons__button"
-          }
-          onClick={() => onSelect(number)}
-        >
-          Saison {number}
-        </button>
-      ))}
-    </div>
+    <FilterButtons buttons={buttons} active={season} onSelect={onSelect} />
   );
 }
