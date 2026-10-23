@@ -38,7 +38,9 @@ export default function Category({ page }: CategoryProps): JSX.Element {
       <h1 className="category__title">{page.title}</h1>
       <p className="category__desc">{page.desc}</p>
 
-      <TypeFilters activeType={activeType} onSelect={selectType} />
+      <div className="category__types">
+        <TypeFilters activeType={activeType} onSelect={selectType} />
+      </div>
 
       {loading && <p className="category__empty">Chargement…</p>}
 
