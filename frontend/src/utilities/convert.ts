@@ -9,6 +9,20 @@ export function formatEpisode(season: number, episode: number): string {
   return "S" + season + "E" + episode;
 }
 
+export function formatSeconds(totalSeconds: number): string {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  if (hours > 0) {
+    return hours + " h " + minutes + " min";
+  }
+  if (minutes > 0) {
+    return minutes + " min";
+  }
+  return seconds + " s";
+}
+
 export function formatDuration(duration: string): string {
   const parts = duration.split(":");
   const hours = Number(parts[0]);
@@ -37,4 +51,14 @@ export function isRecent(date: string, days: number): boolean {
   limit.setDate(limit.getDate() - days);
 
   return new Date(date) > limit;
+}
+
+export function toEmbedUrl(url: string): string {
+  const videoId = new URL(url).searchParams.get("v");
+
+  if (!videoId) {
+    return url;
+  }
+
+  return "https://www.youtube.com/embed/" + videoId;
 }

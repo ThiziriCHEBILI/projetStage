@@ -4,6 +4,7 @@ import { filmsPage, seriesPage, animesPage } from "../data/data";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Show from "../Pages/Show/Show";
 
 export function Router() {
   return (
@@ -24,6 +25,7 @@ export function Router() {
         path="/shows/dessins-animes"
         element={<Category key="dessins-animes" page={animesPage} />}
       />
+      <Route path="/shows/:name/:id" element={<Show />} />
     </Routes>
   );
 }

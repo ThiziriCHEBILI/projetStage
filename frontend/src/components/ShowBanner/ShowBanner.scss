@@ -1,0 +1,118 @@
+@use "../../index" as *;
+
+.banner {
+  position: relative;
+  padding: 60px $container-padding;
+  overflow: hidden;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(to top, $color-background, transparent 70%),
+      linear-gradient(
+        to right,
+        rgba($color-background, 0.95) 30%,
+        rgba($color-background, 0.3) 100%
+      );
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  &__poster {
+    width: 220px;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  &__infos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &__title {
+    margin-bottom: 12px;
+    font-size: 42px;
+    font-weight: bold;
+  }
+
+  &__meta {
+    margin-bottom: 16px;
+    color: $color-text-muted;
+    font-size: 15px;
+  }
+
+  &__description {
+    max-width: 520px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  &__tag {
+    display: inline-block;
+    margin-bottom: 24px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background-color: rgba($color-surface, 0.8);
+    color: $color-text-muted;
+    font-size: 13px;
+    text-transform: capitalize;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  &__play,
+  &__add {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 24px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+
+  &__play {
+    background-color: $color-accent;
+    color: $color-text;
+
+    &:hover {
+      background-color: $color-accent-hover;
+    }
+  }
+
+  &__add {
+    border: 1px solid $color-text-subtle;
+    background-color: rgba($color-surface, 0.9);
+    color: $color-text;
+
+    &:hover {
+      background-color: $color-surface-hover;
+    }
+  }
+}
