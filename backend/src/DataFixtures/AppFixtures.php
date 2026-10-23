@@ -176,6 +176,7 @@ class AppFixtures extends Fixture
 
         $defaultEpisodeCount = 10;
         foreach ($showVideosData as $showVideoData) {
+            $duration = $this->toSeconds($showVideoData["duration"]);
             $showVideo = new ShowVideo();
             $showVideo->setDescriptionVideo($showVideoData["description"]);
             $showVideo->setImageVideo($showVideoData["image"]);
@@ -183,7 +184,7 @@ class AppFixtures extends Fixture
             $showVideo->setEpisodeNumber($showVideoData["episodeNumber"] ?? null);
             $showVideo->setSaisonNumber($showVideoData["saisonNumber"] ?? null);
             $showVideo->setVideoQuality($showVideoData["videoQuality"]);
-            $showVideo->setDuration(new \DateTime($showVideoData["duration"]));
+            $showVideo->setDuration($duration);
             $showVideo->setShowId($shows[$showVideoData["showIndex"]]);
             $manager->persist($showVideo);
             $saison = $showVideoData["saisonNumber"] ?? null;
@@ -205,12 +206,19 @@ class AppFixtures extends Fixture
                 $video->setSaisonNumber($saison);
                 $video->setEpisodeNumber($episode);
                 $video->setVideoQuality($showVideoData["videoQuality"]);
-                $video->setDuration(new \DateTime($showVideoData["duration"]));
+                $video->setDuration($duration);
                 $video->setShowId($show);
                 $manager->persist($video);
             }
         }
 
         $manager->flush();
+    }
+
+    private function toSeconds(string $time): int
+    {
+        [$hours, $minutes, $seconds] = explode(':', $time);
+
+        return (int) $hours * 3600 + (int) $minutes * 60 + (int) $seconds;
     }
 }
