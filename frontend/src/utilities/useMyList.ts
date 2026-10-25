@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { fetchAPIWithStatus } from "./fetchApi";
 import type { Show } from "../Types/ApiType";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import { loginUrl } from "./convert";
 
 export function useMyList() {
   const [myList, setMyList] = useState<Show[]>([]);
@@ -10,6 +11,7 @@ export function useMyList() {
   const [listError, setListError] = useState<string | null>(null);
   const { token } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!token) {
@@ -36,7 +38,7 @@ export function useMyList() {
 
   async function addToMyList(show: Show): Promise<void> {
     if (!token) {
-      navigate("/login");
+      navigate(loginUrl(location.pathname));
       return;
     }
 
@@ -61,7 +63,7 @@ export function useMyList() {
 
   async function removeFromMyList(showId: number): Promise<void> {
     if (!token) {
-      navigate("/login");
+      navigate(loginUrl(location.pathname));
       return;
     }
 

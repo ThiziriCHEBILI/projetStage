@@ -62,3 +62,7 @@ export function toEmbedUrl(url: string): string {
 
   return "https://www.youtube.com/embed/" + videoId;
 }
+
+export function loginUrl(path: string): string {
+  return `/login?redirect=${encodeURIComponent(path)}`;
+}

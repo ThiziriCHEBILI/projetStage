@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { fetchAPI } from "./fetchApi";
-import { toEmbedUrl } from "./convert";
+import { toEmbedUrl, loginUrl } from "./convert";
 
 export function useVideoPlayer() {
   const [playing, setPlaying] = useState<{ url: string; title: string } | null>(
@@ -11,7 +11,8 @@ export function useVideoPlayer() {
   const [playError, setPlayError] = useState<string | null>(null);
   const { token } = useAuth();
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
   useEffect(() => {
     if (!playError) {
       return;
@@ -24,7 +25,7 @@ export function useVideoPlayer() {
 
   async function play(videoId: number, title: string): Promise<void> {
     if (!token) {
-      navigate("/login");
+      navigate(loginUrl(location.pathname));
       return;
     }
 

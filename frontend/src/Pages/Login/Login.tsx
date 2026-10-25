@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { JSX, FormEvent } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { RgpdModal } from "../../components/RgpdModal/RgpdModal";
 import { fetchAPI } from "../../utilities/fetchApi";
 import { useAuth } from "../../context/AuthContext";
@@ -12,8 +12,13 @@ export default function Login(): JSX.Element {
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState("");
   const { setToken } = useAuth();
-
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect");
+  const redirectedPage =
+    redirect && redirect.startsWith("/") && !redirect.startsWith("//")
+      ? redirect
+      : "/";
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -32,7 +37,7 @@ export default function Login(): JSX.Element {
         sessionStorage.setItem("token", response.token);
       }
       setToken(response.token);
-      navigate("/");
+      navigate(redirectedPage);
     } else {
       setError("Email ou mot de passe incorrect.");
     }

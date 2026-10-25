@@ -1,17 +1,19 @@
 import type { JSX } from "react";
 import { useMyList } from "../../utilities/useMyList";
 import { ShowCard } from "../../components/ShowCard/ShowCard";
-import { Navigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import { useAuth } from "../../context/AuthContext";
+import { loginUrl } from "../../utilities/convert";
 import "./MyList.scss";
 
 export default function MyList(): JSX.Element {
   const { myList, listLoading, listError, removeFromMyList } = useMyList();
 
   const { token } = useAuth();
+  const location = useLocation();
 
   if (!token) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to={loginUrl(location.pathname)} replace />;
   }
 
   return (
