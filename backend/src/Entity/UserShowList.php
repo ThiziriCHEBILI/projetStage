@@ -19,27 +19,46 @@ class UserShowList
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Show $show = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $date_added = null;
 
-    public function getUserId(): ?Users
+    public function __construct()
+    {
+        $this->date_added = new \DateTimeImmutable();
+    }
+
+    public function getUser(): ?Users
     {
         return $this->user;
     }
 
-    public function setUserId(?Users $user): static
+    public function setUser(?Users $user): static
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getShowId(): ?Show
+    public function getShow(): ?Show
     {
         return $this->show;
     }
 
-    public function setShowId(?Show $show): static
+    public function setShow(?Show $show): static
     {
         $this->show = $show;
+
+        return $this;
+    }
+
+    public function getDateAdded(): ?\DateTimeImmutable
+    {
+        return $this->date_added;
+    }
+
+    public function setDateAdded(\DateTimeImmutable $date_added): static
+    {
+        $this->date_added = $date_added;
 
         return $this;
     }
