@@ -8,6 +8,7 @@ import { useVideoPlayer } from "../../utilities/useVideoPlayer";
 import { EpisodeCard } from "../../components/EpisodeCard/EpisodeCard";
 import { SeasonButtons } from "../../components/SeasonButtons/SeasonButtons";
 import { ShowBanner } from "../../components/ShowBanner/ShowBanner";
+import { useMyList } from "../../utilities/useMyList";
 import "./Show.scss";
 
 export default function Show(): JSX.Element {
@@ -16,6 +17,8 @@ export default function Show(): JSX.Element {
   const [season, setSeason] = useState(1);
   const [switching, setSwitching] = useState(false);
   const { playing, play, close, playError } = useVideoPlayer();
+  const { isInList, addToMyList, removeFromMyList, listLoading, listError } =
+    useMyList();
 
   function selectSeason(number: number): void {
     setSeason(number);
@@ -45,6 +48,15 @@ export default function Show(): JSX.Element {
       video.episode_number === null &&
       (seasons.length === 0 || video.saison_number === season),
   );
+  const inMyList = isInList(data.id);
+
+  const handleListClick = (): void => {
+    if (inMyList) {
+      removeFromMyList(data.id);
+    } else {
+      addToMyList(data);
+    }
+  };
 
   return (
     <section className="show">
@@ -52,11 +64,19 @@ export default function Show(): JSX.Element {
         show={data}
         canPlay={Boolean(bannerVideo)}
         onPlay={() => bannerVideo && play(bannerVideo.id, data.title)}
+        inMyList={inMyList}
+        listLoading={listLoading}
+        onListClick={handleListClick}
       />
 
       {playError && (
         <p className="show__error" role="alert">
           {playError}
+        </p>
+      )}
+      {listError && (
+        <p className="show__error" role="alert">
+          {listError}
         </p>
       )}
 

@@ -8,12 +8,18 @@ interface ShowBannerProps {
   show: ShowDetail;
   canPlay: boolean;
   onPlay: () => void;
+  inMyList: boolean;
+  listLoading: boolean;
+  onListClick: () => void;
 }
 
 export function ShowBanner({
   show,
   canPlay,
   onPlay,
+  inMyList,
+  listLoading,
+  onListClick,
 }: ShowBannerProps): JSX.Element {
   return (
     <div className="banner">
@@ -57,9 +63,19 @@ export function ShowBanner({
               Voir la bande-annonce
             </button>
 
-            <button type="button" className="banner__add">
-              <i className="fa-solid fa-plus" aria-hidden="true"></i>
-              Ajouter à ma liste
+            <button
+              type="button"
+              className="banner__add"
+              onClick={onListClick}
+              disabled={listLoading}
+            >
+              <i
+                className={
+                  inMyList ? "fa-solid fa-heart" : "fa-regular fa-heart"
+                }
+                aria-hidden="true"
+              ></i>
+              {inMyList ? "Retirer de ma liste" : "Ajouter à ma liste"}
             </button>
           </div>
         </div>
