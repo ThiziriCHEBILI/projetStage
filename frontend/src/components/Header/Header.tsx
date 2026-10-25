@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { Nav } from "../Nav/Nav";
 import logo from "../../assets/logo_NOVA.png";
 import { useAuth } from "../../context/AuthContext";
+import { startTransition } from "react";
 import "./Header.scss";
 
 export function Header(): JSX.Element {
@@ -14,8 +15,10 @@ export function Header(): JSX.Element {
   };
 
   function handleLogout(): void {
-    logout();
-    navigate("/");
+    startTransition(() => {
+      navigate("/");
+      logout();
+    });
   }
 
   return (
