@@ -30,6 +30,16 @@ export function useMyList() {
     );
   }, [token]);
 
+  useEffect(() => {
+    if (!listError) {
+      return;
+    }
+
+    const timer = setTimeout(() => setListError(null), 4000);
+
+    return () => clearTimeout(timer);
+  }, [listError]);
+
   const listLoading = Boolean(token) && !loaded;
 
   function isInList(showId: number): boolean {

@@ -58,6 +58,8 @@ export default function Show(): JSX.Element {
     }
   };
 
+  const errorMessage = playError ?? listError;
+
   return (
     <section className="show">
       <ShowBanner
@@ -69,14 +71,9 @@ export default function Show(): JSX.Element {
         onListClick={handleListClick}
       />
 
-      {playError && (
+      {errorMessage && (
         <p className="show__error" role="alert">
-          {playError}
-        </p>
-      )}
-      {listError && (
-        <p className="show__error" role="alert">
-          {listError}
+          {errorMessage}
         </p>
       )}
 
