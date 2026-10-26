@@ -36,7 +36,7 @@ export default function MyList(): JSX.Element {
         <div className="my-list__grid">
           {myList.map((show) => (
             <div key={show.id} className="my-list__item">
-              <ShowCard show={show} withQuality={false} info="type_show" />
+              <ShowCard show={show} info="type_show" />
               <button
                 type="button"
                 className="my-list__remove"
