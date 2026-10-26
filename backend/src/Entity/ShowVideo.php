@@ -13,26 +13,26 @@ class ShowVideo
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['video:read'])]
+    #[Groups(['video:read', 'progress:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['video:read'])]
+    #[Groups(['video:read', 'progress:read'])]
     private ?string $description_video = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['video:read'])]
+    #[Groups(['video:read', 'progress:read'])]
     private ?string $image_video = null;
 
     #[ORM\Column(length: 255)]
     private ?string $url_video = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['video:read'])]
+    #[Groups(['video:read', 'progress:read'])]
     private ?int $episode_number = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['video:read'])]
+    #[Groups(['video:read', 'progress:read'])]
     private ?int $saison_number = null;
 
     #[ORM\Column(length: 10)]
@@ -40,11 +40,12 @@ class ShowVideo
     private ?string $video_quality = null;
 
     #[ORM\Column]
-    #[Groups(['video:read'])]
+    #[Groups(['video:read', 'progress:read'])]
     private ?int $duration = null;
 
     #[ORM\ManyToOne(inversedBy: 'showVideos')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[Groups(['progress:read'])]
     private ?Show $show = null;
 
     public function getId(): ?int
@@ -136,12 +137,12 @@ class ShowVideo
         return $this;
     }
 
-    public function getShowId(): ?Show
+    public function getShow(): ?Show
     {
         return $this->show;
     }
 
-    public function setShowId(?Show $show): static
+    public function setShow(?Show $show): static
     {
         $this->show = $show;
 

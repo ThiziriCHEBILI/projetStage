@@ -155,7 +155,7 @@ class Show
     {
         if (!$this->showVideos->contains($showVideo)) {
             $this->showVideos->add($showVideo);
-            $showVideo->setShowId($this);
+            $showVideo->setShow($this);
         }
 
         return $this;
@@ -165,8 +165,8 @@ class Show
     {
         if ($this->showVideos->removeElement($showVideo)) {
             // set the owning side to null (unless already changed)
-            if ($showVideo->getShowId() === $this) {
-                $showVideo->setShowId(null);
+            if ($showVideo->getShow() === $this) {
+                $showVideo->setShow(null);
             }
         }
 

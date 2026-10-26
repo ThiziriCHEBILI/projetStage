@@ -4,15 +4,18 @@ namespace App\Entity;
 
 use App\Repository\UserProgressRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: UserProgressRepository::class)]
 class UserProgress
 {
 
     #[ORM\Column]
+    #[Groups(['progress:read'])]
     private ?int $position = null;
 
     #[ORM\Column]
+    #[Groups(['progress:read'])]
     private ?\DateTimeImmutable $last_watched = null;
 
     #[ORM\Id]
@@ -23,6 +26,7 @@ class UserProgress
     #[ORM\Id]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[Groups(['progress:read'])]
     private ?ShowVideo $show_video = null;
 
 
