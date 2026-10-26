@@ -6,6 +6,23 @@ import { fetchAPI } from "../../utilities/fetchApi";
 import { useAuth } from "../../context/AuthContext";
 import "./Login.scss";
 
+function getSafeRedirect(redirect: string | null): string {
+  if (!redirect) {
+    return "/";
+  }
+
+  try {
+    const url = new URL(redirect, window.location.origin);
+    if (url.origin === window.location.origin) {
+      return url.pathname;
+    }
+  } catch {
+    return "/";
+  }
+
+  return "/";
+}
+
 export default function Login(): JSX.Element {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showRgpd, setShowRgpd] = useState(false);
@@ -14,11 +31,7 @@ export default function Login(): JSX.Element {
   const { setToken } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const redirect = searchParams.get("redirect");
-  const redirectedPage =
-    redirect && redirect.startsWith("/") && !redirect.startsWith("//")
-      ? redirect
-      : "/";
+  const redirectedPage = getSafeRedirect(searchParams.get("redirect"));
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
