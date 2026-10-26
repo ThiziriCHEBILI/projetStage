@@ -37,6 +37,11 @@ export default function Login(): JSX.Element {
     event.preventDefault();
     setError("");
 
+    if (!formData.email || !formData.password) {
+      setError("Veuillez remplir l'email et le mot de passe.");
+      return;
+    }
+
     const response = await fetchAPI<{ token?: string; message?: string }>(
       "auth/login",
       "POST",
@@ -108,7 +113,12 @@ export default function Login(): JSX.Element {
           <button className="login__button" type="submit">
             Se connecter
           </button>
-          {error && <p className="login__error">{error}</p>}
+
+          {error && (
+            <p className="login__error" role="alert">
+              {error}
+            </p>
+          )}
         </form>
 
         <p className="login__footer">
