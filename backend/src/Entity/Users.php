@@ -165,7 +165,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->userShowList->contains($userShowList)) {
             $this->userShowList->add($userShowList);
-            $userShowList->setUserId($this);
+            $userShowList->setUser($this);
         }
 
         return $this;
@@ -175,8 +175,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->userShowList->removeElement($userShowList)) {
             // set the owning side to null (unless already changed)
-            if ($userShowList->getUserId() === $this) {
-                $userShowList->setUserId(null);
+            if ($userShowList->getUser() === $this) {
+                $userShowList->setUser(null);
             }
         }
 

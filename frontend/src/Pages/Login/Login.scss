@@ -94,6 +94,13 @@
     }
   }
 
+  &__error {
+    margin-top: 12px;
+    color: $color-accent-light;
+    font-size: 14px;
+    text-align: center;
+  }
+
   &__footer {
     margin-top: 28px;
     color: $color-text-muted;

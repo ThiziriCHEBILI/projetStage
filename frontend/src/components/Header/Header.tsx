@@ -1,4 +1,4 @@
-import type { JSX, SubmitEvent } from "react";
+import { type JSX, type SubmitEvent, startTransition } from "react";
 import { Link, useNavigate } from "react-router";
 import { Nav } from "../Nav/Nav";
 import logo from "../../assets/logo_NOVA.png";
@@ -14,8 +14,13 @@ export function Header(): JSX.Element {
   };
 
   function handleLogout(): void {
-    logout();
-    navigate("/");
+    // startTransition regroupe le changement de page et la déconnexion.
+    // Sans lui, Ma Liste voit le token disparaître avant le changement de page,
+    // et elle redirige vers la connexion au lieu de l'accueil.
+    startTransition(() => {
+      navigate("/");
+      logout();
+    });
   }
 
   return (

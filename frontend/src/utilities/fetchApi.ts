@@ -8,6 +8,22 @@ export async function fetchAPI<T>(
   data?: unknown,
   token?: string,
 ): Promise<T | undefined> {
+  const result = await fetchAPIWithStatus<T>(endpoint, method, data, token);
+  return result.data;
+}
+
+export interface ApiResult<T> {
+  ok: boolean;
+  status: number;
+  data: T | undefined;
+}
+
+export async function fetchAPIWithStatus<T>(
+  endpoint: string,
+  method: Method = "GET",
+  data?: unknown,
+  token?: string,
+): Promise<ApiResult<T>> {
   const headers: Record<string, string> = {};
 
   if (data) {
@@ -25,13 +41,11 @@ export async function fetchAPI<T>(
       body: data ? JSON.stringify(data) : undefined,
     });
 
-    if (response.ok) {
-      return await response.json();
-    } else {
-      const error = await response.json();
-      return error;
-    }
+    const json = await response.json();
+
+    return { ok: response.ok, status: response.status, data: json };
   } catch (e) {
     console.error(e);
+    return { ok: false, status: 0, data: undefined };
   }
 }

@@ -1,10 +1,27 @@
 import { useState } from "react";
 import type { JSX, FormEvent } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { RgpdModal } from "../../components/RgpdModal/RgpdModal";
 import { fetchAPI } from "../../utilities/fetchApi";
 import { useAuth } from "../../context/AuthContext";
 import "./Login.scss";
+
+function getSafeRedirect(redirect: string | null): string {
+  if (!redirect) {
+    return "/";
+  }
+
+  try {
+    const url = new URL(redirect, window.location.origin);
+    if (url.origin === window.location.origin) {
+      return url.pathname;
+    }
+  } catch {
+    return "/";
+  }
+
+  return "/";
+}
 
 export default function Login(): JSX.Element {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -12,12 +29,18 @@ export default function Login(): JSX.Element {
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState("");
   const { setToken } = useAuth();
-
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectedPage = getSafeRedirect(searchParams.get("redirect"));
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setError("");
+
+    if (!formData.email || !formData.password) {
+      setError("Veuillez remplir l'email et le mot de passe.");
+      return;
+    }
 
     const response = await fetchAPI<{ token?: string; message?: string }>(
       "auth/login",
@@ -32,7 +55,7 @@ export default function Login(): JSX.Element {
         sessionStorage.setItem("token", response.token);
       }
       setToken(response.token);
-      navigate("/");
+      navigate(redirectedPage);
     } else {
       setError("Email ou mot de passe incorrect.");
     }
@@ -90,7 +113,12 @@ export default function Login(): JSX.Element {
           <button className="login__button" type="submit">
             Se connecter
           </button>
-          {error && <p className="login__error">{error}</p>}
+
+          {error && (
+            <p className="login__error" role="alert">
+              {error}
+            </p>
+          )}
         </form>
 
         <p className="login__footer">
