@@ -12,7 +12,7 @@ class UserProgress
 
     #[ORM\Column]
     #[Groups(['progress:read'])]
-    private ?int $position = null;
+    private ?int $watched_seconds = null;
 
     #[ORM\Column]
     #[Groups(['progress:read'])]
@@ -35,14 +35,14 @@ class UserProgress
         $this->last_watched = new \DateTimeImmutable();
     }
 
-    public function getPosition(): ?int
+    public function getWatchedSeconds(): ?int
     {
-        return $this->position;
+        return $this->watched_seconds;
     }
 
-    public function setPosition(int $position): static
+    public function setWatchedSeconds(int $watched_seconds): static
     {
-        $this->position = $position;
+        $this->watched_seconds = $watched_seconds;
 
         return $this;
     }
