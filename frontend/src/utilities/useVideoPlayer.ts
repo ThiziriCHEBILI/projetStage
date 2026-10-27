@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, useLocation } from "react-router";
-import { fetchAPI } from "./fetchApi";
+import { fetchAPI, fetchAPIWithStatus } from "./fetchApi";
 import { toVideoId, loginUrl } from "./convert";
 
 export function useVideoPlayer() {
@@ -53,5 +53,19 @@ export function useVideoPlayer() {
   function close() {
     setPlaying(null);
   }
-  return { playing, play, close, playError };
+
+  function saveProgress(seconds: number): void {
+    if (!playing || !token) {
+      return;
+    }
+
+    fetchAPIWithStatus(
+      `my-progress/${playing.videoId}`,
+      "PUT",
+      { watched_seconds: Math.floor(seconds) },
+      token,
+    );
+  }
+
+  return { playing, play, close, playError, saveProgress };
 }

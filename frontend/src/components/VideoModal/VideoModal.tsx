@@ -1,11 +1,12 @@
 import type { JSX } from "react";
-import YouTube from "react-youtube";
+import YouTube, { type YouTubeEvent } from "react-youtube";
 import "./VideoModal.scss";
 
 interface VideoModalProps {
   youtubeId: string;
   title: string;
   startAt: number;
+  onSave: (seconds: number) => void;
   onClose: () => void;
 }
 
@@ -13,8 +14,14 @@ export function VideoModal({
   youtubeId,
   title,
   startAt,
+  onSave,
   onClose,
 }: VideoModalProps): JSX.Element {
+  async function handlePause(event: YouTubeEvent): Promise<void> {
+    const seconds = await event.target.getCurrentTime();
+    onSave(seconds);
+  }
+
   return (
     <div className="video-modal" onClick={onClose}>
       <div
@@ -42,6 +49,7 @@ export function VideoModal({
             height: "100%",
             playerVars: { autoplay: 1, start: startAt },
           }}
+          onPause={handlePause}
         />
       </div>
     </div>
