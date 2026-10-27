@@ -61,6 +61,7 @@ export function VideoModal({
           }}
           onPause={handlePause}
           onReady={(event) => setPlayer(event.target)}
+          onEnd={async (event) => onSave(await event.target.getDuration())}
         />
       </div>
     </div>
