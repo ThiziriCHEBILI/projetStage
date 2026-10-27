@@ -17,14 +17,13 @@ use App\Entity\ShowVideo;
 #[Route('/my-progress', name: 'app_my_progress')]
 final class UserProgressController extends AbstractController
 {
-    private const DAYS_BEFORE_REMOVE = 30;
     private const FINISHED_PERCENT = 95;
 
     #[Route('', name: 'get_my_progress', methods: ['GET'])]
     public function getMyProgress(EntityManagerInterface $em): JsonResponse
     {
         try {
-            $limit = new \DateTimeImmutable('-' . self::DAYS_BEFORE_REMOVE . ' days');
+            $limit = new \DateTimeImmutable('-' . UserProgress::DAYS_BEFORE_REMOVE . ' days');
 
             $allProgress = $em->getRepository(UserProgress::class)->findBy(
                 ['user' => $this->getUser()],

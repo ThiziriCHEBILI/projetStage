@@ -2,13 +2,13 @@
 
 namespace App\Command;
 
-use App\Entity\UserProgress;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use App\Entity\UserProgress;
 
 #[AsCommand(
     name: 'app:clean-progress',
@@ -16,7 +16,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class CleanProgressCommand extends Command
 {
-    private const DAYS_BEFORE_REMOVE = 30;
 
     public function __construct(private EntityManagerInterface $em)
     {
@@ -26,7 +25,7 @@ class CleanProgressCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $limit = new \DateTimeImmutable('-' . self::DAYS_BEFORE_REMOVE . ' days');
+        $limit = new \DateTimeImmutable('-' . UserProgress::DAYS_BEFORE_REMOVE . ' days');
 
         $allProgress = $this->em->getRepository(UserProgress::class)->findAll();
         $count = 0;

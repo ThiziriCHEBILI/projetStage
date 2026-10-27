@@ -9,6 +9,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ORM\Entity(repositoryClass: UserProgressRepository::class)]
 class UserProgress
 {
+    public const DAYS_BEFORE_REMOVE = 30;
 
     #[ORM\Column]
     #[Groups(['progress:read'])]
