@@ -4,10 +4,16 @@ import "./VideoModal.scss";
 interface VideoModalProps {
   url: string;
   title: string;
+  startAt: number;
   onClose: () => void;
 }
 
-export function VideoModal({ url, title, onClose }: VideoModalProps): JSX.Element {
+export function VideoModal({
+  url,
+  title,
+  startAt,
+  onClose,
+}: VideoModalProps): JSX.Element {
   return (
     <div className="video-modal" onClick={onClose}>
       <div
@@ -27,7 +33,7 @@ export function VideoModal({ url, title, onClose }: VideoModalProps): JSX.Elemen
         </button>
 
         <iframe
-          src={url + "?autoplay=1"}
+          src={`${url}?autoplay=1&start=${startAt}`}
           title={title}
           className="video-modal__player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

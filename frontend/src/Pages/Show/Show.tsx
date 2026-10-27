@@ -128,7 +128,12 @@ export default function Show(): JSX.Element {
       )}
 
       {playing && (
-        <VideoModal url={playing.url} title={playing.title} onClose={close} />
+        <VideoModal
+          url={playing.url}
+          title={playing.title}
+          startAt={playing.startAt}
+          onClose={close}
+        />
       )}
     </section>
   );
