@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, useLocation } from "react-router";
 import { fetchAPI } from "./fetchApi";
-import { toEmbedUrl, loginUrl } from "./convert";
+import { toVideoId, loginUrl } from "./convert";
 
 export function useVideoPlayer() {
   const [playing, setPlaying] = useState<{
-    url: string;
+    videoId: number;
+    youtubeId: string;
     title: string;
     startAt: number;
   } | null>(null);
@@ -39,7 +40,8 @@ export function useVideoPlayer() {
     if (response?.url_video) {
       setPlayError(null);
       setPlaying({
-        url: toEmbedUrl(response.url_video),
+        videoId,
+        youtubeId: toVideoId(response.url_video) ?? "",
         title,
         startAt: response.watched_seconds ?? 0,
       });

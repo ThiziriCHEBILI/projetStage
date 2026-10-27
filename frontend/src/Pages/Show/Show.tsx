@@ -129,7 +129,7 @@ export default function Show(): JSX.Element {
 
       {playing && (
         <VideoModal
-          url={playing.url}
+          youtubeId={playing.youtubeId}
           title={playing.title}
           startAt={playing.startAt}
           onClose={close}

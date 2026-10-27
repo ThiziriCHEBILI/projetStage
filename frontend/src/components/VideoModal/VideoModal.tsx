@@ -1,15 +1,16 @@
 import type { JSX } from "react";
+import YouTube from "react-youtube";
 import "./VideoModal.scss";
 
 interface VideoModalProps {
-  url: string;
+  youtubeId: string;
   title: string;
   startAt: number;
   onClose: () => void;
 }
 
 export function VideoModal({
-  url,
+  youtubeId,
   title,
   startAt,
   onClose,
@@ -32,12 +33,15 @@ export function VideoModal({
           <i className="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
 
-        <iframe
-          src={`${url}?autoplay=1&start=${startAt}`}
+        <YouTube
+          videoId={youtubeId}
           title={title}
-          className="video-modal__player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
+          iframeClassName="video-modal__player"
+          opts={{
+            width: "100%",
+            height: "100%",
+            playerVars: { autoplay: 1, start: startAt },
+          }}
         />
       </div>
     </div>
