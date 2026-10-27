@@ -10,6 +10,7 @@ use Doctrine\DBAL\Exception as DBALException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use App\Entity\UserProgress;
 use App\Entity\ShowVideo;
 
@@ -17,6 +18,7 @@ use App\Entity\ShowVideo;
 final class UserProgressController extends AbstractController
 {
     private const DAYS_BEFORE_REMOVE = 30;
+    private const FINISHED_PERCENT = 95;
 
     #[Route('', name: 'get_my_progress', methods: ['GET'])]
     public function getMyProgress(EntityManagerInterface $em): JsonResponse
@@ -67,10 +69,22 @@ final class UserProgressController extends AbstractController
                 return $this->json(['message' => (string) $errors], 400);
             }
 
+            $watchedSeconds = min($data['watched_seconds'], $video->getDuration());
+            $isFinished = $watchedSeconds >= $video->getDuration() * self::FINISHED_PERCENT / 100;
+
             $userProgress = $em->getRepository(UserProgress::class)->findOneBy([
                 'user' => $this->getUser(),
                 'show_video' => $video,
             ]);
+
+            if ($isFinished) {
+                if ($userProgress) {
+                    $em->remove($userProgress);
+                    $em->flush();
+                }
+
+                return $this->json(['message' => 'Vidéo terminée'], 200);
+            }
 
             if (!$userProgress) {
                 $userProgress = new UserProgress();
@@ -78,12 +92,15 @@ final class UserProgressController extends AbstractController
                 $userProgress->setShowVideo($video);
             }
 
-            $userProgress->setWatchedSeconds(min($data['watched_seconds'], $video->getDuration()));
+            $userProgress->setWatchedSeconds($watchedSeconds);
             $userProgress->setLastWatched(new \DateTimeImmutable());
 
             $em->persist($userProgress);
             $em->flush();
 
+            return $this->json(['message' => 'Progression enregistrée'], 200);
+        } catch (UniqueConstraintViolationException) {
+            // Deux enregistrements en même temps : l'autre requête a déjà créé la ligne
             return $this->json(['message' => 'Progression enregistrée'], 200);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
