@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import { useState, type JSX } from "react";
 import YouTube, { type YouTubeEvent } from "react-youtube";
 import "./VideoModal.scss";
 
@@ -17,13 +17,23 @@ export function VideoModal({
   onSave,
   onClose,
 }: VideoModalProps): JSX.Element {
+  const [player, setPlayer] = useState<YouTubeEvent["target"] | null>(null);
+
   async function handlePause(event: YouTubeEvent): Promise<void> {
     const seconds = await event.target.getCurrentTime();
     onSave(seconds);
   }
 
+  async function handleClose(): Promise<void> {
+    if (player) {
+      const seconds = await player.getCurrentTime();
+      onSave(seconds);
+    }
+    onClose();
+  }
+
   return (
-    <div className="video-modal" onClick={onClose}>
+    <div className="video-modal" onClick={handleClose}>
       <div
         className="video-modal__content"
         role="dialog"
@@ -34,7 +44,7 @@ export function VideoModal({
         <button
           type="button"
           className="video-modal__close"
-          onClick={onClose}
+          onClick={handleClose}
           aria-label="Fermer la vidéo"
         >
           <i className="fa-solid fa-xmark" aria-hidden="true"></i>
@@ -50,6 +60,7 @@ export function VideoModal({
             playerVars: { autoplay: 1, start: startAt },
           }}
           onPause={handlePause}
+          onReady={(event) => setPlayer(event.target)}
         />
       </div>
     </div>
