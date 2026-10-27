@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\ShowVideo;
+use App\Entity\UserProgress;
 
 #[Route('/videos', name: 'app_video')]
 final class ShowVideoController extends AbstractController
@@ -20,7 +21,21 @@ final class ShowVideoController extends AbstractController
             if (!$video) {
                 return $this->json(['message' => 'Vidéo introuvable'], 404);
             }
-            return $this->json(['url_video' => $video->getUrlVideo()], 200);
+
+            $userProgress = $em->getRepository(UserProgress::class)->findOneBy([
+                'user' => $this->getUser(),
+                'show_video' => $video,
+            ]);
+
+            $watchedSeconds = 0;
+            if ($userProgress) {
+                $watchedSeconds = $userProgress->getWatchedSeconds();
+            }
+
+            return $this->json([
+                'url_video' => $video->getUrlVideo(),
+                'watched_seconds' => $watchedSeconds,
+            ], 200);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
         } catch (\Exception) {
