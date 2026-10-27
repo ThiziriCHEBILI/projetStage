@@ -108,4 +108,32 @@ final class UserProgressController extends AbstractController
             return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
+
+    #[Route('/{id}', name: 'delete_my_progress', methods: ['DELETE'], requirements: ['id' => '\d+'])]
+    public function deleteMyProgress(int $id, EntityManagerInterface $em): JsonResponse
+    {
+        try {
+            $video = $em->getRepository(ShowVideo::class)->find($id);
+            if (!$video) {
+                return $this->json(['message' => 'Vidéo introuvable'], 404);
+            }
+
+            $userProgress = $em->getRepository(UserProgress::class)->findOneBy([
+                'user' => $this->getUser(),
+                'show_video' => $video,
+            ]);
+            if (!$userProgress) {
+                return $this->json(['message' => 'Progression introuvable'], 404);
+            }
+
+            $em->remove($userProgress);
+            $em->flush();
+
+            return $this->json(['message' => 'Progression retirée'], 200);
+        } catch (DBALException) {
+            return $this->json(['message' => 'Une erreur est survenue'], 500);
+        } catch (\Exception) {
+            return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
+        }
+    }
 }
