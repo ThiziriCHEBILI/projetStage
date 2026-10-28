@@ -1,3 +1,4 @@
+// Données reçues de l'API
 export type TypeShow =
   | "sci-fi"
   | "drame"
@@ -64,4 +65,21 @@ export interface UserProgress {
   watched_seconds: number;
   last_watched: string;
   show_video: ProgressVideo;
+}
+
+// Affichage : sections et pages
+export type Info = "type_show" | "saison";
+
+export interface Section {
+  title: string;
+  desc?: string;
+  seeAll?: string;
+  withQuality?: boolean;
+  info?: Info;
+}
+
+export interface CategoryPage {
+  name: string;
+  title: string;
+  desc: string;
 }
