@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { JSX } from "react";
 import { Link } from "react-router";
-import type { Show } from "../../Types";
+import type { Show } from "../../Types/ApiType";
 import { imageUrl } from "../../utilities/imageUrl";
 import "./Hero.scss";
 
