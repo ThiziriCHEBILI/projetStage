@@ -244,4 +244,12 @@ class Show
 
         return $this;
     }
+
+    #[Groups(['show:hero'])]
+    public function getFirstVideoId(): ?int
+    {
+        $firstVideo = $this->showVideos->first();
+
+        return $firstVideo ? $firstVideo->getId() : null;
+    }
 }

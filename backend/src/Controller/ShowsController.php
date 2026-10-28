@@ -34,7 +34,7 @@ final class ShowsController extends AbstractController
                 }
             }
 
-            return $this->json($shows, 200, [], ['groups' => 'show:read']);
+            return $this->json($shows, 200, [], ['groups' => ['show:read', 'show:hero']]);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
         } catch (\Exception) {
