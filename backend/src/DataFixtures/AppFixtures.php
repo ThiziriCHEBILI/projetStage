@@ -185,7 +185,7 @@ class AppFixtures extends Fixture
             $showVideo->setSaisonNumber($showVideoData["saisonNumber"] ?? null);
             $showVideo->setVideoQuality($showVideoData["videoQuality"]);
             $showVideo->setDuration($duration);
-            $showVideo->setShowId($shows[$showVideoData["showIndex"]]);
+            $showVideo->setShow($shows[$showVideoData["showIndex"]]);
             $manager->persist($showVideo);
             $saison = $showVideoData["saisonNumber"] ?? null;
             if ($saison === null) {
@@ -207,7 +207,7 @@ class AppFixtures extends Fixture
                 $video->setEpisodeNumber($episode);
                 $video->setVideoQuality($showVideoData["videoQuality"]);
                 $video->setDuration($duration);
-                $video->setShowId($show);
+                $video->setShow($show);
                 $manager->persist($video);
             }
         }

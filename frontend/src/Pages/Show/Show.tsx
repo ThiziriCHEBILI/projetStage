@@ -16,7 +16,7 @@ export default function Show(): JSX.Element {
   const { data, loading, error } = useFetch<ShowDetail>(`shows/${name}/${id}`);
   const [season, setSeason] = useState(1);
   const [switching, setSwitching] = useState(false);
-  const { playing, play, close, playError } = useVideoPlayer();
+  const { playing, play, close, playError, saveProgress } = useVideoPlayer();
   const { isInList, addToMyList, removeFromMyList, listLoading, listError } =
     useMyList();
 
@@ -128,7 +128,13 @@ export default function Show(): JSX.Element {
       )}
 
       {playing && (
-        <VideoModal url={playing.url} title={playing.title} onClose={close} />
+        <VideoModal
+          youtubeId={playing.youtubeId}
+          title={playing.title}
+          startAt={playing.startAt}
+          onClose={close}
+          onSave={saveProgress}
+        />
       )}
     </section>
   );

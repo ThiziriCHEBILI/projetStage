@@ -3,73 +3,81 @@
 namespace App\Entity;
 
 use App\Repository\UserProgressRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: UserProgressRepository::class)]
 class UserProgress
 {
+    public const DAYS_BEFORE_REMOVE = 30;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTime $remaining_duration = null;
+    #[ORM\Column]
+    #[Groups(['progress:read'])]
+    private ?int $watched_seconds = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTime $last_watched = null;
+    #[ORM\Column]
+    #[Groups(['progress:read'])]
+    private ?\DateTimeImmutable $last_watched = null;
 
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'userProgress')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Users $user = null;
 
     #[ORM\Id]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[Groups(['progress:read'])]
     private ?ShowVideo $show_video = null;
 
 
-
-    public function getRemainingDuration(): ?\DateTime
+    public function __construct()
     {
-        return $this->remaining_duration;
+        $this->last_watched = new \DateTimeImmutable();
     }
 
-    public function setRemainingDuration(\DateTime $remaining_duration): static
+    public function getWatchedSeconds(): ?int
     {
-        $this->remaining_duration = $remaining_duration;
+        return $this->watched_seconds;
+    }
+
+    public function setWatchedSeconds(int $watched_seconds): static
+    {
+        $this->watched_seconds = $watched_seconds;
 
         return $this;
     }
 
-    public function getLastWatched(): ?\DateTime
+    public function getLastWatched(): ?\DateTimeImmutable
     {
         return $this->last_watched;
     }
 
-    public function setLastWatched(\DateTime $last_watched): static
+    public function setLastWatched(\DateTimeImmutable $last_watched): static
     {
         $this->last_watched = $last_watched;
 
         return $this;
     }
 
-    public function getUserId(): ?Users
+    public function getUser(): ?Users
     {
         return $this->user;
     }
 
-    public function setUserId(?Users $user): static
+    public function setUser(?Users $user): static
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getShowVideoId(): ?ShowVideo
+    public function getShowVideo(): ?ShowVideo
     {
         return $this->show_video;
     }
 
-    public function setShowVideoId(?ShowVideo $show_video): static
+    public function setShowVideo(?ShowVideo $show_video): static
     {
         $this->show_video = $show_video;
 

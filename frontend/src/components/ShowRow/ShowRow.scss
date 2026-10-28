@@ -46,12 +46,12 @@
 
   &__cards {
     display: flex;
-    gap: 16px;
+    gap: 18px;
     overflow: hidden;
     padding: 12px 8px;
   }
 
-    &__arrow {
+  &__arrow {
     position: absolute;
     top: 34%;
     transform: translateY(-50%);
@@ -68,5 +68,4 @@
       right: 12px;
     }
   }
-  }
-
+}

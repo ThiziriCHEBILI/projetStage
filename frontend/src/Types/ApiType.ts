@@ -55,3 +55,13 @@ export interface User {
   email: string;
   date_registration: string;
 }
+
+export interface ProgressVideo extends Omit<ShowVideo, "video_quality"> {
+  show: Show;
+}
+
+export interface UserProgress {
+  watched_seconds: number;
+  last_watched: string;
+  show_video: ProgressVideo;
+}

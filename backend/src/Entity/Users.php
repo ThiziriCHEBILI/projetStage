@@ -195,7 +195,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->userProgress->contains($userProgress)) {
             $this->userProgress->add($userProgress);
-            $userProgress->setUserId($this);
+            $userProgress->setUser($this);
         }
 
         return $this;
@@ -205,8 +205,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->userProgress->removeElement($userProgress)) {
             // set the owning side to null (unless already changed)
-            if ($userProgress->getUserId() === $this) {
-                $userProgress->setUserId(null);
+            if ($userProgress->getUser() === $this) {
+                $userProgress->setUser(null);
             }
         }
 

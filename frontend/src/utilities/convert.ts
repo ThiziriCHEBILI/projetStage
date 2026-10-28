@@ -53,14 +53,8 @@ export function isRecent(date: string, days: number): boolean {
   return new Date(date) > limit;
 }
 
-export function toEmbedUrl(url: string): string {
-  const videoId = new URL(url).searchParams.get("v");
-
-  if (!videoId) {
-    return url;
-  }
-
-  return "https://www.youtube.com/embed/" + videoId;
+export function toVideoId(url: string): string | null {
+  return new URL(url).searchParams.get("v");
 }
 
 export function loginUrl(path: string): string {
