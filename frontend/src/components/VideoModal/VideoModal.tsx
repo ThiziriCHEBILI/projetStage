@@ -1,5 +1,6 @@
 import { useState, type JSX } from "react";
 import YouTube, { type YouTubeEvent } from "react-youtube";
+import { Modal } from "../Modal/Modal";
 import "./VideoModal.scss";
 
 interface VideoModalProps {
@@ -33,37 +34,20 @@ export function VideoModal({
   }
 
   return (
-    <div className="video-modal" onClick={handleClose}>
-      <div
-        className="video-modal__content"
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-        onClick={(event) => event.stopPropagation()}
-      >
-        <button
-          type="button"
-          className="video-modal__close"
-          onClick={handleClose}
-          aria-label="Fermer la vidéo"
-        >
-          <i className="fa-solid fa-xmark" aria-hidden="true"></i>
-        </button>
-
-        <YouTube
-          videoId={youtubeId}
-          title={title}
-          iframeClassName="video-modal__player"
-          opts={{
-            width: "100%",
-            height: "100%",
-            playerVars: { autoplay: 1, start: startAt },
-          }}
-          onPause={handlePause}
-          onReady={(event) => setPlayer(event.target)}
-          onEnd={async (event) => onSave(await event.target.getDuration())}
-        />
-      </div>
-    </div>
+    <Modal title={title} boxType="video" onClose={handleClose}>
+      <YouTube
+        videoId={youtubeId}
+        title={title}
+        iframeClassName="video-modal__player"
+        opts={{
+          width: "100%",
+          height: "100%",
+          playerVars: { autoplay: 1, start: startAt },
+        }}
+        onPause={handlePause}
+        onReady={(event) => setPlayer(event.target)}
+        onEnd={async (event) => onSave(await event.target.getDuration())}
+      />
+    </Modal>
   );
 }
