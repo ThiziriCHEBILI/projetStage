@@ -1,7 +1,6 @@
 import type { JSX } from "react";
 import { Link } from "react-router";
-import type { Show } from "../../Types/ApiType";
-import type { Info } from "../../Types";
+import type { Show, Info } from "../../Types/ApiType";
 import { formatSeasons } from "../../utilities/convert";
 import { API_URL } from "../../utilities/fetchApi";
 import "./ShowCard.scss";
