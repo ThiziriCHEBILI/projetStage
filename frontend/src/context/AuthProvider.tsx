@@ -1,27 +1,12 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { JSX, ReactNode } from "react";
 import { fetchAPI } from "../utilities/fetchApi";
 import type { User } from "../Types";
-
-interface AuthContextType {
-  token: string | undefined;
-  user: User | null;
-  loadingUser: boolean;
-  setToken: (token: string | undefined) => void;
-  logout: () => void;
-}
+import { AuthContext } from "./AuthContext";
 
 interface AuthProviderProps {
   children: ReactNode;
 }
-
-const AuthContext = createContext<AuthContextType>({
-  token: undefined,
-  user: null,
-  loadingUser: false,
-  setToken: () => {},
-  logout: () => {},
-});
 
 export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [token, setToken] = useState<string | undefined>(
