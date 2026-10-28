@@ -5,20 +5,35 @@ import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
 import { TopCard } from "../../components/TopCard/TopCard";
 import { useFetch } from "../../utilities/useFetch";
-import type { Show, PaginatedShows } from "../../Types/ApiType";
-import { trendingSection, seriesSection } from "../../data/data";
+import type { Show, PaginatedShows, Section } from "../../Types";
 import { useProgress } from "../../utilities/useProgress";
 import { useVideoPlayer } from "../../utilities/useVideoPlayer";
 import { VideoModal } from "../../components/VideoModal/VideoModal";
 import { useMyList } from "../../utilities/useMyList";
-import "./Home.scss";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+
+const trendingSection: Section = {
+  title: "Tendances actuelles",
+  desc: "Les titres les plus regardés cette semaine en France",
+  seeAll: "/shows/tendances",
+  withQuality: true,
+  info: "type_show",
+};
+
+const seriesSection: Section = {
+  title: "Séries à dévorer",
+  desc: "Saisons complètes, nouveaux épisodes chaque vendredi",
+  seeAll: "/shows/series",
+  withQuality: true,
+  info: "saison",
+};
 
 export default function Home(): JSX.Element {
   const { data: heroShows } = useFetch<Show[]>("shows/a-la-une");
   const { data: trendingShows } =
     useFetch<PaginatedShows>("shows/films?page=1");
   const { progressList, removeProgress } = useProgress();
-  const { isInList, addToMyList, removeFromMyList } = useMyList();
+  const { isInList, addToMyList, removeFromMyList, listError } = useMyList();
   const { playing, play, close, playError, saveProgress } = useVideoPlayer();
   const { data: topShows } = useFetch<PaginatedShows>(
     "shows/dessins-animes?page=1",
@@ -32,6 +47,8 @@ export default function Home(): JSX.Element {
       addToMyList(show);
     }
   }
+
+  const errorMessage = playError ?? listError;
 
   return (
     <>
@@ -54,11 +71,7 @@ export default function Home(): JSX.Element {
         />
       )}
 
-      {playError && (
-        <p className="home__error" role="alert">
-          {playError}
-        </p>
-      )}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
 
       {trendingShows && (
         <ShowRow

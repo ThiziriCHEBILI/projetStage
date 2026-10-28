@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { JSX, ReactNode } from "react";
 import { fetchAPI } from "../utilities/fetchApi";
-import type { User } from "../Types/ApiType";
+import type { User } from "../Types";
 
 interface AuthContextType {
   token: string | undefined;
@@ -72,7 +72,9 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ token, user, loadingUser, setToken, logout }}>
+    <AuthContext.Provider
+      value={{ token, user, loadingUser, setToken, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

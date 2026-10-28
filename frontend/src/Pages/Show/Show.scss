@@ -44,18 +44,7 @@
       animation-delay: 0.4s;
     }
   }
-  &__error {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    margin: 0;
-    padding: 12px 20px;
-    border-radius: 8px;
-    background-color: #e50914;
-    color: #fff;
-  }
+
   &__seasons {
     margin-bottom: 28px;
     padding: 0 $container-padding;

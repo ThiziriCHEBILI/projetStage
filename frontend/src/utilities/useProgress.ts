@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { fetchAPIWithStatus } from "./fetchApi";
-import type { UserProgress } from "../Types/ApiType";
+import type { UserProgress } from "../Types";
 
 export function useProgress() {
   const [progressList, setProgressList] = useState<UserProgress[]>([]);

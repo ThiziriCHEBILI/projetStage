@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { fetchAPIWithStatus } from "./fetchApi";
-import type { Show } from "../Types/ApiType";
+import type { Show } from "../Types";
 import { useLocation, useNavigate } from "react-router";
 import { loginUrl } from "./convert";
 

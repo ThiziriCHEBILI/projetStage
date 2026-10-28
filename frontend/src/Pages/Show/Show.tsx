@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { useState } from "react";
 import { useParams } from "react-router";
-import type { ShowDetail } from "../../Types/ApiType";
+import type { ShowDetail } from "../../Types";
 import { useFetch } from "../../utilities/useFetch";
 import { VideoModal } from "../../components/VideoModal/VideoModal";
 import { useVideoPlayer } from "../../utilities/useVideoPlayer";
@@ -9,6 +9,7 @@ import { EpisodeCard } from "../../components/EpisodeCard/EpisodeCard";
 import { SeasonButtons } from "../../components/SeasonButtons/SeasonButtons";
 import { ShowBanner } from "../../components/ShowBanner/ShowBanner";
 import { useMyList } from "../../utilities/useMyList";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import "./Show.scss";
 
 export default function Show(): JSX.Element {
@@ -71,11 +72,7 @@ export default function Show(): JSX.Element {
         onListClick={handleListClick}
       />
 
-      {errorMessage && (
-        <p className="show__error" role="alert">
-          {errorMessage}
-        </p>
-      )}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
 
       {seasons.length > 0 && (
         <div className="show__seasons">
