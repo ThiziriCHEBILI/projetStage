@@ -2,7 +2,7 @@ import type { JSX } from "react";
 import { Link } from "react-router";
 import type { Show, Info } from "../../Types";
 import { formatSeasons } from "../../utilities/convert";
-import { API_URL } from "../../utilities/fetchApi";
+import { imageUrl } from "../../utilities/imageUrl";
 import "./ShowCard.scss";
 
 interface ShowCardProps {
@@ -21,9 +21,7 @@ export function ShowCard({
   if (info === "saison" && show.season_count !== null) {
     infoText = formatSeasons(show.season_count);
   }
-  const imageUrl = show.category_show
-    ? `${API_URL}/images/${show.category_show.name}/${show.image_show}`
-    : show.image_show;
+  const image = imageUrl(show, show.image_show);
 
   return (
     <Link
@@ -31,7 +29,7 @@ export function ShowCard({
       className="card__link"
     >
       <article className="card">
-        <img src={imageUrl} alt="" className="card__image" loading="lazy" />
+        <img src={image} alt="" className="card__image" loading="lazy" />
 
         {withQuality && <span className="card__quality">{show.quality}</span>}
 
