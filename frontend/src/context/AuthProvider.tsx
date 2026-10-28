@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { JSX, ReactNode } from "react";
 import { fetchAPI } from "../utilities/fetchApi";
 import type { User } from "../Types";
@@ -63,8 +63,4 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
 }
