@@ -40,6 +40,9 @@ export interface ShowVideo {
 export interface ShowDetail extends Show {
   showVideos: ShowVideo[];
 }
+export interface HeroShow extends Show {
+  firstVideoId: number | null;
+}
 
 export interface PaginatedShows {
   shows: Show[];
