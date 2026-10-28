@@ -9,6 +9,7 @@ import { EpisodeCard } from "../../components/EpisodeCard/EpisodeCard";
 import { SeasonButtons } from "../../components/SeasonButtons/SeasonButtons";
 import { ShowBanner } from "../../components/ShowBanner/ShowBanner";
 import { useMyList } from "../../utilities/useMyList";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import "./Show.scss";
 
 export default function Show(): JSX.Element {
@@ -71,11 +72,7 @@ export default function Show(): JSX.Element {
         onListClick={handleListClick}
       />
 
-      {errorMessage && (
-        <p className="show__error" role="alert">
-          {errorMessage}
-        </p>
-      )}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
 
       {seasons.length > 0 && (
         <div className="show__seasons">

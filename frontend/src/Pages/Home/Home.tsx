@@ -10,7 +10,7 @@ import { useProgress } from "../../utilities/useProgress";
 import { useVideoPlayer } from "../../utilities/useVideoPlayer";
 import { VideoModal } from "../../components/VideoModal/VideoModal";
 import { useMyList } from "../../utilities/useMyList";
-import "./Home.scss";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 const trendingSection: Section = {
   title: "Tendances actuelles",
@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
   const { data: trendingShows } =
     useFetch<PaginatedShows>("shows/films?page=1");
   const { progressList, removeProgress } = useProgress();
-  const { isInList, addToMyList, removeFromMyList } = useMyList();
+  const { isInList, addToMyList, removeFromMyList, listError } = useMyList();
   const { playing, play, close, playError, saveProgress } = useVideoPlayer();
   const { data: topShows } = useFetch<PaginatedShows>(
     "shows/dessins-animes?page=1",
@@ -47,6 +47,8 @@ export default function Home(): JSX.Element {
       addToMyList(show);
     }
   }
+
+  const errorMessage = playError ?? listError;
 
   return (
     <>
@@ -69,11 +71,7 @@ export default function Home(): JSX.Element {
         />
       )}
 
-      {playError && (
-        <p className="home__error" role="alert">
-          {playError}
-        </p>
-      )}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
 
       {trendingShows && (
         <ShowRow
