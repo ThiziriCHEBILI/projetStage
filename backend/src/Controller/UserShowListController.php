@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Exception as DBALException;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use App\Entity\UserShowList;
 use App\Entity\Show;
 
@@ -50,6 +51,7 @@ final class UserShowListController extends AbstractController
                 'user' => $this->getUser(),
                 'show' => $show,
             ]);
+
             if ($alreadyAdded) {
                 return $this->json(['message' => 'Ce show est déjà dans votre liste'], 409);
             }
@@ -61,6 +63,9 @@ final class UserShowListController extends AbstractController
             $em->flush();
 
             return $this->json(['message' => 'Show ajouté à votre liste'], 201);
+        } catch (UniqueConstraintViolationException) {
+            // Deux ajouts en même temps : l'autre requête a déjà ajouté le show
+            return $this->json(['message' => 'Ce show est déjà dans votre liste'], 409);
         } catch (DBALException) {
             return $this->json(['message' => 'Une erreur est survenue'], 500);
         } catch (\Exception) {
