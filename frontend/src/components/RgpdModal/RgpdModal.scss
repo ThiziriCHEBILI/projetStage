@@ -1,40 +1,6 @@
 @use "../../index" as *;
 
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  padding: 16px;
-  background-color: transparent;
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-.modal {
-  position: relative;
-  max-width: 604px;
-  padding: 20px 28px;
-  border-radius: 12px;
-  background-color: $color-background-bar;
-  border: 1px solid $color-accent-hover;
-  margin: auto;
-
-  &__close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    font-size: 18px;
-    color: $color-text-muted;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: $color-text;
-    }
-  }
-
+.rgpd {
   &__title {
     font-size: 22px;
     font-weight: bold;

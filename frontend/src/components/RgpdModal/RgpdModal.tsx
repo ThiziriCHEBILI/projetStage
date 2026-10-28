@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import { Modal } from "../Modal/Modal";
 import "./RgpdModal.scss";
 
 interface RgpdInfo {
@@ -37,56 +38,35 @@ const infos: RgpdInfo[] = [
 
 export function RgpdModal({ onClose, onConfirm }: RgpdModalProps): JSX.Element {
   return (
-    <div
-      className="backdrop"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div
-        className="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Avant de créer votre compte"
-      >
-        <button
-          type="button"
-          className="modal__close"
-          aria-label="Fermer"
-          onClick={onClose}
-        >
-          <i className="fa-solid fa-xmark" aria-hidden="true"></i>
+    <Modal title="Avant de créer votre compte" boxType="card" onClose={onClose}>
+      <h2 className="rgpd__title">Avant de créer votre compte</h2>
+      <p className="rgpd__subtitle">Vos données et vos droits</p>
+
+      <ul className="rgpd__list">
+        {infos.map((info) => (
+          <li key={info.title} className="rgpd__item">
+            <i className={info.icon} aria-hidden="true"></i>
+            <div>
+              <h3>{info.title}</h3>
+              <p>{info.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <p className="rgpd__consent">
+        En continuant, vous reconnaissez avoir pris connaissance de ces
+        informations.
+      </p>
+
+      <div className="rgpd__actions">
+        <button type="button" className="rgpd__confirm" onClick={onConfirm}>
+          Continuer l'inscription
         </button>
-
-        <h2 className="modal__title">Avant de créer votre compte</h2>
-        <p className="modal__subtitle">Vos données et vos droits</p>
-
-        <ul className="modal__list">
-          {infos.map((info) => (
-            <li key={info.title} className="modal__item">
-              <i className={info.icon} aria-hidden="true"></i>
-              <div>
-                <h3>{info.title}</h3>
-                <p>{info.text}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <p className="modal__consent">
-          En continuant, vous reconnaissez avoir pris connaissance de ces
-          informations.
-        </p>
-
-        <div className="modal__actions">
-          <button type="button" className="modal__confirm" onClick={onConfirm}>
-            Continuer l'inscription
-          </button>
-          <button type="button" className="modal__cancel" onClick={onClose}>
-            Annuler
-          </button>
-        </div>
+        <button type="button" className="rgpd__cancel" onClick={onClose}>
+          Annuler
+        </button>
       </div>
-    </div>
+    </Modal>
   );
 }
