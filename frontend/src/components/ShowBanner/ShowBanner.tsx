@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { imageUrl } from "../../utilities/imageUrl";
 import { formatSeasons } from "../../utilities/convert";
-import type { ShowDetail } from "../../Types/ApiType";
+import type { ShowDetail } from "../../Types";
 import "./ShowBanner.scss";
 
 interface ShowBannerProps {

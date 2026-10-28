@@ -1,4 +1,4 @@
-import type { CategoryPage } from "../Types/ApiType";
+import type { CategoryPage } from "../Types";
 
 export const showTypes: string[] = [
   "sci-fi",

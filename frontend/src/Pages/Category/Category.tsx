@@ -1,5 +1,5 @@
 import { useState, type JSX } from "react";
-import type { PaginatedShows, CategoryPage } from "../../Types/ApiType";
+import type { PaginatedShows, CategoryPage } from "../../Types";
 import { useFetch } from "../../utilities/useFetch";
 import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { TypeFilters } from "../../components/TypeFilters/TypeFilters";

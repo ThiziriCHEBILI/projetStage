@@ -1,6 +1,6 @@
 import { useState, type JSX } from "react";
 import { Link } from "react-router";
-import type { UserProgress } from "../../Types/ApiType";
+import type { UserProgress } from "../../Types";
 import { formatEpisode, formatSeconds } from "../../utilities/convert";
 import { imageUrl } from "../../utilities/imageUrl";
 import "./ProgressCard.scss";

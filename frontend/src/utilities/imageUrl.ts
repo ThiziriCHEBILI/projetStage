@@ -1,4 +1,4 @@
-import type { Show } from "../Types/ApiType";
+import type { Show } from "../Types";
 import { API_URL } from "./fetchApi";
 
 export function imageUrl(show: Show, file: string): string {

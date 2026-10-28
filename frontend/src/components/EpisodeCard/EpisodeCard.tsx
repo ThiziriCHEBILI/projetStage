@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { formatSeconds } from "../../utilities/convert";
 import { imageUrl } from "../../utilities/imageUrl";
-import type { ShowVideo, ShowDetail } from "../../Types/ApiType";
+import type { ShowVideo, ShowDetail } from "../../Types";
 import "./EpisodeCard.scss";
 
 interface EpisodeCardProps {

@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { useState } from "react";
 import { useParams } from "react-router";
-import type { ShowDetail } from "../../Types/ApiType";
+import type { ShowDetail } from "../../Types";
 import { useFetch } from "../../utilities/useFetch";
 import { VideoModal } from "../../components/VideoModal/VideoModal";
 import { useVideoPlayer } from "../../utilities/useVideoPlayer";

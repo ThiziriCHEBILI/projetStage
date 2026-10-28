@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 import { Link } from "react-router";
-import type { Show } from "../../Types/ApiType";
+import type { Show } from "../../Types";
 import { imageUrl } from "../../utilities/imageUrl";
 import "./TopCard.scss";
 

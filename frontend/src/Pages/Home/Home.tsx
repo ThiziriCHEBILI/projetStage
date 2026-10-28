@@ -5,7 +5,7 @@ import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
 import { TopCard } from "../../components/TopCard/TopCard";
 import { useFetch } from "../../utilities/useFetch";
-import type { Show, PaginatedShows, Section } from "../../Types/ApiType";
+import type { Show, PaginatedShows, Section } from "../../Types";
 import { useProgress } from "../../utilities/useProgress";
 import { useVideoPlayer } from "../../utilities/useVideoPlayer";
 import { VideoModal } from "../../components/VideoModal/VideoModal";
