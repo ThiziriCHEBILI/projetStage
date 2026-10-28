@@ -1,38 +1,51 @@
-import { useState } from "react";
-import type { JSX } from "react";
+import { useState, type JSX } from "react";
 import { Link } from "react-router";
-import type { Progress } from "../../Types";
-import {
-  formatEpisode,
-  formatDuration,
-  watchedPercent,
-} from "../../utilities/convert";
+import type { UserProgress } from "../../Types/ApiType";
+import { formatEpisode, formatSeconds } from "../../utilities/convert";
+import { imageUrl } from "../../utilities/imageUrl";
 import "./ProgressCard.scss";
 
 interface ProgressCardProps {
-  progress: Progress;
-  onRemove: (id: number) => void;
+  progress: UserProgress;
+  inMyList: boolean;
+  onPlay: (videoId: number, title: string) => void;
+  onListClick: () => void;
+  onRemove: (videoId: number) => void;
 }
 
 export function ProgressCard({
   progress,
+  inMyList,
+  onPlay,
+  onListClick,
   onRemove,
 }: ProgressCardProps): JSX.Element {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const show = progress.show;
-  const video = progress.video;
-  const percent = watchedPercent(progress.remainingDuration, video.duration);
+  const video = progress.show_video;
+  const show = video.show;
+  const percent = (progress.watched_seconds / video.duration) * 100;
+  const remaining = video.duration - progress.watched_seconds;
+  const image = imageUrl(show, video.image_video);
+
+  let videoInfo = "Film | ";
+  if (video.saison_number !== null && video.episode_number !== null) {
+    videoInfo =
+      formatEpisode(video.saison_number, video.episode_number) + " | ";
+  } else if (video.saison_number !== null) {
+    videoInfo = "Saison " + video.saison_number + " | ";
+  }
 
   return (
     <article className="progress">
       <div className="progress__visual">
-        <img src={video.image} alt="" className="progress__image" />
+        <img src={image} alt="" className="progress__image" />
 
         <button
           type="button"
           className="progress__play"
           aria-label={"Reprendre " + show.title}
+          onClick={() => onPlay(video.id, show.title)}
         >
           <i className="fa-solid fa-play" aria-hidden="true"></i>
         </button>
@@ -68,8 +81,12 @@ export function ProgressCard({
 
               <ul className="progress__options">
                 <li>
-                  <button type="button" className="progress__option">
-                    Ajouter à Ma Liste
+                  <button
+                    type="button"
+                    className="progress__option"
+                    onClick={onListClick}
+                  >
+                    {inMyList ? "Retirer de Ma Liste" : "Ajouter à Ma Liste"}
                   </button>
                 </li>
                 <li>
@@ -78,11 +95,14 @@ export function ProgressCard({
                     className="progress__option"
                     onClick={() => onRemove(video.id)}
                   >
-                    Retirer de la liste
+                    Masquer cette vidéo
                   </button>
                 </li>
                 <li>
-                  <Link to={"/show/" + show.id} className="progress__option">
+                  <Link
+                    to={`/shows/${show.category_show.name}/${show.id}`}
+                    className="progress__option"
+                  >
                     Plus d'infos sur le titre
                   </Link>
                 </li>
@@ -93,9 +113,8 @@ export function ProgressCard({
       </div>
 
       <p className="progress__info">
-        {formatEpisode(video.saisonNumber, video.episodeNumber)} —{" "}
-        {formatDuration(video.duration)} ·{" "}
-        {formatDuration(progress.remainingDuration)} restants
+        {videoInfo}
+        {formatSeconds(video.duration)} · {formatSeconds(remaining)} restants
       </p>
     </article>
   );
