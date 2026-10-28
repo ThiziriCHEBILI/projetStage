@@ -37,6 +37,8 @@ export function Hero({
     return () => clearInterval(timer);
   }, [slide, shows.length]);
 
+  const inMyList = isInList(show.id);
+
   function handleWatch(): void {
     if (show.firstVideoId !== null) {
       onPlay(show.firstVideoId, show.title);
@@ -91,9 +93,18 @@ export function Hero({
           <button
             type="button"
             className="hero__list"
-            aria-label={`Ajouter ${show.title} à ma liste`}
+            aria-label={
+              inMyList
+                ? `Retirer ${show.title} de ma liste`
+                : `Ajouter ${show.title} à ma liste`
+            }
+            onClick={() => onListClick(show)}
           >
-            <i className="fa-solid fa-plus" aria-hidden="true"></i> Ma Liste
+            <i
+              className={inMyList ? "fa-solid fa-check" : "fa-solid fa-plus"}
+              aria-hidden="true"
+            ></i>{" "}
+            Ma Liste
           </button>
         </div>
       </div>
