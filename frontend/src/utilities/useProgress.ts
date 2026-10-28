@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { fetchAPIWithStatus } from "./fetchApi";
 import type { UserProgress } from "../Types";
 

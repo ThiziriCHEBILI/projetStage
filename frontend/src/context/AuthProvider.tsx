@@ -1,27 +1,12 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { JSX, ReactNode } from "react";
 import { fetchAPI } from "../utilities/fetchApi";
 import type { User } from "../Types";
-
-interface AuthContextType {
-  token: string | undefined;
-  user: User | null;
-  loadingUser: boolean;
-  setToken: (token: string | undefined) => void;
-  logout: () => void;
-}
+import { AuthContext } from "./AuthContext";
 
 interface AuthProviderProps {
   children: ReactNode;
 }
-
-const AuthContext = createContext<AuthContextType>({
-  token: undefined,
-  user: null,
-  loadingUser: false,
-  setToken: () => {},
-  logout: () => {},
-});
 
 export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [token, setToken] = useState<string | undefined>(
@@ -30,9 +15,13 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
       undefined,
   );
 
-  const [user, setUser] = useState<User | null>(null);
-  const [loadingUser, setLoadingUser] = useState(token !== undefined);
+  const [loadedUser, setLoadedUser] = useState<{
+    token: string;
+    user: User | null;
+  } | null>(null);
 
+  const user = token && loadedUser?.token === token ? loadedUser.user : null;
+  const loadingUser = Boolean(token) && loadedUser?.token !== token;
   function logout(): void {
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
@@ -41,13 +30,10 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 
   useEffect(() => {
     if (!token) {
-      setUser(null);
-      setLoadingUser(false);
       return;
     }
 
     let ignore = false;
-    setLoadingUser(true);
 
     fetchAPI<User | { message: string }>(
       "user/me",
@@ -57,13 +43,15 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     ).then((response) => {
       if (ignore) return;
 
-      if (response && "id" in response) {
-        setUser(response);
-      } else if (response && "message" in response) {
+      if (response && "message" in response) {
         logout();
+        return;
       }
 
-      setLoadingUser(false);
+      setLoadedUser({
+        token,
+        user: response && "id" in response ? response : null,
+      });
     });
 
     return () => {
@@ -78,8 +66,4 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
 }
