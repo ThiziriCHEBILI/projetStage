@@ -15,9 +15,13 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
       undefined,
   );
 
-  const [user, setUser] = useState<User | null>(null);
-  const [loadingUser, setLoadingUser] = useState(token !== undefined);
+  const [loadedUser, setLoadedUser] = useState<{
+    token: string;
+    user: User | null;
+  } | null>(null);
 
+  const user = token && loadedUser?.token === token ? loadedUser.user : null;
+  const loadingUser = Boolean(token) && loadedUser?.token !== token;
   function logout(): void {
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
@@ -26,13 +30,10 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 
   useEffect(() => {
     if (!token) {
-      setUser(null);
-      setLoadingUser(false);
       return;
     }
 
     let ignore = false;
-    setLoadingUser(true);
 
     fetchAPI<User | { message: string }>(
       "user/me",
@@ -42,13 +43,15 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     ).then((response) => {
       if (ignore) return;
 
-      if (response && "id" in response) {
-        setUser(response);
-      } else if (response && "message" in response) {
+      if (response && "message" in response) {
         logout();
+        return;
       }
 
-      setLoadingUser(false);
+      setLoadedUser({
+        token,
+        user: response && "id" in response ? response : null,
+      });
     });
 
     return () => {
