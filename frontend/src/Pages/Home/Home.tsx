@@ -5,7 +5,7 @@ import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { ProgressCard } from "../../components/ProgressCard/ProgressCard";
 import { TopCard } from "../../components/TopCard/TopCard";
 import { useFetch } from "../../utilities/useFetch";
-import type { Show, PaginatedShows, Section } from "../../Types";
+import type { Show, PaginatedShows, Section, HeroShow } from "../../Types";
 import { useProgress } from "../../utilities/useProgress";
 import { useVideoPlayer } from "../../utilities/useVideoPlayer";
 import { VideoModal } from "../../components/VideoModal/VideoModal";
@@ -29,7 +29,7 @@ const seriesSection: Section = {
 };
 
 export default function Home(): JSX.Element {
-  const { data: heroShows } = useFetch<Show[]>("shows/a-la-une");
+  const { data: heroShows } = useFetch<HeroShow[]>("shows/a-la-une");
   const { data: trendingShows } =
     useFetch<PaginatedShows>("shows/films?page=1");
   const { progressList, removeProgress } = useProgress();
@@ -52,7 +52,14 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      {heroShows && heroShows.length > 0 && <Hero shows={heroShows} />}
+      {heroShows && heroShows.length > 0 && (
+        <Hero
+          shows={heroShows}
+          onPlay={play}
+          isInList={isInList}
+          onListClick={handleListClick}
+        />
+      )}
 
       {progressList.length > 0 && (
         <ShowRow

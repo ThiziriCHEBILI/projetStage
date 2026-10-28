@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react";
 import type { JSX } from "react";
-import { Link } from "react-router";
-import type { Show } from "../../Types";
+import type { Show, HeroShow } from "../../Types";
 import { imageUrl } from "../../utilities/imageUrl";
 import "./Hero.scss";
 
 interface HeroProps {
-  shows: Show[];
+  shows: HeroShow[];
+  onPlay: (videoId: number, title: string) => void;
+  isInList: (showId: number) => boolean;
+  onListClick: (show: Show) => void;
 }
 
-export function Hero({ shows }: HeroProps): JSX.Element {
+export function Hero({
+  shows,
+  onPlay,
+  isInList,
+  onListClick,
+}: HeroProps): JSX.Element {
   const [slide, setSlide] = useState(0);
 
   const show = shows[slide];
@@ -29,6 +36,12 @@ export function Hero({ shows }: HeroProps): JSX.Element {
 
     return () => clearInterval(timer);
   }, [slide, shows.length]);
+
+  function handleWatch(): void {
+    if (show.firstVideoId !== null) {
+      onPlay(show.firstVideoId, show.title);
+    }
+  }
 
   return (
     <section className="hero">
@@ -65,13 +78,15 @@ export function Hero({ shows }: HeroProps): JSX.Element {
         <p className="hero__desc">{show.description}</p>
 
         <div className="hero__actions">
-          <Link
-            to="/"
+          <button
+            type="button"
             className="hero__watch"
             aria-label={`Regarder ${show.title}`}
+            disabled={show.firstVideoId === null}
+            onClick={handleWatch}
           >
             <i className="fa-solid fa-play" aria-hidden="true"></i> Regarder
-          </Link>
+          </button>
 
           <button
             type="button"
