@@ -2,7 +2,7 @@ import type { JSX } from "react";
 import { useMyList } from "../../utilities/useMyList";
 import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { Navigate, useLocation } from "react-router";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthProvider";
 import { loginUrl } from "../../utilities/convert";
 import "./MyList.scss";
 

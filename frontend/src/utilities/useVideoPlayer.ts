@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthProvider";
 import { useNavigate, useLocation } from "react-router";
 import { fetchAPI, fetchAPIWithStatus } from "./fetchApi";
 import { toVideoId, loginUrl } from "./convert";

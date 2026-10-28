@@ -2,7 +2,7 @@ import { type JSX, type SubmitEvent, startTransition } from "react";
 import { Link, useNavigate } from "react-router";
 import { Nav } from "../Nav/Nav";
 import logo from "../../assets/logo_NOVA.png";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthProvider";
 import "./Header.scss";
 
 export function Header(): JSX.Element {

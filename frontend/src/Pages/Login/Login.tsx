@@ -3,7 +3,7 @@ import type { JSX, FormEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { RgpdModal } from "../../components/RgpdModal/RgpdModal";
 import { fetchAPI } from "../../utilities/fetchApi";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthProvider";
 import "./Login.scss";
 
 function getSafeRedirect(redirect: string | null): string {

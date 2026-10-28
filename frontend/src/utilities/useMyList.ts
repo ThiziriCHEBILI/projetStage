@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthProvider";
 import { fetchAPIWithStatus } from "./fetchApi";
 import type { Show } from "../Types";
 import { useLocation, useNavigate } from "react-router";
