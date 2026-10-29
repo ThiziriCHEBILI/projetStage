@@ -49,11 +49,6 @@ export default function Login(): JSX.Element {
     );
 
     if (response?.token) {
-      if (remember) {
-        localStorage.setItem("token", response.token);
-      } else {
-        sessionStorage.setItem("token", response.token);
-      }
       setToken(response.token);
       navigate(redirectedPage);
     } else {
