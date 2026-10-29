@@ -37,6 +37,7 @@ export async function fetchAPIWithStatus<T>(
   try {
     const response = await fetch(`${API_URL}/${endpoint}`, {
       method,
+      credentials: "include",
       headers,
       body: data ? JSON.stringify(data) : undefined,
     });
