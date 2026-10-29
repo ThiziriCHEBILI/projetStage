@@ -61,6 +61,15 @@ final class AuthController extends AbstractController
         }
     }
 
+    #[Route('/logout', name: 'logout', methods: ['POST'])]
+    public function logout(): JsonResponse
+    {
+        $response = $this->json(['message' => 'Déconnexion réussie'], 200);
+        $response->headers->clearCookie('BEARER', '/');
+
+        return $response;
+    }
+
     #[Route('/login', name: '_login', methods: ['POST'])]
     public function login(): JsonResponse
     {
