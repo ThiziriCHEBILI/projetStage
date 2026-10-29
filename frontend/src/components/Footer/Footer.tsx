@@ -18,7 +18,9 @@ export function Footer(): JSX.Element {
         </div>
         <div className="footer__links">
           <Link to="/">Confidentialité</Link>
-          <Link to="/">Mentions Légales</Link>
+          <Link to="/mentions-legales" onClick={() => window.scrollTo(0, 0)}>
+            Mentions Légales
+          </Link>
           <Link to="/">Contact</Link>
         </div>
       </div>
