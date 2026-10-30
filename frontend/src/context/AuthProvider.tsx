@@ -14,7 +14,6 @@ async function getCurrentUser(): Promise<User | null> {
 }
 
 export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
-  const [token, setToken] = useState<string | undefined>(undefined);
   const [user, setUser] = useState<User | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
@@ -25,7 +24,6 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   async function logout(): Promise<void> {
     await fetchAPI("auth/logout", "POST");
     setUser(null);
-    setToken(undefined);
   }
 
   useEffect(() => {
@@ -36,9 +34,7 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   }, []);
 
   return (
-    <AuthContext.Provider
-      value={{ token, user, loadingUser, setToken, refreshUser, logout }}
-    >
+    <AuthContext.Provider value={{ user, loadingUser, refreshUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
