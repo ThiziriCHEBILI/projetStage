@@ -28,7 +28,7 @@ export default function Login(): JSX.Element {
   const [showRgpd, setShowRgpd] = useState(false);
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState("");
-  const { setToken } = useAuth();
+  const { setToken, refreshUser } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectedPage = getSafeRedirect(searchParams.get("redirect"));
@@ -50,6 +50,7 @@ export default function Login(): JSX.Element {
 
     if (response?.token) {
       setToken(response.token);
+      await refreshUser();
       navigate(redirectedPage);
     } else {
       setError("Email ou mot de passe incorrect.");

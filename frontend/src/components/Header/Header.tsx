@@ -6,7 +6,7 @@ import { useAuth } from "../../context/useAuth";
 import "./Header.scss";
 
 export function Header(): JSX.Element {
-  const { token, user, logout } = useAuth();
+  const { user, loadingUser, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e: SubmitEvent) => {
@@ -47,33 +47,32 @@ export function Header(): JSX.Element {
           />
         </form>
 
-        {token ? (
-          <div className="header__account">
-            <i
-              className="header__account-icon fa-solid fa-circle-user"
-              aria-hidden="true"
-            ></i>
-            <div className="header__account-text">
-              {user && (
+        {!loadingUser &&
+          (user ? (
+            <div className="header__account">
+              <i
+                className="header__account-icon fa-solid fa-circle-user"
+                aria-hidden="true"
+              ></i>
+              <div className="header__account-text">
                 <span className="header__user">
                   {user.name} {user.surname}
                 </span>
-              )}
-              <button
-                type="button"
-                className="header__login"
-                onClick={handleLogout}
-              >
-                Déconnexion
-              </button>
+                <button
+                  type="button"
+                  className="header__login"
+                  onClick={handleLogout}
+                >
+                  Déconnexion
+                </button>
+              </div>
             </div>
-          </div>
-        ) : (
-          <Link to="/login" className="header__login">
-            <i className="fa-solid fa-circle-user" aria-hidden="true"></i>
-            Connexion
-          </Link>
-        )}
+          ) : (
+            <Link to="/login" className="header__login">
+              <i className="fa-solid fa-circle-user" aria-hidden="true"></i>
+              Connexion
+            </Link>
+          ))}
       </div>
     </header>
   );

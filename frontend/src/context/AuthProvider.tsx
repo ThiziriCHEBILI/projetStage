@@ -8,60 +8,36 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+async function getCurrentUser(): Promise<User | null> {
+  const response = await fetchAPI<User | { message: string }>("user/me");
+  return response && "id" in response ? response : null;
+}
+
 export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
-  const [token, setToken] = useState<string | undefined>(
-    localStorage.getItem("token") ||
-      sessionStorage.getItem("token") ||
-      undefined,
-  );
+  const [token, setToken] = useState<string | undefined>(undefined);
+  const [user, setUser] = useState<User | null>(null);
+  const [loadingUser, setLoadingUser] = useState(true);
 
-  const [loadedUser, setLoadedUser] = useState<{
-    token: string;
-    user: User | null;
-  } | null>(null);
+  async function refreshUser(): Promise<void> {
+    setUser(await getCurrentUser());
+  }
 
-  const user = token && loadedUser?.token === token ? loadedUser.user : null;
-  const loadingUser = Boolean(token) && loadedUser?.token !== token;
-  function logout(): void {
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token");
+  async function logout(): Promise<void> {
+    await fetchAPI("auth/logout", "POST");
+    setUser(null);
     setToken(undefined);
   }
 
   useEffect(() => {
-    if (!token) {
-      return;
-    }
-
-    let ignore = false;
-
-    fetchAPI<User | { message: string }>(
-      "user/me",
-      "GET",
-      undefined,
-      token,
-    ).then((response) => {
-      if (ignore) return;
-
-      if (response && "message" in response) {
-        logout();
-        return;
-      }
-
-      setLoadedUser({
-        token,
-        user: response && "id" in response ? response : null,
-      });
+    getCurrentUser().then((currentUser) => {
+      setUser(currentUser);
+      setLoadingUser(false);
     });
-
-    return () => {
-      ignore = true;
-    };
-  }, [token]);
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ token, user, loadingUser, setToken, logout }}
+      value={{ token, user, loadingUser, setToken, refreshUser, logout }}
     >
       {children}
     </AuthContext.Provider>
