@@ -11,18 +11,23 @@ final class JwtCookieListener
 {
     public function __invoke(AuthenticationSuccessEvent $event): void
     {
-        $token = $event->getData()['token'];
+        $token = $event->getData()['token'] ?? null;
+
+        if (!$token) {
+            return;
+        }
 
         $cookie = new Cookie(
             name: 'BEARER',
             value: $token,
             expire: new \DateTimeImmutable('+1 hour'),
             path: '/',
-            secure: false,
+            secure: true,
             httpOnly: true,
             sameSite: Cookie::SAMESITE_LAX,
         );
 
         $event->getResponse()->headers->setCookie($cookie);
+        $event->setData(['message' => 'Connexion réussie']);
     }
 }
