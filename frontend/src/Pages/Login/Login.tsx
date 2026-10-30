@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { JSX, FormEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { RgpdModal } from "../../components/RgpdModal/RgpdModal";
-import { fetchAPI } from "../../utilities/fetchApi";
+import { fetchAPIWithStatus } from "../../utilities/fetchApi";
 import { useAuth } from "../../context/useAuth";
 import "./Login.scss";
 
@@ -42,13 +42,9 @@ export default function Login(): JSX.Element {
       return;
     }
 
-    const response = await fetchAPI<{ token?: string; message?: string }>(
-      "auth/login",
-      "POST",
-      formData,
-    );
+    const result = await fetchAPIWithStatus("auth/login", "POST", formData);
 
-    if (response?.token) {
+    if (result.ok) {
       await refreshUser();
       navigate(redirectedPage);
     } else {
