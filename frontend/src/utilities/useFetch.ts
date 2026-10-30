@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { fetchAPI } from "./fetchApi";
 
-export function useFetch<T extends object>(endpoint: string, token?: string) {
+export function useFetch<T extends object>(endpoint: string) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchAPI<T>(endpoint, "GET", undefined, token)
+    fetchAPI<T>(endpoint)
       .then((response) => {
         if (response === undefined) {
           setError("Une erreur s'est produite. Veuillez réessayer.");
@@ -21,7 +21,7 @@ export function useFetch<T extends object>(endpoint: string, token?: string) {
         }
       })
       .finally(() => setLoading(false));
-  }, [endpoint, token]);
+  }, [endpoint]);
 
   return { data, loading, error };
 }
