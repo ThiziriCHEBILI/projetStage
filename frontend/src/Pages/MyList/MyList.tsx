@@ -9,10 +9,18 @@ import "./MyList.scss";
 export default function MyList(): JSX.Element {
   const { myList, listLoading, listError, removeFromMyList } = useMyList();
 
-  const { token } = useAuth();
+  const { user, loadingUser } = useAuth();
   const location = useLocation();
 
-  if (!token) {
+  if (loadingUser) {
+    return (
+      <section className="my-list">
+        <p className="my-list__empty">Chargement…</p>
+      </section>
+    );
+  }
+
+  if (!user) {
     return <Navigate to={loginUrl(location.pathname)} replace />;
   }
 
