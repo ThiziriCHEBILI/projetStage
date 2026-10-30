@@ -15,7 +15,7 @@ export function Header(): JSX.Element {
 
   function handleLogout(): void {
     // startTransition regroupe le changement de page et la déconnexion.
-    // Sans lui, Ma Liste voit le token disparaître avant le changement de page,
+    // Sans lui, Ma Liste croit que personne n'est connecté avant le changement de page,
     // et elle redirige vers la connexion au lieu de l'accueil.
     startTransition(() => {
       navigate("/");
