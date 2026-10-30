@@ -9,26 +9,24 @@ export function useMyList() {
   const [myList, setMyList] = useState<Show[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [listError, setListError] = useState<string | null>(null);
-  const { token } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (!token) {
+    if (!user) {
       return;
     }
 
-    fetchAPIWithStatus<Show[]>("my-list", "GET", undefined, token).then(
-      (result) => {
-        if (result.ok && result.data) {
-          setMyList(result.data);
-        } else {
-          setListError("Impossible de charger votre liste.");
-        }
-        setLoaded(true);
-      },
-    );
-  }, [token]);
+    fetchAPIWithStatus<Show[]>("my-list").then((result) => {
+      if (result.ok && result.data) {
+        setMyList(result.data);
+      } else {
+        setListError("Impossible de charger votre liste.");
+      }
+      setLoaded(true);
+    });
+  }, [user]);
 
   useEffect(() => {
     if (!listError) {
@@ -40,24 +38,19 @@ export function useMyList() {
     return () => clearTimeout(timer);
   }, [listError]);
 
-  const listLoading = Boolean(token) && !loaded;
+  const listLoading = Boolean(user) && !loaded;
 
   function isInList(showId: number): boolean {
     return myList.some((show) => show.id === showId);
   }
 
   async function addToMyList(show: Show): Promise<void> {
-    if (!token) {
+    if (!user) {
       navigate(loginUrl(location.pathname));
       return;
     }
 
-    const result = await fetchAPIWithStatus(
-      `my-list/${show.id}`,
-      "POST",
-      undefined,
-      token,
-    );
+    const result = await fetchAPIWithStatus(`my-list/${show.id}`, "POST");
 
     if (result.status === 201 || result.status === 409) {
       setListError(null);
@@ -72,17 +65,12 @@ export function useMyList() {
   }
 
   async function removeFromMyList(showId: number): Promise<void> {
-    if (!token) {
+    if (!user) {
       navigate(loginUrl(location.pathname));
       return;
     }
 
-    const result = await fetchAPIWithStatus(
-      `my-list/${showId}`,
-      "DELETE",
-      undefined,
-      token,
-    );
+    const result = await fetchAPIWithStatus(`my-list/${showId}`, "DELETE");
 
     if (result.status === 200 || result.status === 404) {
       setListError(null);
