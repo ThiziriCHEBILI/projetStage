@@ -4,9 +4,7 @@ lexik_jwt_authentication:
     pass_phrase: "%env(JWT_PASSPHRASE)%"
     token_extractors:
         authorization_header:
-            enabled: true
-            prefix: Bearer
-            name: Authorization
+            enabled: false
         cookie:
             enabled: true
             name: BEARER
