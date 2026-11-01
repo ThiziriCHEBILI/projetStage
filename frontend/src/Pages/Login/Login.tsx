@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { JSX, FormEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { RgpdModal } from "../../components/RgpdModal/RgpdModal";
-import { fetchAPI } from "../../utilities/fetchApi";
+import { fetchAPIWithStatus } from "../../utilities/fetchApi";
 import { useAuth } from "../../context/useAuth";
 import "./Login.scss";
 
@@ -28,7 +28,7 @@ export default function Login(): JSX.Element {
   const [showRgpd, setShowRgpd] = useState(false);
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState("");
-  const { setToken } = useAuth();
+  const { refreshUser } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectedPage = getSafeRedirect(searchParams.get("redirect"));
@@ -42,19 +42,13 @@ export default function Login(): JSX.Element {
       return;
     }
 
-    const response = await fetchAPI<{ token?: string; message?: string }>(
-      "auth/login",
-      "POST",
-      formData,
-    );
+    const result = await fetchAPIWithStatus("auth/login", "POST", {
+      ...formData,
+      remember,
+    });
 
-    if (response?.token) {
-      if (remember) {
-        localStorage.setItem("token", response.token);
-      } else {
-        sessionStorage.setItem("token", response.token);
-      }
-      setToken(response.token);
+    if (result.ok) {
+      await refreshUser();
       navigate(redirectedPage);
     } else {
       setError("Email ou mot de passe incorrect.");

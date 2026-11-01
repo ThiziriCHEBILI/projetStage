@@ -12,7 +12,7 @@ export function useVideoPlayer() {
     startAt: number;
   } | null>(null);
   const [playError, setPlayError] = useState<string | null>(null);
-  const { token } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,7 +27,7 @@ export function useVideoPlayer() {
   }, [playError]);
 
   async function play(videoId: number, title: string): Promise<void> {
-    if (!token) {
+    if (!user) {
       navigate(loginUrl(location.pathname));
       return;
     }
@@ -35,7 +35,7 @@ export function useVideoPlayer() {
     const response = await fetchAPI<{
       url_video?: string;
       watched_seconds?: number;
-    }>(`videos/${videoId}/url`, "GET", undefined, token);
+    }>(`videos/${videoId}/url`);
 
     if (response?.url_video) {
       setPlayError(null);
@@ -55,16 +55,13 @@ export function useVideoPlayer() {
   }
 
   function saveProgress(seconds: number): void {
-    if (!playing || !token) {
+    if (!playing || !user) {
       return;
     }
 
-    fetchAPIWithStatus(
-      `my-progress/${playing.videoId}`,
-      "PUT",
-      { watched_seconds: Math.floor(seconds) },
-      token,
-    );
+    fetchAPIWithStatus(`my-progress/${playing.videoId}`, "PUT", {
+      watched_seconds: Math.floor(seconds),
+    });
   }
 
   return { playing, play, close, playError, saveProgress };

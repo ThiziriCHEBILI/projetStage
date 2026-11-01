@@ -6,9 +6,8 @@ export async function fetchAPI<T>(
   endpoint: string,
   method: Method = "GET",
   data?: unknown,
-  token?: string,
 ): Promise<T | undefined> {
-  const result = await fetchAPIWithStatus<T>(endpoint, method, data, token);
+  const result = await fetchAPIWithStatus<T>(endpoint, method, data);
   return result.data;
 }
 
@@ -22,7 +21,6 @@ export async function fetchAPIWithStatus<T>(
   endpoint: string,
   method: Method = "GET",
   data?: unknown,
-  token?: string,
 ): Promise<ApiResult<T>> {
   const headers: Record<string, string> = {};
 
@@ -30,13 +28,10 @@ export async function fetchAPIWithStatus<T>(
     headers["Content-Type"] = "application/json";
   }
 
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
-
   try {
     const response = await fetch(`${API_URL}/${endpoint}`, {
       method,
+      credentials: "include",
       headers,
       body: data ? JSON.stringify(data) : undefined,
     });

@@ -5,36 +5,26 @@ import type { UserProgress } from "../Types";
 
 export function useProgress() {
   const [progressList, setProgressList] = useState<UserProgress[]>([]);
-  const { token } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
-    if (!token) {
+    if (!user) {
       return;
     }
 
-    fetchAPIWithStatus<UserProgress[]>(
-      "my-progress",
-      "GET",
-      undefined,
-      token,
-    ).then((result) => {
+    fetchAPIWithStatus<UserProgress[]>("my-progress").then((result) => {
       if (result.ok && result.data) {
         setProgressList(result.data);
       }
     });
-  }, [token]);
+  }, [user]);
 
   async function removeProgress(videoId: number): Promise<void> {
-    if (!token) {
+    if (!user) {
       return;
     }
 
-    const result = await fetchAPIWithStatus(
-      `my-progress/${videoId}`,
-      "DELETE",
-      undefined,
-      token,
-    );
+    const result = await fetchAPIWithStatus(`my-progress/${videoId}`, "DELETE");
 
     if (result.status === 200 || result.status === 404) {
       setProgressList((current) =>
@@ -43,5 +33,5 @@ export function useProgress() {
     }
   }
 
-  return { progressList: token ? progressList : [], removeProgress };
+  return { progressList: user ? progressList : [], removeProgress };
 }
