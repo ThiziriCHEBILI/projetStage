@@ -42,7 +42,10 @@ export default function Login(): JSX.Element {
       return;
     }
 
-    const result = await fetchAPIWithStatus("auth/login", "POST", formData);
+    const result = await fetchAPIWithStatus("auth/login", "POST", {
+      ...formData,
+      remember,
+    });
 
     if (result.ok) {
       await refreshUser();
