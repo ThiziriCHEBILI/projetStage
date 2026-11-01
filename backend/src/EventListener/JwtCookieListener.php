@@ -20,7 +20,7 @@ final class JwtCookieListener
         $cookie = new Cookie(
             name: 'BEARER',
             value: $token,
-            expire: new \DateTimeImmutable('+1 hour'),
+            expire: new \DateTimeImmutable('+1 day'),
             path: '/',
             secure: true,
             httpOnly: true,
