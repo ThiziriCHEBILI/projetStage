@@ -81,8 +81,4 @@ export interface Section {
   info?: Info;
 }
 
-export interface CategoryPage {
-  name: string;
-  title: string;
-  desc: string;
-}
+export type CategoryName = "films" | "series" | "dessins-animes";

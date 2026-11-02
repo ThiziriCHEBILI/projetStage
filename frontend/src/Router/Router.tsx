@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router";
 import Category from "../Pages/Category/Category";
-import { filmsPage, seriesPage, animesPage } from "../data/data";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
@@ -19,15 +18,15 @@ export function Router() {
 
       <Route
         path="/shows/films"
-        element={<Category key="films" page={filmsPage} />}
+        element={<Category key="films" name="films" />}
       />
       <Route
         path="/shows/series"
-        element={<Category key="series" page={seriesPage} />}
+        element={<Category key="series" name="series" />}
       />
       <Route
         path="/shows/dessins-animes"
-        element={<Category key="dessins-animes" page={animesPage} />}
+        element={<Category key="dessins-animes" name="dessins-animes" />}
       />
       <Route path="/shows/:name/:id" element={<Show />} />
     </Routes>
