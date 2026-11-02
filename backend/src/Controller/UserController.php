@@ -11,8 +11,8 @@ use Doctrine\DBAL\Exception as DBALException;
 #[Route('/user', name: 'app_user')]
 final class UserController extends AbstractController
 {
-    #[Route('/me', name: '_me', methods: ['GET'])]
-    public function getMe(Security $security): JsonResponse
+    #[Route('/me', name: '_connected', methods: ['GET'])]
+    public function getUserConnected(Security $security): JsonResponse
     {
         try {
             $user = $security->getUser();
