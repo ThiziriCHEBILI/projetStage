@@ -4,6 +4,7 @@ import { useFetch } from "../../utilities/useFetch";
 import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { TypeFilters } from "../../components/TypeFilters/TypeFilters";
 import { Pagination } from "../../components/Pagination/Pagination";
+import { DataLoader } from "../../components/DataLoader/DataLoader";
 import "./Category.scss";
 
 const categoryTexts: Record<CategoryName, { title: string; desc: string }> = {
@@ -56,13 +57,14 @@ export default function Category({ name }: CategoryProps): JSX.Element {
         <TypeFilters activeType={activeType} onSelect={selectType} />
       </div>
 
-      {loading && <p className="category__empty">Chargement…</p>}
-
-      {error && <p className="category__empty">{error}</p>}
-
-      {data && data.shows.length > 0 && (
+      <DataLoader
+        loading={loading}
+        error={error}
+        isEmpty={data?.shows.length === 0}
+        emptyMessage="Aucun titre de ce type pour le moment."
+      >
         <div className="category__grid">
-          {data.shows.map((show) => (
+          {data?.shows.map((show) => (
             <ShowCard
               key={show.id}
               show={show}
@@ -71,21 +73,15 @@ export default function Category({ name }: CategoryProps): JSX.Element {
             />
           ))}
         </div>
-      )}
 
-      {data && data.shows.length === 0 && (
-        <p className="category__empty">
-          Aucun titre de ce type pour le moment.
-        </p>
-      )}
-
-      {data && data.totalPages > 1 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={data.totalPages}
-          onSelect={selectPage}
-        />
-      )}
+        {data && data.totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={data.totalPages}
+            onSelect={selectPage}
+          />
+        )}
+      </DataLoader>
     </section>
   );
 }
