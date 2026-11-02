@@ -41,6 +41,27 @@ final class ShowsController extends AbstractController
             return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
+
+    #[Route('/search', name: 'search_shows', methods: ['GET'])]
+    public function searchShows(Request $request, EntityManagerInterface $em): JsonResponse
+    {
+        try {
+            $search = trim($request->query->getString('q'));
+
+            if ($search === '') {
+                return $this->json([], 200);
+            }
+
+            $shows = $em->getRepository(Show::class)->searchByTitle($search);
+
+            return $this->json($shows, 200, [], ['groups' => 'show:read']);
+        } catch (DBALException) {
+            return $this->json(['message' => 'Une erreur est survenue'], 500);
+        } catch (\Exception) {
+            return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
+        }
+    }
+
     #[Route('/{name}', name: 'get_shows_by_category', methods: ['GET'])]
     public function getShowsByCategory(string $name, Request $request, EntityManagerInterface $em): JsonResponse
     {
