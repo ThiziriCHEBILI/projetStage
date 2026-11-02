@@ -23,8 +23,12 @@ export function formatSeconds(totalSeconds: number): string {
   return seconds + " s";
 }
 
-export function toVideoId(url: string): string | null {
-  return new URL(url).searchParams.get("v");
+export function getYoutubeIdFromUrl(url: string): string | null {
+  try {
+    return new URL(url).searchParams.get("v");
+  } catch {
+    return null;
+  }
 }
 
 export function loginUrl(path: string): string {
