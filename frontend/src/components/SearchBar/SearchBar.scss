@@ -1,0 +1,71 @@
+@use "../../index" as *;
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background-color: $color-surface;
+
+  &__icon {
+    color: $color-text-subtle;
+    font-size: 14px;
+  }
+
+  &__input {
+    border: none;
+    outline: none;
+    background: none;
+    color: $color-text;
+    font-size: 14px;
+    width: 220px;
+
+    &::placeholder {
+      color: $color-text-subtle;
+    }
+  }
+
+  &:focus-within {
+    outline: 2px solid $color-accent;
+  }
+
+  &__list {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin: 0;
+    padding: 8px 0;
+    list-style: none;
+    border-radius: 10px;
+    background-color: $color-surface;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    color: $color-text;
+
+    &:hover,
+    &:focus-visible {
+      background-color: rgba($color-text, 0.08);
+    }
+  }
+
+  &__poster {
+    width: 36px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  &__title {
+    font-size: 14px;
+  }
+}

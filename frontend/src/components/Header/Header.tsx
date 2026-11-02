@@ -1,17 +1,31 @@
-import { type JSX, type SubmitEvent, startTransition } from "react";
+import { type JSX, startTransition, useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { SearchBar } from "../SearchBar/SearchBar";
 import { Nav } from "../Nav/Nav";
 import logo from "../../assets/logo_NOVA.png";
 import { useAuth } from "../../context/useAuth";
+import { useSearchSuggestions } from "../../utilities/useSearchSuggestions";
 import "./Header.scss";
 
 export function Header(): JSX.Element {
   const { user, loadingUser, logout } = useAuth();
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState("");
+  const suggestions = useSearchSuggestions(searchText);
 
-  const handleSubmit = (e: SubmitEvent) => {
-    e.preventDefault();
-  };
+  function handleSearch(text: string): void {
+    setSearchText(text);
+  }
+
+  function handleSubmit(): void {
+    const firstShow = suggestions[0];
+
+    if (!firstShow) {
+      return;
+    }
+
+    navigate(`/shows/${firstShow.category_show.name}/${firstShow.id}`);
+  }
 
   function handleLogout(): void {
     // startTransition regroupe le changement de page et la déconnexion.
@@ -35,17 +49,11 @@ export function Header(): JSX.Element {
       </div>
 
       <div className="header__tools">
-        <form className="header__search" onSubmit={handleSubmit}>
-          <button type="submit" aria-label="Lancer la recherche">
-            <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-          </button>
-          <input
-            type="search"
-            name="query"
-            aria-label="Rechercher sur NOVA"
-            placeholder="Rechercher un film, une série..."
-          />
-        </form>
+        <SearchBar
+          suggestions={suggestions}
+          onSearch={handleSearch}
+          onSubmit={handleSubmit}
+        />
 
         {!loadingUser &&
           (user ? (
