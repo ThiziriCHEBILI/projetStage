@@ -16,28 +16,14 @@ class ShowRepository extends ServiceEntityRepository
         parent::__construct($registry, Show::class);
     }
 
-//    /**
-//     * @return Show[] Returns an array of Show objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Produits
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function searchByTitle(string $search): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.title LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('s.title', 'ASC')
+            ->setMaxResults(8)
+            ->getQuery()
+            ->getResult();
+    }
 }

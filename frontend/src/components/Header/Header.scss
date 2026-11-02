@@ -39,33 +39,6 @@
     font-weight: bold;
   }
 
-  &__search {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 14px;
-    border-radius: 10px;
-    background-color: $color-surface;
-
-    i {
-      color: $color-text-subtle;
-      font-size: 14px;
-    }
-
-    input {
-      border: none;
-      outline: none;
-      background: none;
-      color: $color-text;
-      font-size: 14px;
-      width: 220px;
-
-      &::placeholder {
-        color: $color-text-subtle;
-      }
-    }
-  }
-
   &__login {
     display: flex;
     align-items: center;
