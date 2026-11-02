@@ -1,7 +1,7 @@
 import { useState, type JSX } from "react";
 import { Link } from "react-router";
 import type { UserProgress } from "../../Types";
-import { formatEpisode, formatSeconds } from "../../utilities/convert";
+import { formatSeasonEpisode, formatSeconds } from "../../utilities/convert";
 import { imageUrl } from "../../utilities/imageUrl";
 import "./ProgressCard.scss";
 
@@ -20,7 +20,7 @@ export function ProgressCard({
   onListClick,
   onRemove,
 }: ProgressCardProps): JSX.Element {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [listOpen, setListOpen] = useState(false);
 
   const video = progress.show_video;
   const show = video.show;
@@ -31,7 +31,7 @@ export function ProgressCard({
   let videoInfo = "Film | ";
   if (video.saison_number !== null && video.episode_number !== null) {
     videoInfo =
-      formatEpisode(video.saison_number, video.episode_number) + " | ";
+      formatSeasonEpisode(video.saison_number, video.episode_number) + " | ";
   } else if (video.saison_number !== null) {
     videoInfo = "Saison " + video.saison_number + " | ";
   }
@@ -61,22 +61,22 @@ export function ProgressCard({
       <div className="progress__footer">
         <h3 className="progress__title">{show.title}</h3>
 
-        <div className="progress__menu">
+        <div className="progress__list">
           <button
             type="button"
             className="progress__more"
             aria-label="Plus d'options"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={listOpen}
+            onClick={() => setListOpen(!listOpen)}
           >
             <i className="fa-solid fa-ellipsis" aria-hidden="true"></i>
           </button>
 
-          {menuOpen && (
+          {listOpen && (
             <>
               <div
                 className="progress__backdrop"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => setListOpen(false)}
               ></div>
 
               <ul className="progress__options">

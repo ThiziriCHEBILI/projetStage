@@ -5,7 +5,7 @@ export function formatSeasons(count: number): string {
   return count + " saison";
 }
 
-export function formatEpisode(season: number, episode: number): string {
+export function formatSeasonEpisode(season: number, episode: number): string {
   return "S" + season + "E" + episode;
 }
 
