@@ -21,16 +21,34 @@ export function VideoModal({
   const [player, setPlayer] = useState<YouTubeEvent["target"] | null>(null);
 
   async function handlePause(event: YouTubeEvent): Promise<void> {
-    const seconds = await event.target.getCurrentTime();
-    onSave(seconds);
+    try {
+      const seconds = await event.target.getCurrentTime();
+      onSave(seconds);
+    } catch {
+      // Si la sauvegarde échoue, la vidéo reste en pause.
+    }
+  }
+
+  async function handleEnd(event: YouTubeEvent): Promise<void> {
+    try {
+      const duration = await event.target.getDuration();
+      onSave(duration);
+    } catch {
+      // Si la sauvegarde échoue, la vidéo est quand même finie.
+    }
   }
 
   async function handleClose(): Promise<void> {
-    if (player) {
-      const seconds = await player.getCurrentTime();
-      onSave(seconds);
+    try {
+      if (player) {
+        const seconds = await player.getCurrentTime();
+        onSave(seconds);
+      }
+    } catch {
+      // Si la sauvegarde échoue, on ferme quand même la vidéo.
+    } finally {
+      onClose();
     }
-    onClose();
   }
 
   return (
@@ -46,7 +64,7 @@ export function VideoModal({
         }}
         onPause={handlePause}
         onReady={(event) => setPlayer(event.target)}
-        onEnd={async (event) => onSave(await event.target.getDuration())}
+        onEnd={handleEnd}
       />
     </Modal>
   );

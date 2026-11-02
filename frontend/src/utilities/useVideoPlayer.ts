@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/useAuth";
 import { useNavigate, useLocation } from "react-router";
 import { fetchAPI, fetchAPIWithStatus } from "./fetchApi";
-import { toVideoId, loginUrl } from "./convert";
+import { getYoutubeIdFromUrl, loginUrl } from "./convert";
 
 export function useVideoPlayer() {
   const [playing, setPlaying] = useState<{
@@ -37,13 +37,17 @@ export function useVideoPlayer() {
       watched_seconds?: number;
     }>(`videos/${videoId}/url`);
 
-    if (response?.url_video) {
+    const youtubeId = response?.url_video
+      ? getYoutubeIdFromUrl(response.url_video)
+      : null;
+
+    if (youtubeId) {
       setPlayError(null);
       setPlaying({
         videoId,
-        youtubeId: toVideoId(response.url_video) ?? "",
+        youtubeId,
         title,
-        startAt: response.watched_seconds ?? 0,
+        startAt: response?.watched_seconds ?? 0,
       });
     } else {
       setPlayError("Impossible de lancer la vidéo. Réessayez plus tard.");
