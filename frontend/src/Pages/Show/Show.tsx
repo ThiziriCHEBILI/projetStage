@@ -10,6 +10,7 @@ import { SeasonButtons } from "../../components/SeasonButtons/SeasonButtons";
 import { ShowBanner } from "../../components/ShowBanner/ShowBanner";
 import { useMyList } from "../../utilities/useMyList";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { DataLoader } from "../../components/DataLoader/DataLoader";
 import "./Show.scss";
 
 export default function Show(): JSX.Element {
@@ -27,12 +28,8 @@ export default function Show(): JSX.Element {
     setTimeout(() => setSwitching(false), 1000);
   }
 
-  if (loading) {
-    return <p>Chargement...</p>;
-  }
-
-  if (error || !data) {
-    return <p>Ce titre est introuvable.</p>;
+  if (loading || error || !data) {
+    return <DataLoader loading={loading} error="Ce titre est introuvable." />;
   }
 
   const seasons: number[] = [];

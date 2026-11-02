@@ -4,6 +4,8 @@ import { ShowCard } from "../../components/ShowCard/ShowCard";
 import { Navigate, useLocation } from "react-router";
 import { useAuth } from "../../context/useAuth";
 import { loginUrl } from "../../utilities/convert";
+import { DataLoader } from "../../components/DataLoader/DataLoader";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import "./MyList.scss";
 
 export default function MyList(): JSX.Element {
@@ -15,7 +17,7 @@ export default function MyList(): JSX.Element {
   if (loadingUser) {
     return (
       <section className="my-list">
-        <p className="my-list__empty">Chargement…</p>
+        <DataLoader loading={true} />
       </section>
     );
   }
@@ -32,15 +34,11 @@ export default function MyList(): JSX.Element {
         même endroit.
       </p>
 
-      {listLoading && <p className="my-list__empty">Chargement…</p>}
-
-      {listError && <p className="my-list__empty">{listError}</p>}
-
-      {!listLoading && !listError && myList.length === 0 && (
-        <p className="my-list__empty">Votre liste est vide.</p>
-      )}
-
-      {myList.length > 0 && (
+      <DataLoader
+        loading={listLoading}
+        isEmpty={myList.length === 0}
+        emptyMessage="Votre liste est vide."
+      >
         <div className="my-list__grid">
           {myList.map((show) => (
             <div key={show.id} className="my-list__item">
@@ -56,7 +54,9 @@ export default function MyList(): JSX.Element {
             </div>
           ))}
         </div>
-      )}
+      </DataLoader>
+
+      {listError && <ErrorMessage message={listError} />}
     </section>
   );
 }
