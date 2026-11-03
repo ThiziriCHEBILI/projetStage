@@ -32,7 +32,10 @@ final class UserProgressController extends AbstractController
 
             $progress = [];
             foreach ($allProgress as $userProgress) {
-                if ($userProgress->getLastWatched() >= $limit) {
+                $video = $userProgress->getShowVideo();
+                $isSeasonVideo = $video->getSaisonNumber() !== null && $video->getEpisodeNumber() === null;
+
+                if ($userProgress->getLastWatched() >= $limit && !$isSeasonVideo) {
                     $progress[] = $userProgress;
                 }
             }
