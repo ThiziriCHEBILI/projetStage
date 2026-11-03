@@ -13,7 +13,7 @@ export function Footer(): JSX.Element {
             <span className="footer__name">NOVA</span>
           </div>
           <p className="footer__text">
-            Explorez les films, séries et dessins animés du moment.
+            Explorez les films, séries et dessins animés.
           </p>
         </div>
         <div className="footer__links">
