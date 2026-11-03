@@ -92,7 +92,8 @@ export default function Register(): JSX.Element {
       <div className="register__card">
         <h1 className="register__title">Créer votre profil</h1>
         <p className="register__subtitle">
-          Rejoignez Nova et retrouvez vos bandes-annonces enregistrées.
+          Rejoignez Nova et retrouvez tous vos films, séries et dessins animés
+          préférés.
         </p>
 
         <form className="register__form" onSubmit={handleSubmit} noValidate>

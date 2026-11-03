@@ -60,8 +60,7 @@ export default function Login(): JSX.Element {
       <div className="login__card">
         <h1 className="login__title">Bienvenue sur Nova</h1>
         <p className="login__subtitle">
-          Connectez-vous pour retrouver vos bandes-annonces enregistrées :
-          films, séries et dessins animés.
+          Connectez-vous pour retrouver vos films, séries et dessins animés
         </p>
 
         <form className="login__form" onSubmit={handleSubmit}>
