@@ -8,8 +8,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px $container-padding;
-  background-color: rgba($color-background-bar, 0.7);
-  backdrop-filter: blur(8px);
+  background-color: $color-background-bar;
 
   &__navigation {
     display: flex;
@@ -76,5 +75,57 @@
     color: $color-text;
     font-size: 14px;
     white-space: nowrap;
+  }
+
+  &__search-button {
+    padding: 8px;
+    font-size: 18px;
+    color: $color-text-muted;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  &__search-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__search-panel {
+    position: absolute;
+    top: 100%;
+    margin-top: 14px;
+    right: $container-padding;
+    width: 300px;
+  }
+
+  @include tablet {
+    &__navigation {
+      gap: 20px;
+    }
+
+    &__tools {
+      gap: 16px;
+    }
+
+    &__user {
+      display: none;
+    }
+
+    &__name {
+      font-size: 22px;
+    }
+  }
+
+  @include mobile {
+    &__search-panel {
+      left: $container-padding;
+      width: auto;
+    }
   }
 }

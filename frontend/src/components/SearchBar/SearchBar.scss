@@ -19,8 +19,9 @@
     outline: none;
     background: none;
     color: $color-text;
-    font-size: 14px;
-    width: 220px;
+    font-size: 16px;
+    flex: 1;
+    min-width: 0;
 
     &::placeholder {
       color: $color-text-subtle;
