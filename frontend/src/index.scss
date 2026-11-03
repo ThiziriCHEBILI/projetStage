@@ -1,5 +1,17 @@
 @use "styles/tools" as *;
 
+:root {
+  --container-padding: 50px;
+
+  @include tablet {
+    --container-padding: 32px;
+  }
+
+  @include mobile {
+    --container-padding: 16px;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

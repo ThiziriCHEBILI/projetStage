@@ -19,7 +19,7 @@ $color-text-subtle: #8c949c;
 $font-main: "Inter", Arial, sans-serif;
 
 // Espacements
-$container-padding: 50px;
+$container-padding: var(--container-padding);
 
 // Points de rupture
 $breakpoint-tablet: 1023px;
