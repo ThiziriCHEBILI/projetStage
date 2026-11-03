@@ -1,0 +1,39 @@
+// Couleurs
+$color-background: #06090a;
+$color-background-bar: #090b0d;
+
+$color-surface: #1c2429;
+$color-surface-hover: #2a353b;
+
+$color-accent: #e01f26;
+$color-accent-hover: #c4181e;
+$color-accent-light: #ff4a50;
+
+$color-success: #40bf2e;
+
+$color-text: #ffffff;
+$color-text-muted: #b8bfc4;
+$color-text-subtle: #8c949c;
+
+// Police
+$font-main: "Inter", Arial, sans-serif;
+
+// Espacements
+$container-padding: 50px;
+
+// Points de rupture
+$breakpoint-tablet: 1023px;
+$breakpoint-mobile: 767px;
+
+// Mixins du responsive
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}

@@ -1,4 +1,4 @@
-@use "../../index" as *;
+@use "../../styles/tools" as *;
 
 .top {
   position: relative;
@@ -6,7 +6,7 @@
   padding: 10px;
   border-radius: 8px;
   background-color: $color-surface;
-  
+
   &__link {
     display: block;
     width: 19%;

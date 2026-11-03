@@ -1,23 +1,4 @@
-$color-background: #06090a;
-$color-background-bar: #090b0d;
-
-$color-surface: #1c2429;
-$color-accent: #e01f26;
-$color-accent-light: #ff4a50;
-$color-success: #40bf2e;
-
-$color-text: #ffffff;
-$color-text-muted: #b8bfc4;
-$color-text-subtle: #8c949c;
-
-$color-accent-hover: #c4181e;
-$color-surface-hover: #2a353b;
-
-$font-main: "Inter", Arial, sans-serif;
-
-$container-padding: 50px;
-
-$breakpoint-mobile: 768px;
+@use "styles/tools" as *;
 
 * {
   box-sizing: border-box;
