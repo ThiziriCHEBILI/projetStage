@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router";
 import { fetchAPI, fetchAPIWithStatus } from "./fetchApi";
 import { getYoutubeIdFromUrl, loginUrl } from "./convert";
 
-export function useVideoPlayer() {
+export function useVideoPlayer(onSaved?: () => void) {
   const [playing, setPlaying] = useState<{
     videoId: number;
     youtubeId: string;
@@ -58,14 +58,16 @@ export function useVideoPlayer() {
     setPlaying(null);
   }
 
-  function saveProgress(seconds: number): void {
+  async function saveProgress(seconds: number): Promise<void> {
     if (!playing || !user) {
       return;
     }
 
-    fetchAPIWithStatus(`my-progress/${playing.videoId}`, "PUT", {
+    await fetchAPIWithStatus(`my-progress/${playing.videoId}`, "PUT", {
       watched_seconds: Math.floor(seconds),
     });
+
+    onSaved?.();
   }
 
   return { playing, play, close, playError, saveProgress };

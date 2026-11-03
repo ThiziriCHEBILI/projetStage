@@ -32,8 +32,6 @@ export function ProgressCard({
   if (video.saison_number !== null && video.episode_number !== null) {
     videoInfo =
       formatSeasonEpisode(video.saison_number, video.episode_number) + " | ";
-  } else if (video.saison_number !== null) {
-    videoInfo = "Saison " + video.saison_number + " | ";
   }
 
   return (
