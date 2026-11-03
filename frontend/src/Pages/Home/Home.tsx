@@ -14,7 +14,7 @@ import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 const trendingSection: Section = {
   title: "Tendances actuelles",
-  desc: "Les titres les plus regardés cette semaine en France",
+  desc: "Notre sélection de films du moment.",
   seeAll: "/shows/tendances",
   withQuality: true,
   info: "type_show",
