@@ -32,9 +32,12 @@ export default function Home(): JSX.Element {
   const { data: heroShows } = useFetch<HeroShow[]>("shows/a-la-une");
   const { data: trendingShows } =
     useFetch<PaginatedShows>("shows/films?page=1");
-  const { progressList, removeProgress } = useProgress();
+
+  const { progressList, removeProgress, refreshProgress } = useProgress();
   const { isInList, addToMyList, removeFromMyList, listError } = useMyList();
-  const { playing, play, close, playError, saveProgress } = useVideoPlayer();
+  const { playing, play, close, playError, saveProgress } =
+    useVideoPlayer(refreshProgress);
+
   const { data: topShows } = useFetch<PaginatedShows>(
     "shows/dessins-animes?page=1",
   );
