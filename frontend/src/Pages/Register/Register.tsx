@@ -1,10 +1,11 @@
 import { useState } from "react";
 import type { JSX, FormEvent } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { fetchAPI } from "../../utilities/fetchApi";
 import "./Register.scss";
 
 const SUCCESS_MESSAGE = "compte créé avec succès";
+const REQUIRED_MESSAGE = "Ce champ est obligatoire.";
 
 export default function Register(): JSX.Element {
   const [formData, setFormData] = useState({
@@ -17,28 +18,29 @@ export default function Register(): JSX.Element {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [accepted, setAccepted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const navigate = useNavigate();
+  const [accountCreated, setAccountCreated] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
   function validateForm(): boolean {
     const fieldErrors: Record<string, string> = {};
 
     if (!formData.name) {
-      fieldErrors.name = "Le prénom est obligatoire";
+      fieldErrors.name = REQUIRED_MESSAGE;
     }
 
     if (!formData.surname) {
-      fieldErrors.surname = "Le nom est obligatoire";
+      fieldErrors.surname = REQUIRED_MESSAGE;
     }
 
     if (!formData.email) {
-      fieldErrors.email = "Adresse e-mail ou identifiant requis";
+      fieldErrors.email = REQUIRED_MESSAGE;
     }
 
     if (!formData.password) {
-      fieldErrors.password = "Mot de passe requis";
+      fieldErrors.password = REQUIRED_MESSAGE;
     } else if (formData.password.length < 8) {
-      fieldErrors.password = "Le mot de passe doit faire au moins 8 caractères.";
+      fieldErrors.password =
+        "Le mot de passe doit faire au moins 8 caractères.";
     }
 
     if (confirmPassword !== formData.password) {
@@ -47,7 +49,8 @@ export default function Register(): JSX.Element {
     }
 
     if (!accepted) {
-      fieldErrors.accepted = "Vous devez accepter les conditions pour continuer.";
+      fieldErrors.accepted =
+        "Vous devez accepter les conditions pour continuer.";
     }
 
     setErrors(fieldErrors);
@@ -56,6 +59,11 @@ export default function Register(): JSX.Element {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setAccountCreated(false);
+
+    if (honeypot) {
+      return;
+    }
 
     if (!validateForm()) {
       return;
@@ -68,7 +76,10 @@ export default function Register(): JSX.Element {
     );
 
     if (response?.message === SUCCESS_MESSAGE) {
-      navigate("/login");
+      setAccountCreated(true);
+      setFormData({ name: "", surname: "", email: "", password: "" });
+      setConfirmPassword("");
+      setAccepted(false);
     } else {
       setErrors({
         form: "Impossible de créer ce compte. Vérifiez vos informations.",
@@ -196,6 +207,18 @@ export default function Register(): JSX.Element {
             <span className="register__error">{errors.accepted}</span>
           )}
 
+          <div className="register__honeypot" aria-hidden="true">
+            <label htmlFor="website">Site web</label>
+            <input
+              id="website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={honeypot}
+              onChange={(event) => setHoneypot(event.target.value)}
+            />
+          </div>
+
           <button className="register__button" type="submit">
             Créer mon profil
           </button>
@@ -203,6 +226,12 @@ export default function Register(): JSX.Element {
           {errors.form && (
             <p className="register__error register__error--form">
               {errors.form}
+            </p>
+          )}
+
+          {accountCreated && (
+            <p className="register__success" role="status">
+              Votre compte a été créé. Vous pouvez maintenant vous connecter.
             </p>
           )}
         </form>

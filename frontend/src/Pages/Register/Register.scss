@@ -134,6 +134,18 @@
     }
   }
 
+  &__success {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 14px;
+    color: $color-success;
+  }
+
+  &__honeypot {
+    position: absolute;
+    left: -9999px;
+  }
+
   @media (max-width: $breakpoint-mobile) {
     padding: 24px;
 
