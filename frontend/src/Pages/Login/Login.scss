@@ -53,7 +53,7 @@
     border-radius: 4px;
     background-color: $color-background;
     color: $color-text;
-    font-size: 15px;
+    font-size: 16px;
 
     &:focus {
       outline: 2px solid $color-accent;
@@ -118,13 +118,13 @@
     }
   }
 
-  @media (max-width: $breakpoint-mobile) {
-    & {
-      padding: 24px;
-    }
-
+  @include mobile {
     &__card {
       padding: 28px 22px;
+    }
+
+    &__title {
+      font-size: 24px;
     }
   }
 }
