@@ -147,5 +147,22 @@
     &__info {
       font-size: 12px;
     }
+
+    &__footer {
+      position: relative;
+    }
+
+    &__list {
+      position: static;
+    }
+
+    &__options {
+      min-width: 0;
+    }
+
+    &__option {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
   }
 }
