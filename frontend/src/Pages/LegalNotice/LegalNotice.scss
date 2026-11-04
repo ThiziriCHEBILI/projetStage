@@ -42,4 +42,29 @@
     line-height: 1.6;
     color: rgba($color-background, 0.75);
   }
+  @include mobile {
+    padding-top: 24px;
+
+    &__content {
+      padding: 24px 20px;
+    }
+
+    &__title {
+      margin-bottom: 24px;
+      font-size: 28px;
+    }
+
+    &__section {
+      margin-bottom: 28px;
+      padding-left: 14px;
+    }
+
+    &__heading {
+      font-size: 18px;
+    }
+
+    &__text {
+      font-size: 14px;
+    }
+  }
 }
