@@ -51,6 +51,14 @@
     padding: 12px 8px;
   }
 
+  &__item {
+    display: contents;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
   &__arrow {
     position: absolute;
     top: 34%;
@@ -66,6 +74,39 @@
 
     &--right {
       right: 12px;
+    }
+  }
+
+  @include tablet {
+    &__cards {
+      overflow-x: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__item--hidden {
+      display: contents;
+    }
+
+    &__arrow {
+      display: none;
+    }
+  }
+
+  @include mobile {
+    &__title {
+      font-size: 18px;
+    }
+
+    &__seeall {
+      font-size: 14px;
+    }
+
+    &__desc {
+      font-size: 14px;
     }
   }
 }

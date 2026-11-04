@@ -4,6 +4,14 @@
   width: 24%;
   flex-shrink: 0;
 
+  @include tablet {
+    width: 30%;
+  }
+
+  @include mobile {
+    width: 48%;
+  }
+
   &__visual {
     position: relative;
     margin-bottom: 10px;
@@ -23,6 +31,9 @@
     border-radius: 6px;
     border: 2px solid transparent;
     transition: border-color 0.25s ease;
+    @include mobile {
+      height: 180px;
+    }
   }
 
   &:hover &__image {
@@ -126,5 +137,15 @@
     position: fixed;
     inset: 0;
     z-index: 9;
+  }
+
+  @include mobile {
+    &__title {
+      font-size: 14px;
+    }
+
+    &__info {
+      font-size: 12px;
+    }
   }
 }
