@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 140px;
+  margin-top: 86px;
 
   &__button {
     min-width: 40px;
@@ -20,6 +20,11 @@
 
     &:hover {
       background-color: $color-surface-hover;
+    }
+
+    @include mobile {
+      min-width: 32px;
+      height: 32px;
     }
   }
 
