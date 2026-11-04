@@ -90,9 +90,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 13px 24px;
+    padding: 8px 24px;
     border-radius: 6px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     transition: background-color 0.2s ease;
   }
@@ -118,5 +118,46 @@
     i {
       color: $color-accent;
     }
+  }
+  @include mobile {
+    &__content {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    &__poster {
+      width: 100px;
+    }
+
+    &__title {
+      font-size: 28px;
+    }
+
+    &__meta {
+      font-size: 14px;
+    }
+
+    &__description {
+      font-size: 14px;
+    }
+
+    &__tag {
+      font-size: 12px;
+    }
+
+    &__background {
+      height: 280px;
+    }
+
+    &::after {
+      height: 280px;
+    }
+  }
+
+  &__play,
+  &__add {
+    gap: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
   }
 }
