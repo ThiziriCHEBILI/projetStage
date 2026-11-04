@@ -152,12 +152,12 @@
     &::after {
       height: 280px;
     }
-  }
 
-  &__play,
-  &__add {
-    gap: 8px;
-    padding: 10px 14px;
-    font-size: 12px;
+    &__play,
+    &__add {
+      gap: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+    }
   }
 }
