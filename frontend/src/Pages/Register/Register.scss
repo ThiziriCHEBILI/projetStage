@@ -1,9 +1,8 @@
 @use "../../styles/tools" as *;
 
 .register {
-  display: flex;
+  @include flex($justify: center);
   flex: 1;
-  justify-content: center;
   padding: 24px $container-padding;
 
   background-image:
@@ -19,11 +18,19 @@
     padding: 16px 34px;
     background-color: $color-surface;
     border-radius: 8px;
+
+    @include mobile {
+      padding: 28px 22px;
+    }
   }
   &__title {
     margin-bottom: 8px;
     font-size: 26px;
     text-align: center;
+
+    @include mobile {
+      font-size: 24px;
+    }
   }
 
   &__subtitle {
@@ -34,20 +41,22 @@
     text-align: center;
   }
   &__form {
-    display: flex;
-    flex-direction: column;
+    @include flex(column);
   }
 
   &__row {
-    display: flex;
-    gap: 8px;
+    @include flex($gap: 8px);
+
+    @include mobile {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 
   &__field {
-    display: flex;
+    @include flex(column);
     flex: 1;
     min-width: 0;
-    flex-direction: column;
     margin-bottom: 16px;
   }
 
@@ -83,9 +92,7 @@
   }
 
   &__options {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    @include flex($align: center, $gap: 10px);
     margin-bottom: 6px;
   }
 
@@ -145,20 +152,5 @@
   &__honeypot {
     position: absolute;
     left: -9999px;
-  }
-
-  @include mobile {
-    &__card {
-      padding: 28px 22px;
-    }
-
-    &__title {
-      font-size: 24px;
-    }
-
-    &__row {
-      flex-direction: column;
-      gap: 0;
-    }
   }
 }

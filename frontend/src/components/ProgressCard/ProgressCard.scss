@@ -1,7 +1,7 @@
 @use "../../styles/tools" as *;
 
 .progress {
-  width: 24%;
+  width: 23%;
   flex-shrink: 0;
 
   @include tablet {
@@ -43,16 +43,12 @@
   &__play {
     position: absolute;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex($justify: center, $align: center);
     border-radius: 6px;
     color: $color-text;
 
     i {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex($justify: center, $align: center);
       width: 48px;
       height: 48px;
       border-radius: 50%;
@@ -77,26 +73,33 @@
   }
 
   &__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex($justify: space-between, $align: center);
+
+    @include mobile {
+      position: relative;
+    }
   }
 
   &__title {
     font-size: 15px;
     font-weight: bold;
+
+    @include mobile {
+      font-size: 14px;
+    }
   }
 
   &__more {
     font-size: 16px;
     color: $color-text-muted;
-    @include tablet {
-      padding: 12px;
-      margin: -12px;
-    }
 
     &:hover {
       color: $color-text;
+    }
+
+    @include tablet {
+      padding: 12px;
+      margin: -12px;
     }
   }
 
@@ -104,10 +107,18 @@
     font-size: 13px;
     color: $color-text-subtle;
     margin-top: 4px;
+
+    @include mobile {
+      font-size: 12px;
+    }
   }
 
   &__list {
     position: relative;
+
+    @include mobile {
+      position: static;
+    }
   }
 
   &__options {
@@ -122,6 +133,10 @@
     border-radius: 6px;
     background-color: $color-surface;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+    @include mobile {
+      min-width: 0;
+    }
   }
 
   &__option {
@@ -136,37 +151,15 @@
       background-color: rgba($color-text, 0.08);
       color: $color-text;
     }
+
+    @include mobile {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
   }
   &__backdrop {
     position: fixed;
     inset: 0;
     z-index: 9;
-  }
-
-  @include mobile {
-    &__title {
-      font-size: 14px;
-    }
-
-    &__info {
-      font-size: 12px;
-    }
-
-    &__footer {
-      position: relative;
-    }
-
-    &__list {
-      position: static;
-    }
-
-    &__options {
-      min-width: 0;
-    }
-
-    &__option {
-      padding: 8px 10px;
-      font-size: 12px;
-    }
   }
 }

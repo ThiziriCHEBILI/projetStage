@@ -1,9 +1,8 @@
 @use "../../styles/tools" as *;
 
 .filters {
-  display: flex;
+  @include flex($gap: 10px);
   flex-wrap: wrap;
-  gap: 10px;
 
   @include mobile {
     flex-wrap: nowrap;
@@ -24,13 +23,14 @@
     cursor: pointer;
     text-transform: capitalize;
     transition: background-color 0.2s ease;
-    @include mobile {
-      flex-shrink: 0;
-      padding: 8px 16px;
-    }
 
     &:hover {
       background-color: $color-surface-hover;
+    }
+
+    @include mobile {
+      flex-shrink: 0;
+      padding: 8px 16px;
     }
 
     &--active {

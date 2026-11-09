@@ -5,6 +5,10 @@
   background-color: $color-text;
   color: $color-background;
 
+  @include mobile {
+    padding-top: 24px;
+  }
+
   &__content {
     max-width: 960px;
     margin: 0 auto;
@@ -12,12 +16,21 @@
     border: 1px solid rgba($color-background, 0.1);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba($color-background, 0.08);
+
+    @include mobile {
+      padding: 24px 20px;
+    }
   }
 
   &__title {
     margin-bottom: 32px;
     font-size: 40px;
     font-weight: bold;
+
+    @include mobile {
+      margin-bottom: 24px;
+      font-size: 28px;
+    }
   }
 
   &__section {
@@ -28,12 +41,21 @@
     &:last-child {
       margin-bottom: 0;
     }
+
+    @include mobile {
+      margin-bottom: 28px;
+      padding-left: 14px;
+    }
   }
 
   &__heading {
     margin-bottom: 10px;
     font-size: 24px;
     font-weight: bold;
+
+    @include mobile {
+      font-size: 18px;
+    }
   }
 
   &__text {
@@ -41,29 +63,8 @@
     font-size: 18px;
     line-height: 1.6;
     color: rgba($color-background, 0.75);
-  }
-  @include mobile {
-    padding-top: 24px;
 
-    &__content {
-      padding: 24px 20px;
-    }
-
-    &__title {
-      margin-bottom: 24px;
-      font-size: 28px;
-    }
-
-    &__section {
-      margin-bottom: 28px;
-      padding-left: 14px;
-    }
-
-    &__heading {
-      font-size: 18px;
-    }
-
-    &__text {
+    @include mobile {
       font-size: 14px;
     }
   }

@@ -3,9 +3,17 @@
 .my-list {
   padding: 40px $container-padding 60px;
 
+  @include mobile {
+    padding-top: 24px;
+  }
+
   &__title {
     font-size: 40px;
     font-weight: bold;
+
+    @include mobile {
+      font-size: 28px;
+    }
   }
 
   &__desc {
@@ -15,6 +23,11 @@
     font-size: 16px;
     line-height: 1.6;
     color: $color-text-muted;
+
+    @include mobile {
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
   }
 
   &__grid {
@@ -44,27 +57,12 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex($justify: center, $align: center);
     width: 34px;
     height: 34px;
     border-radius: 50%;
     background-color: rgba($color-background, 0.7);
     color: $color-accent;
     z-index: 2;
-  }
-
-  @include mobile {
-    padding-top: 24px;
-
-    &__title {
-      font-size: 28px;
-    }
-
-    &__desc {
-      margin-bottom: 24px;
-      font-size: 14px;
-    }
   }
 }

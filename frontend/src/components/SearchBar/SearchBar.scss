@@ -2,9 +2,7 @@
 
 .search-bar {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  @include flex($align: center, $gap: 10px);
   padding: 8px 14px;
   border-radius: 10px;
   background-color: $color-surface;
@@ -49,9 +47,7 @@
   }
 
   &__item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    @include flex($align: center, $gap: 12px);
     padding: 8px 14px;
     color: $color-text;
 

@@ -3,9 +3,17 @@
 .category {
   padding: 40px $container-padding 48px;
 
+  @include mobile {
+    padding-top: 24px;
+  }
+
   &__title {
     font-size: 40px;
     font-weight: bold;
+
+    @include mobile {
+      font-size: 28px;
+    }
   }
 
   &__desc {
@@ -15,6 +23,11 @@
     font-size: 16px;
     line-height: 1.6;
     color: $color-text-muted;
+
+    @include mobile {
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
   }
 
   &__grid {
@@ -38,18 +51,5 @@
 
   &__types {
     margin-bottom: 32px;
-  }
-
-  @include mobile {
-    padding-top: 24px;
-
-    &__title {
-      font-size: 28px;
-    }
-
-    &__desc {
-      margin-bottom: 24px;
-      font-size: 14px;
-    }
   }
 }

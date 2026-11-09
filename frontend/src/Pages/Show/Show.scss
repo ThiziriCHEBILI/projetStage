@@ -23,10 +23,8 @@
     color: $color-text-muted;
   }
   &__dots {
-    display: flex;
-    gap: 8px;
+    @include flex($justify: center, $gap: 8px);
     padding: 20px 0;
-    justify-content: center;
   }
 
   &__dot {
