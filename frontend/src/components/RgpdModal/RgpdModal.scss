@@ -91,19 +91,11 @@
   }
 
   &__confirm {
-    background-color: $color-accent;
     font-weight: bold;
-
-    &:hover {
-      background-color: $color-accent-hover;
-    }
+    @include button-color($color-accent, $color-accent-hover);
   }
 
   &__cancel {
-    background-color: $color-surface;
-
-    &:hover {
-      background-color: $color-surface-hover;
-    }
+    @include button-color($color-surface, $color-surface-hover);
   }
 }

@@ -24,11 +24,7 @@
 
   &__seeall {
     font-size: 16px;
-    color: $color-text-muted;
-
-    &:hover {
-      color: $color-text;
-    }
+    @include link-hover($animate: false);
 
     @include mobile {
       font-size: 14px;
@@ -86,7 +82,6 @@
     z-index: 2;
     font-size: 28px;
     color: $color-text;
-    cursor: pointer;
 
     @include tablet {
       display: none;

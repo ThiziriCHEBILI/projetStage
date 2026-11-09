@@ -17,10 +17,7 @@
 
   &__content {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     @include flex(column, $justify: flex-end, $align: flex-start);
     padding: 0 $container-padding 40px 80px;
     background-image: linear-gradient(to right, $color-background, transparent);
@@ -49,10 +46,6 @@
     letter-spacing: 1px;
     color: $color-text;
     background-image: linear-gradient(to right, $color-text, $color-accent 44%);
-
-    @include mobile {
-      font-size: 12px;
-    }
   }
 
   &__title {
@@ -109,7 +102,6 @@
     border-radius: 4px;
     font-size: 15px;
     font-weight: bold;
-    cursor: pointer;
     transition:
       transform 0.25s ease,
       background-color 0.25s ease,
@@ -144,7 +136,6 @@
     z-index: 2;
     font-size: 32px;
     color: $color-text-muted;
-    cursor: pointer;
     transition:
       transform 0.25s ease,
       color 0.25s ease;

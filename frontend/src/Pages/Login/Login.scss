@@ -87,14 +87,9 @@
   &__button {
     padding: 13px;
     border-radius: 4px;
-    background-color: $color-accent;
-    color: $color-text;
     font-size: 16px;
     font-weight: 600;
-
-    &:hover {
-      background-color: $color-accent-hover;
-    }
+    @include button-color($color-accent, $color-accent-hover, $color-text);
   }
 
   &__error {

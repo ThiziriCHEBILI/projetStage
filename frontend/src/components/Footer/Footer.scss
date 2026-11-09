@@ -65,12 +65,7 @@
 
     a {
       font-size: 16px;
-      color: $color-text-muted;
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: $color-text;
-      }
+      @include link-hover;
 
       @include mobile {
         font-size: 14px;

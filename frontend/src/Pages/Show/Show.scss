@@ -15,13 +15,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 24px;
-    padding: 0;
-    list-style: none;
   }
 
   &__empty {
     color: $color-text-muted;
   }
+
   &__dots {
     @include flex($justify: center, $gap: 8px);
     padding: 20px 0;
@@ -48,6 +47,7 @@
     padding: 0 $container-padding;
   }
 }
+
 @keyframes blink {
   0%,
   100% {

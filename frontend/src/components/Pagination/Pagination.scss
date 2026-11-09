@@ -12,14 +12,8 @@
     border-radius: 8px;
     font-size: 15px;
     font-weight: bold;
-    background-color: $color-surface;
-    color: $color-text;
-    cursor: pointer;
     transition: background-color 0.25s ease;
-
-    &:hover {
-      background-color: $color-surface-hover;
-    }
+    @include button-color($color-surface, $color-surface-hover, $color-text);
 
     @include mobile {
       min-width: 32px;
