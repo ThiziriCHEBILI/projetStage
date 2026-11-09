@@ -37,7 +37,7 @@ export function ProgressCard({
   return (
     <article className="progress">
       <div className="progress__visual">
-        <img src={image} alt="" className="progress__image" />
+        <img src={image} alt="" className="progress__image" loading="lazy" />
 
         <button
           type="button"

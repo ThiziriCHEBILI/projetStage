@@ -34,6 +34,7 @@ export function EpisodeCard({
             src={imageUrl(show, episode.image_video)}
             alt=""
             className="episode__image"
+            loading="lazy"
           />
           <span className="episode__quality">{episode.video_quality}</span>
           <span className="episode__duration">
