@@ -62,6 +62,7 @@
   &__infos {
     @include flex(column, $align: flex-start);
   }
+
   &__title {
     margin-bottom: 12px;
     font-size: 42px;
@@ -129,22 +130,12 @@
   }
 
   &__play {
-    background-color: $color-accent;
-    color: $color-text;
-
-    &:hover {
-      background-color: $color-accent-hover;
-    }
+    @include button-color($color-accent, $color-accent-hover, $color-text);
   }
 
   &__add {
     border: 1px solid $color-text-subtle;
-    background-color: rgba($color-surface, 0.9);
-    color: $color-text;
-
-    &:hover {
-      background-color: $color-surface-hover;
-    }
+    @include button-color(rgba($color-surface, 0.9), $color-surface-hover, $color-text);
 
     i {
       color: $color-accent;

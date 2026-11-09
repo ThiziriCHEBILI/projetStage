@@ -2,7 +2,6 @@
 
 .top {
   position: relative;
-  width: 100%;
   padding: 10px;
   border-radius: 8px;
   background-color: $color-surface;
@@ -32,6 +31,7 @@
     transition:
       transform 0.25s ease,
       border-color 0.25s ease;
+
     @include mobile {
       height: 200px;
     }

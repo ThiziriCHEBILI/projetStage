@@ -10,10 +10,6 @@
 
   &__navigation {
     @include flex($align: center, $gap: 40px);
-
-    @include tablet {
-      gap: 20px;
-    }
   }
 
   &__tools {
@@ -45,12 +41,7 @@
   &__login {
     @include flex($align: center, $gap: 8px);
     font-size: 16px;
-    color: $color-text-muted;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: $color-text;
-    }
+    @include link-hover;
 
     i {
       font-size: 18px;
@@ -83,20 +74,12 @@
   &__search-button {
     padding: 8px;
     font-size: 18px;
-    color: $color-text-muted;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: $color-text;
-    }
+    @include link-hover;
   }
 
   &__search-backdrop {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
   }
 
   &__search-panel {
