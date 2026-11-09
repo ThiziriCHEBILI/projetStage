@@ -1,22 +1,7 @@
 @use "../../styles/tools" as *;
 
 .nav {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-
-  &__link {
-    font-size: 16px;
-    color: $color-text-muted;
-    transition: color 0.2s ease;
-    padding-bottom: 6px;
-    border-bottom: 3px solid transparent;
-
-    &.active {
-      color: $color-text;
-      border-bottom-color: $color-accent;
-    }
-  }
+  @include flex($align: center, $gap: 28px);
 
   @include tablet {
     position: fixed;
@@ -30,18 +15,29 @@
     padding: 0 8px;
     background-color: $color-background-bar;
     border-top: 1px solid $color-surface;
+  }
 
-    &__link {
+  &__link {
+    font-size: 16px;
+    color: $color-text-muted;
+    transition: color 0.2s ease;
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+
+    @include tablet {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex($justify: center, $align: center);
       text-align: center;
       font-size: 13px;
       padding-bottom: 0;
       border-bottom: none;
+    }
 
-      &.active {
+    &.active {
+      color: $color-text;
+      border-bottom-color: $color-accent;
+
+      @include tablet {
         color: $color-accent-light;
       }
     }

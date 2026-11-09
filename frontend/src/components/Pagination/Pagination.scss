@@ -1,9 +1,7 @@
 @use "../../styles/tools" as *;
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+  @include flex($justify: center, $gap: 8px);
   flex-wrap: wrap;
   margin-top: 86px;
 
