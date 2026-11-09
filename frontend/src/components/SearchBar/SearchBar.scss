@@ -1,10 +1,8 @@
-@use "../../index" as *;
+@use "../../styles/tools" as *;
 
 .search-bar {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  @include flex($align: center, $gap: 10px);
   padding: 8px 14px;
   border-radius: 10px;
   background-color: $color-surface;
@@ -19,8 +17,9 @@
     outline: none;
     background: none;
     color: $color-text;
-    font-size: 14px;
-    width: 220px;
+    font-size: 16px;
+    flex: 1;
+    min-width: 0;
 
     &::placeholder {
       color: $color-text-subtle;
@@ -43,12 +42,12 @@
     border-radius: 10px;
     background-color: $color-surface;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    max-height: 60vh;
+    overflow-y: auto;
   }
 
   &__item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    @include flex($align: center, $gap: 12px);
     padding: 8px 14px;
     color: $color-text;
 

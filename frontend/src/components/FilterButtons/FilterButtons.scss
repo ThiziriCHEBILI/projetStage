@@ -1,9 +1,18 @@
-@use "../../index" as *;
+@use "../../styles/tools" as *;
 
 .filters {
-  display: flex;
+  @include flex($gap: 10px);
   flex-wrap: wrap;
-  gap: 10px;
+
+  @include mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 
   &__button {
     padding: 10px 22px;
@@ -17,6 +26,11 @@
 
     &:hover {
       background-color: $color-surface-hover;
+    }
+
+    @include mobile {
+      flex-shrink: 0;
+      padding: 8px 16px;
     }
 
     &--active {

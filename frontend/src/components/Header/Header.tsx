@@ -11,10 +11,16 @@ export function Header(): JSX.Element {
   const { user, loadingUser, logout } = useAuth();
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
   const suggestions = useSearchSuggestions(searchText);
 
   function handleSearch(text: string): void {
     setSearchText(text);
+  }
+
+  function closeSearch(): void {
+    setSearchOpen(false);
+    setSearchText("");
   }
 
   function handleSubmit(): void {
@@ -49,11 +55,36 @@ export function Header(): JSX.Element {
       </div>
 
       <div className="header__tools">
-        <SearchBar
-          suggestions={suggestions}
-          onSearch={handleSearch}
-          onSubmit={handleSubmit}
-        />
+        <div className="header__search">
+          <button
+            type="button"
+            className="header__search-button"
+            aria-label={
+              searchOpen ? "Fermer la recherche" : "Ouvrir la recherche"
+            }
+            aria-expanded={searchOpen}
+            onClick={() => setSearchOpen(!searchOpen)}
+          >
+            <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          </button>
+
+          {searchOpen && (
+            <>
+              <div
+                className="header__search-backdrop"
+                onClick={closeSearch}
+              ></div>
+
+              <div className="header__search-panel">
+                <SearchBar
+                  suggestions={suggestions}
+                  onSearch={handleSearch}
+                  onSubmit={handleSubmit}
+                />
+              </div>
+            </>
+          )}
+        </div>
 
         {!loadingUser &&
           (user ? (

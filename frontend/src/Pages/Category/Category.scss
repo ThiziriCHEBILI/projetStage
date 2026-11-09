@@ -1,11 +1,19 @@
-@use "../../index" as *;
+@use "../../styles/tools" as *;
 
 .category {
-  padding: 40px $container-padding 60px;
+  padding: 40px $container-padding 48px;
+
+  @include mobile {
+    padding-top: 24px;
+  }
 
   &__title {
     font-size: 40px;
     font-weight: bold;
+
+    @include mobile {
+      font-size: 28px;
+    }
   }
 
   &__desc {
@@ -15,12 +23,26 @@
     font-size: 16px;
     line-height: 1.6;
     color: $color-text-muted;
+
+    @include mobile {
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
   }
 
   &__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+
+    @include tablet {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include mobile {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
 
     .card__link {
       width: 100%;

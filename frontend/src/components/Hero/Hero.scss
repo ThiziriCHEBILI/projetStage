@@ -1,4 +1,4 @@
-@use "../../index" as *;
+@use "../../styles/tools" as *;
 
 .hero {
   position: relative;
@@ -9,6 +9,10 @@
     width: 100%;
     height: 420px;
     object-fit: cover;
+
+    @include mobile {
+      height: 364px;
+    }
   }
 
   &__content {
@@ -17,18 +21,23 @@
     bottom: 0;
     left: 0;
     right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0 $container-padding 0 80px;
+    @include flex(column, $justify: flex-end, $align: flex-start);
+    padding: 0 $container-padding 40px 80px;
     background-image: linear-gradient(to right, $color-background, transparent);
+
+    @include mobile {
+      padding: 0 $container-padding 40px;
+    }
   }
 
   &__counter {
     font-size: 13px;
     letter-spacing: 2px;
     color: $color-text-subtle;
+
+    @include mobile {
+      font-size: 12px;
+    }
   }
 
   &__badge {
@@ -40,38 +49,55 @@
     letter-spacing: 1px;
     color: $color-text;
     background-image: linear-gradient(to right, $color-text, $color-accent 44%);
+
+    @include mobile {
+      font-size: 12px;
+    }
   }
 
   &__title {
     max-width: 520px;
-    height: 98px;
     margin-top: 18px;
     font-size: 48px;
     font-weight: bold;
     line-height: 1.1;
+    height: 106px;
+    @include flex($align: flex-end);
+
+    @include mobile {
+      height: 62px;
+      font-size: 28px;
+    }
   }
 
   &__info {
     margin-top: 18px;
     font-size: 15px;
     color: $color-text-muted;
+
+    @include mobile {
+      font-size: 14px;
+    }
   }
 
   &__desc {
     max-width: 520px;
     height: 72px;
-    display: flex;
-    align-items: center;
-    margin-top: 24px;
+    @include flex($align: center);
+    margin-top: 14px;
     font-size: 16px;
     line-height: 1.5;
     color: $color-text-muted;
+
+    @include mobile {
+      height: 63px;
+      font-size: 14px;
+    }
   }
 
   &__actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 28px;
+    @include flex($gap: 12px);
+    margin-top: 14px;
   }
 
   &__watch,
@@ -93,6 +119,11 @@
       transform: scale(1.05);
       color: $color-background;
       background-color: $color-accent-light;
+    }
+
+    @include mobile {
+      padding: 8px 16px;
+      font-size: 14px;
     }
   }
 
@@ -121,6 +152,10 @@
     &:hover {
       transform: translateY(-50%) scale(1.25);
       color: $color-text;
+    }
+
+    @include mobile {
+      display: none;
     }
 
     &--left {

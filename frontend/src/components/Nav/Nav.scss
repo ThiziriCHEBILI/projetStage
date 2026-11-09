@@ -1,20 +1,45 @@
-@use "../../index" as *;
+@use "../../styles/tools" as *;
 
 .nav {
-  display: flex;
-  align-items: center;
-  gap: 28px;
+  @include flex($align: center, $gap: 28px);
 
-  a {
+  @include tablet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    align-items: stretch;
+    gap: 0;
+    height: 64px;
+    padding: 0 8px;
+    background-color: $color-background-bar;
+    border-top: 1px solid $color-surface;
+  }
+
+  &__link {
     font-size: 16px;
     color: $color-text-muted;
     transition: color 0.2s ease;
     padding-bottom: 6px;
     border-bottom: 3px solid transparent;
 
+    @include tablet {
+      flex: 1;
+      @include flex($justify: center, $align: center);
+      text-align: center;
+      font-size: 13px;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
     &.active {
       color: $color-text;
       border-bottom-color: $color-accent;
+
+      @include tablet {
+        color: $color-accent-light;
+      }
     }
   }
 }

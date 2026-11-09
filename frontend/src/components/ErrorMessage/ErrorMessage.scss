@@ -1,5 +1,4 @@
-@use "../../index" as *;
-
+@use "../../styles/tools" as *;
 .error-message {
   position: fixed;
   bottom: 24px;
@@ -11,4 +10,15 @@
   border-radius: 8px;
   background-color: $color-accent;
   color: $color-text;
+
+  @include tablet {
+    bottom: 80px;
+  }
+
+  @include mobile {
+    left: $container-padding;
+    right: $container-padding;
+    transform: none;
+    text-align: center;
+  }
 }

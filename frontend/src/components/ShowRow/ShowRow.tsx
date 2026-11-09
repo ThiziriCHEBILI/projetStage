@@ -34,6 +34,9 @@ export function ShowRow({
     }
   };
 
+  const start = page * maxCards;
+  const end = start + maxCards;
+
   return (
     <section className="row">
       <div className="row__header">
@@ -59,12 +62,28 @@ export function ShowRow({
             aria-label="Page précédente"
             onClick={previous}
           >
-            <i className="fa-solid fa-circle-chevron-left" aria-hidden="true"></i>
+            <i
+              className="fa-solid fa-circle-chevron-left"
+              aria-hidden="true"
+            ></i>
           </button>
         )}
 
         <div className="row__cards">
-          {cards.slice(page * maxCards, page * maxCards + maxCards + 1)}
+          {cards.map((card, index) => {
+            const isHidden = index < start || index > end;
+
+            return (
+              <div
+                key={index}
+                className={
+                  isHidden ? "row__item row__item--hidden" : "row__item"
+                }
+              >
+                {card}
+              </div>
+            );
+          })}
         </div>
 
         {page < totalPages - 1 && (
@@ -74,7 +93,10 @@ export function ShowRow({
             aria-label="Page suivante"
             onClick={next}
           >
-            <i className="fa-solid fa-circle-chevron-right" aria-hidden="true"></i>
+            <i
+              className="fa-solid fa-circle-chevron-right"
+              aria-hidden="true"
+            ></i>
           </button>
         )}
       </div>
