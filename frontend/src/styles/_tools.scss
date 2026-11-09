@@ -37,3 +37,11 @@ $breakpoint-mobile: 767px;
     @content;
   }
 }
+
+@mixin flex($direction: null, $justify: null, $align: null, $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
