@@ -27,6 +27,7 @@ export function ShowBanner({
         src={imageUrl(show, show.image_show)}
         alt=""
         className="banner__background"
+        fetchPriority="high"
       />
 
       <div className="banner__content">

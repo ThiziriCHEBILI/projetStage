@@ -24,6 +24,7 @@ export function TopCard({ show, position }: TopCardProps): JSX.Element {
           src={imageUrl(show, show.image_poster)}
           alt={"Numéro " + position + " : " + show.title}
           className="top__poster"
+          loading="lazy"
         />
       </article>
     </Link>
