@@ -2,7 +2,7 @@ import { useState, type JSX } from "react";
 import { Link } from "react-router";
 import type { UserProgress } from "../../Types";
 import { formatSeasonEpisode, formatSeconds } from "../../utilities/convert";
-import { imageUrl } from "../../utilities/imageUrl";
+import { smallImageUrl } from "../../utilities/imageUrl";
 import "./ProgressCard.scss";
 
 interface ProgressCardProps {
@@ -26,7 +26,7 @@ export function ProgressCard({
   const show = video.show;
   const percent = (progress.watched_seconds / video.duration) * 100;
   const remaining = video.duration - progress.watched_seconds;
-  const image = imageUrl(show, video.image_video);
+  const image = smallImageUrl(show, video.image_video);
 
   let videoInfo = "Film | ";
   if (video.saison_number !== null && video.episode_number !== null) {

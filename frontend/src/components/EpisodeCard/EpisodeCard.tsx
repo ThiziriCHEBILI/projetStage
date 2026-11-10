@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 import { formatSeconds } from "../../utilities/convert";
-import { imageUrl } from "../../utilities/imageUrl";
+import { smallImageUrl } from "../../utilities/imageUrl";
 import type { ShowVideo, ShowDetail } from "../../Types";
 import "./EpisodeCard.scss";
 
@@ -31,7 +31,7 @@ export function EpisodeCard({
       >
         <span className="episode__thumb">
           <img
-            src={imageUrl(show, episode.image_video)}
+            src={smallImageUrl(show, episode.image_video)}
             alt=""
             className="episode__image"
             loading="lazy"
