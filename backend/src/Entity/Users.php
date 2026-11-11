@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -23,14 +24,21 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 25)]
     #[Groups(['user:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 25)]
     private ?string $surname = null;
 
     #[ORM\Column(length: 25)]
     #[Groups(['user:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 25)]
     private ?string $name = null;
 
     #[ORM\Column(length: 100)]
     #[Groups(['user:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Email]
+    #[Assert\Length(max: 100)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -74,7 +82,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->surname;
     }
 
-    public function setSurname(string $surname): static
+    public function setSurname(?string $surname): static
     {
         $this->surname = $surname;
 
@@ -86,7 +94,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -98,7 +106,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
 
