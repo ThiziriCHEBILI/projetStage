@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ShowRepository::class)]
 #[ORM\Table(name: '`show`')]
@@ -21,10 +22,13 @@ class Show
 
     #[ORM\Column(length: 30)]
     #[Groups(['show:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 30)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['show:read'])]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -33,6 +37,7 @@ class Show
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['show:read'])]
+    #[Assert\NotNull]
     private ?\DateTime $release_date = null;
 
     #[ORM\ManyToOne(inversedBy: 'shows')]
@@ -49,26 +54,35 @@ class Show
 
     #[ORM\Column(length: 100, nullable: true)]
     #[Groups(['show:read'])]
+    #[Assert\Choice(choices: ['award winner'])]
     private ?string $award = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     #[Groups(['show:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])]
     private ?string $type_show = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['show:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $image_show = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['show:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $image_poster = null;
 
     #[ORM\Column(nullable: true)]
     #[Groups(['show:read'])]
+    #[Assert\Positive]
     private ?int $season_count = null;
 
     #[ORM\Column(length: 10, nullable: true)]
     #[Groups(['show:read'])]
+    #[Assert\Length(max: 10)]
     private ?string $quality = null;
 
 
@@ -88,7 +102,7 @@ class Show
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(?string $title): static
     {
         $this->title = $title;
 
@@ -100,7 +114,7 @@ class Show
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -124,7 +138,7 @@ class Show
         return $this->release_date;
     }
 
-    public function setReleaseDate(\DateTime $release_date): static
+    public function setReleaseDate(?\DateTime $release_date): static
     {
         $this->release_date = $release_date;
 
@@ -202,7 +216,7 @@ class Show
         return $this->image_show;
     }
 
-    public function setImageShow(string $image_show): static
+    public function setImageShow(?string $image_show): static
     {
         $this->image_show = $image_show;
 
@@ -214,7 +228,7 @@ class Show
         return $this->image_poster;
     }
 
-    public function setImagePoster(string $image_poster): static
+    public function setImagePoster(?string $image_poster): static
     {
         $this->image_poster = $image_poster;
 

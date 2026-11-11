@@ -9,8 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\DBAL\Exception as DBALException;
 use App\Entity\CategoriesShow;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Form\CategoryFormType;
 
 #[Route('/categories', name: 'app_categories_show')]
 final class CategoriesShowController extends AbstractController
@@ -20,7 +19,7 @@ final class CategoriesShowController extends AbstractController
     {
         try {
             $categories = $em->getRepository(CategoriesShow::class)->findAll();
-            if(!$categories){
+            if (!$categories) {
                 return $this->json(['message' => 'Aucune catégorie trouvée'], 404);
             }
 
@@ -33,28 +32,25 @@ final class CategoriesShowController extends AbstractController
     }
 
     #[Route('', name: 'post_category', methods: ['POST'])]
-    public function createCategory(Request $request, EntityManagerInterface $em, ValidatorInterface $validator): JsonResponse
+    public function createCategory(Request $request, EntityManagerInterface $em): JsonResponse
     {
         try {
             $data = json_decode($request->getContent(), true);
             if (!$data) {
                 return $this->json(["message" => "Données invalides ou corps de requête vide"], 400);
             }
-            $constraints = new Assert\Collection([
-                'name' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 25)],
-             
-            ]);
+            $category = new CategoriesShow();
+            $form = $this->createForm(CategoryFormType::class, $category);
+            $form->submit($data);
 
-            $errors = $validator->validate($data, $constraints);
-            if (count($errors) > 0) {
-                return $this->json(["message" => (string) $errors], 400);
+            if (!$form->isValid()) {
+                return $this->json(["message" => (string) $form->getErrors(true)], 400);
             }
-            $category = $em->getRepository(CategoriesShow::class)->findOneBy(['name' => $data['name']]);
-            if ($category) {
+
+            $existingCategory = $em->getRepository(CategoriesShow::class)->findOneBy(['name' => $category->getName()]);
+            if ($existingCategory) {
                 return $this->json(['message' => 'Cette catégorie existe déjà'], 409);
             }
-            $category = new CategoriesShow();
-            $category->setName($data['name']);
 
             $em->persist($category);
             $em->flush();
@@ -67,7 +63,7 @@ final class CategoriesShowController extends AbstractController
         }
     }
 
-#[Route('/{id}', name: 'delete_category', methods: ['DELETE'], requirements: ['id' => '\d+'])]
+    #[Route('/{id}', name: 'delete_category', methods: ['DELETE'], requirements: ['id' => '\d+'])]
     public function deleteCategory(int $id, EntityManagerInterface $em): JsonResponse
 
     {
@@ -92,6 +88,4 @@ final class CategoriesShowController extends AbstractController
             return $this->json(['message' => 'Une erreur inattendue est survenue'], 500);
         }
     }
-
-
 }
