@@ -11,8 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Exception as DBALException;
 use App\Entity\Show;
 use App\Entity\CategoriesShow;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Form\ShowFormType;
 
 #[Route('/shows', name: 'app_show')]
 final class ShowsController extends AbstractController
@@ -135,7 +134,7 @@ final class ShowsController extends AbstractController
 
 
     #[Route('/{name}', name: 'post_shows', methods: ['POST'])]
-    public function createShow(string $name, Request $request, EntityManagerInterface $em, ValidatorInterface $validator): JsonResponse
+    public function createShow(string $name, Request $request, EntityManagerInterface $em): JsonResponse
     {
         try {
 
@@ -149,35 +148,15 @@ final class ShowsController extends AbstractController
                 return $this->json(["message" => "Données invalides ou corps de requête vide"], 400);
             }
 
-            $constraints = new Assert\Collection([
-                'title' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 30)],
-                'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
-                'release_date' => [new Assert\NotBlank(), new Assert\Date()],
-                'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
-                'award' => new Assert\Optional([new Assert\Choice(choices: ['award winner'])]),
-                'image_show' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
-                'image_poster' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
-                'season_count' => new Assert\Optional([new Assert\Type(type: 'integer'), new Assert\Positive()]),
-                'quality' => new Assert\Optional([new Assert\Type(type: 'string'), new Assert\Length(max: 10),]),
-            ]);
+            $show = new Show();
+            $form = $this->createForm(ShowFormType::class, $show);
+            $form->submit($data);
 
-            $errors = $validator->validate($data, $constraints);
-            if (count($errors) > 0) {
-                return $this->json(["message" => (string) $errors], 400);
+            if (!$form->isValid()) {
+                return $this->json(["message" => (string) $form->getErrors(true)], 400);
             }
 
-
-            $show = new Show();
-            $show->setTitle($data['title']);
-            $show->setDescription($data['description']);
             $show->setDatePublication(new \DateTime());
-            $show->setReleaseDate(new \DateTime($data['release_date']));
-            $show->setTypeShow($data['type_show']);
-            $show->setAward($data['award'] ?? null);
-            $show->setImageShow($data['image_show']);
-            $show->setImagePoster($data['image_poster']);
-            $show->setSeasonCount($data['season_count'] ?? null);
-            $show->setQuality($data['quality'] ?? null);
             $show->setCategoryShow($category);
             $em->persist($show);
             $em->flush();
@@ -191,7 +170,7 @@ final class ShowsController extends AbstractController
     }
 
     #[Route('/{name}/{id}', name: 'put_one_show_by_category', methods: ['PUT'], requirements: ['id' => '\d+'])]
-    public function updateShowByCategory(string $name, int $id, Request $request, EntityManagerInterface $em, ValidatorInterface $validator): JsonResponse
+    public function updateShowByCategory(string $name, int $id, Request $request, EntityManagerInterface $em): JsonResponse
 
     {
         try {
@@ -213,35 +192,12 @@ final class ShowsController extends AbstractController
                 return $this->json(["message" => "Données invalides ou corps de requête vide"], 400);
             }
 
-            $constraints = new Assert\Collection([
-                'title' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 30)],
-                'description' => [new Assert\NotBlank(), new Assert\Type(type: 'string')],
-                'release_date' => [new Assert\NotBlank(), new Assert\Date()],
-                'type_show' => [new Assert\NotBlank(), new Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])],
-                'award' => new Assert\Optional([new Assert\Choice(choices: ['award winner'])]),
-                'image_show' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
-                'image_poster' => [new Assert\NotBlank(), new Assert\Type(type: 'string'), new Assert\Length(max: 255)],
-                'season_count' => new Assert\Optional([new Assert\Type(type: 'integer'), new Assert\Positive()]),
-                'quality' => new Assert\Optional([new Assert\Type(type: 'string'), new Assert\Length(max: 10),]),
+            $form = $this->createForm(ShowFormType::class, $show);
+            $form->submit($data);
 
-            ]);
-
-            $errors = $validator->validate($data, $constraints);
-            if (count($errors) > 0) {
-                return $this->json(["message" => (string) $errors], 400);
+            if (!$form->isValid()) {
+                return $this->json(["message" => (string) $form->getErrors(true)], 400);
             }
-
-            $show->setTitle($data['title']);
-            $show->setDescription($data['description']);
-            $show->setReleaseDate(new \DateTime($data['release_date']));
-            $show->setTypeShow($data['type_show']);
-            $show->setAward($data['award'] ?? null);
-            $show->setImageShow($data['image_show']);
-            $show->setImagePoster($data['image_poster']);
-            $show->setSeasonCount($data['season_count'] ?? null);
-            $show->setQuality($data['quality'] ?? null);
-
-
             $em->flush();
 
             return $this->json($show, 200, [], ['groups' => 'show:read']);
