@@ -17,6 +17,7 @@ use App\Form\ShowFormType;
 #[Route('/shows', name: 'app_show')]
 final class ShowsController extends AbstractController
 {
+    private const SHOWS_PER_PAGE = 8;
     #[Route('/a-la-une', name: 'get_shows_winners_by_category', methods: ['GET'])]
     public function getShowsWinners(EntityManagerInterface $em): JsonResponse
     {
@@ -75,7 +76,7 @@ final class ShowsController extends AbstractController
             if ($page < 1) {
                 $page = 1;
             }
-            $limit = 8;
+            $limit = self::SHOWS_PER_PAGE;
             $offset = ($page - 1) * $limit;
 
             $type = $request->query->get('type');
