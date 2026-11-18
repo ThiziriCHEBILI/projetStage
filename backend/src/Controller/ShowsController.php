@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Exception as DBALException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Entity\Show;
 use App\Entity\CategoriesShow;
 use App\Form\ShowFormType;
@@ -134,6 +135,7 @@ final class ShowsController extends AbstractController
 
 
     #[Route('/{name}', name: 'post_shows', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function createShow(string $name, Request $request, EntityManagerInterface $em): JsonResponse
     {
         try {
@@ -170,6 +172,7 @@ final class ShowsController extends AbstractController
     }
 
     #[Route('/{name}/{id}', name: 'put_one_show_by_category', methods: ['PUT'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function updateShowByCategory(string $name, int $id, Request $request, EntityManagerInterface $em): JsonResponse
 
     {
@@ -210,6 +213,7 @@ final class ShowsController extends AbstractController
 
 
     #[Route('/{name}/{id}', name: 'delete_one_show_by_category', methods: ['DELETE'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteShowByCategory(string $name, int $id, EntityManagerInterface $em): JsonResponse
 
     {
