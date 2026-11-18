@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\DBAL\Exception as DBALException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Entity\CategoriesShow;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\CategoryFormType;
@@ -15,6 +16,7 @@ use App\Form\CategoryFormType;
 final class CategoriesShowController extends AbstractController
 {
     #[Route('', name: 'get_categories_show', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function getCategoriesShow(EntityManagerInterface $em): JsonResponse
     {
         try {
@@ -32,6 +34,7 @@ final class CategoriesShowController extends AbstractController
     }
 
     #[Route('', name: 'post_category', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function createCategory(Request $request, EntityManagerInterface $em): JsonResponse
     {
         try {
@@ -64,6 +67,7 @@ final class CategoriesShowController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete_category', methods: ['DELETE'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteCategory(int $id, EntityManagerInterface $em): JsonResponse
 
     {
