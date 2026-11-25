@@ -1,0 +1,52 @@
+@use "../../styles/tools" as *;
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  @include flex;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: rgba($color-background, 0.85);
+
+  &__box {
+    position: relative;
+    width: 100%;
+    margin: auto;
+
+    &--video {
+      max-width: min(960px, 130vh);
+    }
+
+    &--card {
+      max-width: 604px;
+      padding: 20px 28px;
+      border-radius: 12px;
+      border: 1px solid $color-accent-hover;
+      background-color: $color-background-bar;
+    }
+  }
+
+  &__close {
+    position: absolute;
+
+    &--video {
+      top: -44px;
+      right: 0;
+      font-size: 28px;
+      color: $color-text;
+
+      @include mobile {
+        top: -36px;
+        font-size: 22px;
+      }
+    }
+
+    &--card {
+      top: 12px;
+      right: 12px;
+      font-size: 18px;
+      @include link-hover;
+    }
+  }
+}

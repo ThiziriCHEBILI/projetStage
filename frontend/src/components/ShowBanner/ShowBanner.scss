@@ -1,0 +1,150 @@
+@use "../../styles/tools" as *;
+
+.banner {
+  position: relative;
+  padding: 60px $container-padding;
+  overflow: hidden;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    @include mobile {
+      height: 280px;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(to top, $color-background, transparent 70%),
+      linear-gradient(
+        to right,
+        rgba($color-background, 0.95) 30%,
+        rgba($color-background, 0.3) 100%
+      );
+
+    @include mobile {
+      height: 280px;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    @include flex($align: flex-start, $gap: 32px);
+
+    @include mobile {
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+
+  &__poster {
+    width: 220px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 8px;
+
+    @include mobile {
+      width: 100px;
+    }
+  }
+
+  &__infos {
+    @include flex(column, $align: flex-start);
+  }
+
+  &__title {
+    margin-bottom: 12px;
+    font-size: 42px;
+    font-weight: bold;
+
+    @include mobile {
+      font-size: 28px;
+    }
+  }
+
+  &__meta {
+    margin-bottom: 16px;
+    color: $color-text-muted;
+    font-size: 15px;
+
+    @include mobile {
+      font-size: 14px;
+    }
+  }
+
+  &__description {
+    max-width: 520px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+
+    @include mobile {
+      font-size: 14px;
+    }
+  }
+
+  &__tag {
+    display: inline-block;
+    margin-bottom: 24px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background-color: rgba($color-surface, 0.8);
+    color: $color-text-muted;
+    font-size: 13px;
+    text-transform: capitalize;
+
+    @include mobile {
+      font-size: 12px;
+    }
+  }
+
+  &__actions {
+    @include flex($align: center, $gap: 14px);
+  }
+
+  &__play,
+  &__add {
+    @include flex($align: center, $gap: 10px);
+    padding: 8px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+
+    @include mobile {
+      gap: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+    }
+  }
+
+  &__play {
+    @include button-color($color-accent, $color-accent-hover, $color-text);
+  }
+
+  &__add {
+    border: 1px solid $color-text-subtle;
+    @include button-color(
+      rgba($color-surface, 0.9),
+      $color-surface-hover,
+      $color-text
+    );
+
+    i {
+      color: $color-accent;
+    }
+  }
+}

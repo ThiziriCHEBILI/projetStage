@@ -1,0 +1,160 @@
+@use "../../styles/tools" as *;
+
+.hero {
+  position: relative;
+  margin-bottom: 40px;
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+
+    @include mobile {
+      height: 364px;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    inset: 0;
+    @include flex(column, $justify: flex-end, $align: flex-start);
+    padding: 0 $container-padding 40px 80px;
+    background-image: linear-gradient(to right, $color-background, transparent);
+
+    @include mobile {
+      padding: 0 $container-padding 40px;
+    }
+  }
+
+  &__counter {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: $color-text-subtle;
+
+    @include mobile {
+      font-size: 12px;
+    }
+  }
+
+  &__badge {
+    margin-top: 18px;
+    padding: 4px 24px 4px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: $color-text;
+    background-image: linear-gradient(to right, $color-text, $color-accent 44%);
+  }
+
+  &__title {
+    max-width: 520px;
+    margin-top: 18px;
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1.1;
+    height: 106px;
+    @include flex($align: flex-end);
+
+    @include mobile {
+      height: 62px;
+      font-size: 28px;
+    }
+  }
+
+  &__info {
+    margin-top: 18px;
+    font-size: 15px;
+    color: $color-text-muted;
+
+    @include mobile {
+      font-size: 14px;
+    }
+  }
+
+  &__desc {
+    max-width: 520px;
+    height: 72px;
+    @include flex($align: center);
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-text-muted;
+
+    @include mobile {
+      height: 63px;
+      font-size: 14px;
+    }
+  }
+
+  &__actions {
+    @include flex($gap: 12px);
+    margin-top: 14px;
+  }
+
+  &__watch,
+  &__list {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease,
+      color 0.25s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      color: $color-background;
+      background-color: $color-accent-light;
+    }
+
+    @include mobile {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+
+  &__watch {
+    color: $color-background;
+    background-color: $color-text;
+  }
+
+  &__list {
+    color: $color-text;
+    background-color: $color-surface;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    font-size: 32px;
+    color: $color-text-muted;
+    transition:
+      transform 0.25s ease,
+      color 0.25s ease;
+
+    &:hover {
+      transform: translateY(-50%) scale(1.25);
+      color: $color-text;
+    }
+
+    @include mobile {
+      display: none;
+    }
+
+    &--left {
+      left: 20px;
+    }
+
+    &--right {
+      right: 20px;
+    }
+  }
+}

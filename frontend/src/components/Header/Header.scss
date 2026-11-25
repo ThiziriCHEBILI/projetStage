@@ -1,0 +1,97 @@
+@use "../../styles/tools" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  @include flex($justify: space-between, $align: center);
+  padding: 16px $container-padding;
+  background-color: $color-background-bar;
+
+  &__navigation {
+    @include flex($align: center, $gap: 40px);
+  }
+
+  &__tools {
+    @include flex($align: center, $gap: 24px);
+
+    @include tablet {
+      gap: 16px;
+    }
+  }
+
+  &__logo-link {
+    @include flex($align: center, $gap: 10px);
+  }
+
+  &__logoNOVA {
+    width: 30px;
+    height: 30px;
+  }
+
+  &__name {
+    font-size: 28px;
+    font-weight: bold;
+
+    @include tablet {
+      font-size: 22px;
+    }
+  }
+
+  &__login {
+    @include flex($align: center, $gap: 8px);
+    font-size: 16px;
+    @include link-hover;
+
+    i {
+      font-size: 18px;
+    }
+  }
+
+  &__account {
+    @include flex($align: center, $gap: 8px);
+  }
+
+  &__account-icon {
+    font-size: 18px;
+    color: $color-text-muted;
+  }
+
+  &__account-text {
+    @include flex(column, $align: flex-start, $gap: 2px);
+  }
+
+  &__user {
+    color: $color-text;
+    font-size: 14px;
+    white-space: nowrap;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__search-button {
+    padding: 8px;
+    font-size: 18px;
+    @include link-hover;
+  }
+
+  &__search-backdrop {
+    position: fixed;
+    inset: 0;
+  }
+
+  &__search-panel {
+    position: absolute;
+    top: 100%;
+    margin-top: 14px;
+    right: $container-padding;
+    width: 300px;
+
+    @include mobile {
+      left: $container-padding;
+      width: auto;
+    }
+  }
+}

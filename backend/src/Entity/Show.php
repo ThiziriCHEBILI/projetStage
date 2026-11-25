@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ShowRepository::class)]
 #[ORM\Table(name: '`show`')]
@@ -21,10 +22,13 @@ class Show
 
     #[ORM\Column(length: 30)]
     #[Groups(['show:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 30)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['show:read'])]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -33,25 +37,53 @@ class Show
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['show:read'])]
+    #[Assert\NotNull]
     private ?\DateTime $release_date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'show')]
+    #[ORM\ManyToOne(inversedBy: 'shows')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['show:read'])]
-    private ?CategoriesShow $categorie_show = null;
+    private ?CategoriesShow $category_show = null;
     /**
      * @var Collection<int, ShowVideo>
      */
     #[ORM\OneToMany(targetEntity: ShowVideo::class, mappedBy: 'show', cascade: ['remove'])]
+    #[ORM\OrderBy(['saison_number' => 'ASC', 'episode_number' => 'ASC'])]
+    #[Groups(['video:read'])]
     private Collection $showVideos;
 
     #[ORM\Column(length: 100, nullable: true)]
     #[Groups(['show:read'])]
+    #[Assert\Choice(choices: ['award winner'])]
     private ?string $award = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     #[Groups(['show:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Choice(choices: ['sci-fi', 'drame', 'thriller', 'aventure', 'action', 'horreur'])]
     private ?string $type_show = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['show:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    private ?string $image_show = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['show:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    private ?string $image_poster = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['show:read'])]
+    #[Assert\Positive]
+    private ?int $season_count = null;
+
+    #[ORM\Column(length: 10, nullable: true)]
+    #[Groups(['show:read'])]
+    #[Assert\Length(max: 10)]
+    private ?string $quality = null;
 
 
     public function __construct()
@@ -70,7 +102,7 @@ class Show
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(?string $title): static
     {
         $this->title = $title;
 
@@ -82,7 +114,7 @@ class Show
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -106,21 +138,21 @@ class Show
         return $this->release_date;
     }
 
-    public function setReleaseDate(\DateTime $release_date): static
+    public function setReleaseDate(?\DateTime $release_date): static
     {
         $this->release_date = $release_date;
 
         return $this;
     }
-   
-    public function getCategorieShow(): ?CategoriesShow
+
+    public function getCategoryShow(): ?CategoriesShow
     {
-        return $this->categorie_show;
+        return $this->category_show;
     }
 
-    public function setCategorieShow(?CategoriesShow $categorie_show): static
+    public function setCategoryShow(?CategoriesShow $category_show): static
     {
-        $this->categorie_show = $categorie_show;
+        $this->category_show = $category_show;
 
         return $this;
     }
@@ -137,7 +169,7 @@ class Show
     {
         if (!$this->showVideos->contains($showVideo)) {
             $this->showVideos->add($showVideo);
-            $showVideo->setShowId($this);
+            $showVideo->setShow($this);
         }
 
         return $this;
@@ -147,8 +179,8 @@ class Show
     {
         if ($this->showVideos->removeElement($showVideo)) {
             // set the owning side to null (unless already changed)
-            if ($showVideo->getShowId() === $this) {
-                $showVideo->setShowId(null);
+            if ($showVideo->getShow() === $this) {
+                $showVideo->setShow(null);
             }
         }
 
@@ -177,5 +209,61 @@ class Show
         $this->type_show = $type_show;
 
         return $this;
+    }
+
+    public function getImageShow(): ?string
+    {
+        return $this->image_show;
+    }
+
+    public function setImageShow(?string $image_show): static
+    {
+        $this->image_show = $image_show;
+
+        return $this;
+    }
+
+    public function getImagePoster(): ?string
+    {
+        return $this->image_poster;
+    }
+
+    public function setImagePoster(?string $image_poster): static
+    {
+        $this->image_poster = $image_poster;
+
+        return $this;
+    }
+
+    public function getSeasonCount(): ?int
+    {
+        return $this->season_count;
+    }
+
+    public function setSeasonCount(?int $season_count): static
+    {
+        $this->season_count = $season_count;
+
+        return $this;
+    }
+
+    public function getQuality(): ?string
+    {
+        return $this->quality;
+    }
+
+    public function setQuality(?string $quality): static
+    {
+        $this->quality = $quality;
+
+        return $this;
+    }
+
+    #[Groups(['show:hero'])]
+    public function getFirstVideoId(): ?int
+    {
+        $firstVideo = $this->showVideos->first();
+
+        return $firstVideo ? $firstVideo->getId() : null;
     }
 }

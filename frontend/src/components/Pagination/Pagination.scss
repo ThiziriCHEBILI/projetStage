@@ -1,0 +1,28 @@
+@use "../../styles/tools" as *;
+
+.pagination {
+  @include flex($justify: center, $gap: 8px);
+  flex-wrap: wrap;
+  margin-top: 86px;
+
+  &__button {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.25s ease;
+    @include button-color($color-surface, $color-surface-hover, $color-text);
+
+    @include mobile {
+      min-width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__button--active {
+    background-color: $color-text;
+    color: $color-background;
+  }
+}

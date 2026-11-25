@@ -7,46 +7,69 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
-class Users
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['user:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 25)]
+    #[Groups(['user:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 25)]
     private ?string $surname = null;
 
     #[ORM\Column(length: 25)]
+    #[Groups(['user:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 25)]
     private ?string $name = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['user:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Email]
+    #[Assert\Length(max: 100)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
+    /**
+     * @var list<string>
+     */
+    #[ORM\Column]
+    private array $roles = [];
+
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['user:read'])]
     private ?\DateTime $date_registration = null;
 
     /**
-     * @var Collection<int, UserListShow>
+     * @var Collection<int, UserShowList>
      */
-    #[ORM\OneToMany(targetEntity: UserListShow::class, mappedBy: 'user')]
-    private Collection $userListShow;
+    #[ORM\OneToMany(targetEntity: UserShowList::class, mappedBy: 'user')]
+    private Collection $userShowList;
 
     /**
-     * @var Collection<int, UserLectures>
+     * @var Collection<int, UserProgress>
      */
-    #[ORM\OneToMany(targetEntity: UserLectures::class, mappedBy: 'user')]
-    private Collection $userLectures;
+    #[ORM\OneToMany(targetEntity: UserProgress::class, mappedBy: 'user')]
+    private Collection $userProgress;
 
     public function __construct()
     {
-        $this->userListShow = new ArrayCollection();
-        $this->userLectures = new ArrayCollection();
+        $this->userShowList = new ArrayCollection();
+        $this->userProgress = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,7 +82,7 @@ class Users
         return $this->surname;
     }
 
-    public function setSurname(string $surname): static
+    public function setSurname(?string $surname): static
     {
         $this->surname = $surname;
 
@@ -71,7 +94,7 @@ class Users
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -83,7 +106,7 @@ class Users
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
 
@@ -102,6 +125,30 @@ class Users
         return $this;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @return list<string>
+     */
+    #[Groups(['user:read'])]
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
     public function getDateRegistration(): ?\DateTime
     {
         return $this->date_registration;
@@ -115,29 +162,29 @@ class Users
     }
 
     /**
-     * @return Collection<int, UserListShow>
+     * @return Collection<int, UserShowList>
      */
-    public function getUserListShow(): Collection
+    public function getUserShowList(): Collection
     {
-        return $this->userListShow;
+        return $this->userShowList;
     }
 
-    public function addUserListShow(UserListShow $userListShow): static
+    public function addUserShowList(UserShowList $userShowList): static
     {
-        if (!$this->userListShow->contains($userListShow)) {
-            $this->userListShow->add($userListShow);
-            $userListShow->setUserId($this);
+        if (!$this->userShowList->contains($userShowList)) {
+            $this->userShowList->add($userShowList);
+            $userShowList->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeUserListShow(UserListShow $userListShow): static
+    public function removeUserShowList(UserShowList $userShowList): static
     {
-        if ($this->userListShow->removeElement($userListShow)) {
+        if ($this->userShowList->removeElement($userShowList)) {
             // set the owning side to null (unless already changed)
-            if ($userListShow->getUserId() === $this) {
-                $userListShow->setUserId(null);
+            if ($userShowList->getUser() === $this) {
+                $userShowList->setUser(null);
             }
         }
 
@@ -145,29 +192,29 @@ class Users
     }
 
     /**
-     * @return Collection<int, UserLectures>
+     * @return Collection<int, UserProgress>
      */
-    public function getUserLectures(): Collection
+    public function getUserProgress(): Collection
     {
-        return $this->userLectures;
+        return $this->userProgress;
     }
 
-    public function addUserLecture(UserLectures $userLecture): static
+    public function addUserProgress(UserProgress $userProgress): static
     {
-        if (!$this->userLectures->contains($userLecture)) {
-            $this->userLectures->add($userLecture);
-            $userLecture->setUserId($this);
+        if (!$this->userProgress->contains($userProgress)) {
+            $this->userProgress->add($userProgress);
+            $userProgress->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeUserLecture(UserLectures $userLecture): static
+    public function removeUserProgress(UserProgress $userProgress): static
     {
-        if ($this->userLectures->removeElement($userLecture)) {
+        if ($this->userProgress->removeElement($userProgress)) {
             // set the owning side to null (unless already changed)
-            if ($userLecture->getUserId() === $this) {
-                $userLecture->setUserId(null);
+            if ($userProgress->getUser() === $this) {
+                $userProgress->setUser(null);
             }
         }
 

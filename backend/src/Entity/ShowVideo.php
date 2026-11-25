@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ShowVideoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ShowVideoRepository::class)]
 class ShowVideo
@@ -12,31 +13,39 @@ class ShowVideo
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['video:read', 'progress:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['video:read', 'progress:read'])]
     private ?string $description_video = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['video:read', 'progress:read'])]
     private ?string $image_video = null;
 
     #[ORM\Column(length: 255)]
     private ?string $url_video = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
+    #[Groups(['video:read', 'progress:read'])]
     private ?int $episode_number = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
+    #[Groups(['video:read', 'progress:read'])]
     private ?int $saison_number = null;
 
     #[ORM\Column(length: 10)]
+    #[Groups(['video:read'])]
     private ?string $video_quality = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTime $viewing_time = null;
+    #[ORM\Column]
+    #[Groups(['video:read', 'progress:read'])]
+    private ?int $duration = null;
 
     #[ORM\ManyToOne(inversedBy: 'showVideos')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[Groups(['progress:read'])]
     private ?Show $show = null;
 
     public function getId(): ?int
@@ -85,7 +94,7 @@ class ShowVideo
         return $this->episode_number;
     }
 
-    public function setEpisodeNumber(int $episode_number): static
+    public function setEpisodeNumber(?int $episode_number): static
     {
         $this->episode_number = $episode_number;
 
@@ -97,7 +106,7 @@ class ShowVideo
         return $this->saison_number;
     }
 
-    public function setSaisonNumber(int $saison_number): static
+    public function setSaisonNumber(?int $saison_number): static
     {
         $this->saison_number = $saison_number;
 
@@ -116,24 +125,24 @@ class ShowVideo
         return $this;
     }
 
-    public function getViewingTime(): ?\DateTime
+    public function getDuration(): ?int
     {
-        return $this->viewing_time;
+        return $this->duration;
     }
 
-    public function setViewingTime(\DateTime $viewing_time): static
+    public function setDuration(int $duration): static
     {
-        $this->viewing_time = $viewing_time;
+        $this->duration = $duration;
 
         return $this;
     }
 
-    public function getShowId(): ?Show
+    public function getShow(): ?Show
     {
         return $this->show;
     }
 
-    public function setShowId(?Show $show): static
+    public function setShow(?Show $show): static
     {
         $this->show = $show;
 
