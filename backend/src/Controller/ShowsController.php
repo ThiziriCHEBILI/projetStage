@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Exception as DBALException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Entity\Show;
 use App\Entity\CategoriesShow;
 use App\Form\ShowFormType;
@@ -16,6 +17,7 @@ use App\Form\ShowFormType;
 #[Route('/shows', name: 'app_show')]
 final class ShowsController extends AbstractController
 {
+    private const SHOWS_PER_PAGE = 8;
     #[Route('/a-la-une', name: 'get_shows_winners_by_category', methods: ['GET'])]
     public function getShowsWinners(EntityManagerInterface $em): JsonResponse
     {
@@ -74,7 +76,7 @@ final class ShowsController extends AbstractController
             if ($page < 1) {
                 $page = 1;
             }
-            $limit = 8;
+            $limit = self::SHOWS_PER_PAGE;
             $offset = ($page - 1) * $limit;
 
             $type = $request->query->get('type');
@@ -134,6 +136,7 @@ final class ShowsController extends AbstractController
 
 
     #[Route('/{name}', name: 'post_shows', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function createShow(string $name, Request $request, EntityManagerInterface $em): JsonResponse
     {
         try {
@@ -170,6 +173,7 @@ final class ShowsController extends AbstractController
     }
 
     #[Route('/{name}/{id}', name: 'put_one_show_by_category', methods: ['PUT'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function updateShowByCategory(string $name, int $id, Request $request, EntityManagerInterface $em): JsonResponse
 
     {
@@ -210,6 +214,7 @@ final class ShowsController extends AbstractController
 
 
     #[Route('/{name}/{id}', name: 'delete_one_show_by_category', methods: ['DELETE'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteShowByCategory(string $name, int $id, EntityManagerInterface $em): JsonResponse
 
     {

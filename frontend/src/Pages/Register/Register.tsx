@@ -200,8 +200,16 @@ export default function Register(): JSX.Element {
               onChange={(event) => setAccepted(event.target.checked)}
             />
             <label className="register__checkbox-label" htmlFor="accepted">
-              J'accepte les conditions d'utilisation et la politique de
-              confidentialité.
+              J'accepte les{" "}
+              <Link
+                to="#"
+                className="register__link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                conditions d'utilisation et la politique de confidentialité
+              </Link>
+              .
             </label>
           </div>
           {errors.accepted && (
